@@ -1,0 +1,701 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     27599,        693]
+NotebookOptionsPosition[     26801,        671]
+NotebookOutlinePosition[     27193,        687]
+CellTagsIndexPosition[     27150,        684]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{"01.5", ":", 
+    RowBox[{
+     RowBox[{"Hypothesis", " ", "Generation"}], "-", 
+     RowBox[{"THE", " ", "ULTIMATE", " ", "MHG", " ", "TREE"}]}]}], "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<--- Initializing Advanced Combinatorial Logic Tree ---\
+\>\"", "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"edges", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<Sudden Deaths\>\"", 
+        "\[DirectedEdge]", "\"\<WHO: Isolated Demographic\\n(Navajos \
+Only)\>\""}], ",", 
+       RowBox[{"\"\<Sudden Deaths\>\"", 
+        "\[DirectedEdge]", "\"\<WHO: General \
+Population\\n(Indiscriminate)\>\""}], ",", 
+       RowBox[{"\"\<WHO: Isolated Demographic\\n(Navajos Only)\>\"", 
+        "\[DirectedEdge]", "\"\<WHAT: Virulent Flu\>\""}], ",", 
+       RowBox[{"\"\<WHO: Isolated Demographic\\n(Navajos Only)\>\"", 
+        "\[DirectedEdge]", "\"\<WHAT: Unknown Pathogen\>\""}], ",", 
+       RowBox[{"\"\<WHO: Isolated Demographic\\n(Navajos Only)\>\"", 
+        "\[DirectedEdge]", "\"\<WHAT: Chemical Toxin\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Virulent Flu\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Act of Nature\\n(Flu Discarded)\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Virulent Flu\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Intentional Act\\n(Flu Discarded)\>\""}],
+        ",", 
+       RowBox[{"\"\<WHAT: Virulent Flu\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Accidental\\n(Flu Discarded)\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Unknown Pathogen\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Act of Nature\\nCredibility: 1\\n[H4: \
+New Pathogen]\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Unknown Pathogen\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Intentional Act\\nCredibility: \
+3\\n(Pathogen Discarded)\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Unknown Pathogen\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Accidental\\n(Pathogen Discarded)\>\""}],
+        ",", 
+       RowBox[{"\"\<WHAT: Chemical Toxin\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Act of Nature\\nCredibility: 1\\n(Toxin \
+Discarded)\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Chemical Toxin\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Intentional Act\\nCredibility: 2\\n[H3: \
+Hate Crime]\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Chemical Toxin\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Accidental\\n(Toxin Discarded)\>\""}], ",", 
+       RowBox[{"\"\<WHO: General Population\\n(Indiscriminate)\>\"", 
+        "\[DirectedEdge]", "\"\<WHAT: Flu (General)\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Flu (General)\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Act of Nature\\nCredibility: 4\\n[H1: \
+Common Flu]\>\""}], ",", 
+       RowBox[{"\"\<WHAT: Flu (General)\>\"", 
+        "\[DirectedEdge]", "\"\<WHY: Other Causes\\n(Other \
+Discarded)\>\""}]}], "}"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"ClearAll", "[", "nodeAesthetic", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"nodeAesthetic", "[", "name_String", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "bgColor", ",", "fontColor", ",", "borderColor", ",", 
+         "textToDisplay"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"textToDisplay", "=", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"name", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             
+             RowBox[{"\"\<(Flu Discarded)\>\"", 
+              "->", "\"\<Status: DISCARD\>\""}], ",", 
+             
+             RowBox[{"\"\<(Pathogen Discarded)\>\"", 
+              "->", "\"\<Status: DISCARD\>\""}], ",", 
+             
+             RowBox[{"\"\<(Toxin Discarded)\>\"", 
+              "->", "\"\<Status: DISCARD\>\""}], ",", 
+             
+             RowBox[{"\"\<(Other Discarded)\>\"", 
+              "->", "\"\<Status: DISCARD\>\""}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"StringContainsQ", "[", 
+           RowBox[{"name", ",", "\"\<[H\>\""}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"bgColor", "=", 
+            RowBox[{"Lighter", "[", 
+             RowBox[{"Blue", ",", "0.9"}], "]"}]}], ";", 
+           RowBox[{"fontColor", "=", 
+            RowBox[{"Darker", "[", 
+             RowBox[{"Blue", ",", "0.4"}], "]"}]}], ";", 
+           RowBox[{"borderColor", "=", 
+            RowBox[{"Lighter", "[", 
+             RowBox[{"Blue", ",", "0.4"}], "]"}]}], ";"}], ",", 
+          RowBox[{
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"name", ",", "\"\<DISCARD\>\""}], "]"}], "||", 
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"name", ",", "\"\<Discarded\>\""}], "]"}]}], ",", 
+          RowBox[{
+           RowBox[{"bgColor", "=", 
+            RowBox[{"GrayLevel", "[", "0.96", "]"}]}], ";", 
+           RowBox[{"fontColor", "=", 
+            RowBox[{"GrayLevel", "[", "0.6", "]"}]}], ";", 
+           RowBox[{"borderColor", "=", 
+            RowBox[{"GrayLevel", "[", "0.9", "]"}]}], ";"}], ",", 
+          RowBox[{"StringContainsQ", "[", 
+           RowBox[{"name", ",", "\"\<Sudden Deaths\>\""}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"bgColor", "=", 
+            RowBox[{"GrayLevel", "[", "0.15", "]"}]}], ";", 
+           RowBox[{"fontColor", "=", "White"}], ";", 
+           RowBox[{"borderColor", "=", "Black"}], ";"}], ",", "True", ",", 
+          RowBox[{
+           RowBox[{"bgColor", "=", "White"}], ";", 
+           RowBox[{"fontColor", "=", "Black"}], ";", 
+           RowBox[{"borderColor", "=", 
+            RowBox[{"GrayLevel", "[", "0.7", "]"}]}], ";"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Framed", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"textToDisplay", ",", "10", ",", 
+            RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "Bold", ",", 
+            RowBox[{"FontColor", "->", "fontColor"}], ",", 
+            RowBox[{"TextAlignment", "->", "Center"}]}], "]"}], ",", 
+          RowBox[{"Background", "->", "bgColor"}], ",", 
+          RowBox[{"FrameStyle", "->", 
+           RowBox[{"Directive", "[", 
+            RowBox[{
+             RowBox[{"Thickness", "[", "0.003", "]"}], ",", "borderColor"}], 
+            "]"}]}], ",", 
+          RowBox[{"RoundingRadius", "->", "6"}], ",", 
+          RowBox[{"FrameMargins", "->", "10"}]}], "]"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- Generating Master MHG Permutation Tree ---\>\"",
+      "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"treePlot", "=", 
+     RowBox[{"Graph", "[", 
+      RowBox[{"edges", ",", 
+       RowBox[{"VertexShapeFunction", "->", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"nodeAesthetic", "[", "#2", "]"}], ",", "#1"}], "]"}], 
+          "&"}], ")"}]}], ",", 
+       RowBox[{"EdgeStyle", "->", 
+        RowBox[{"Directive", "[", 
+         RowBox[{
+          RowBox[{"Darker", "[", 
+           RowBox[{"Gray", ",", "0.4"}], "]"}], ",", 
+          RowBox[{"AbsoluteThickness", "[", "2", "]"}]}], "]"}]}], ",", 
+       RowBox[{"GraphLayout", "->", 
+        RowBox[{"{", 
+         RowBox[{"\"\<LayeredDigraphEmbedding\>\"", ",", 
+          RowBox[{"\"\<RootVertex\>\"", "->", "\"\<Sudden Deaths\>\""}], ",", 
+          
+          RowBox[{"\"\<Orientation\>\"", "->", "Left"}]}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "->", 
+        RowBox[{"{", 
+         RowBox[{"1000", ",", "800"}], "}"}]}], ",", 
+       RowBox[{"PlotLabel", "->", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<Multiple Hypotheses Generator: Pruned Permutation Logic\
+\>\"", ",", "Bold", ",", "16", ",", 
+          RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}]}], "]"}]}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/Permutation_Tree_\
+Master.pdf\>\"", ",", "treePlot"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\:2705 MASTER MHG TREE COMPLETE. Graph exported to \
+Vault.\>\"", "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "EXPORT"}]}], " ", "TARGET", " ", "HYPOTHESES", " ", 
+      "FOR", " ", "THE", " ", 
+      RowBox[{"MATRIX", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"finalHypotheses", "=", 
+     RowBox[{"{", 
+      RowBox[{"\"\<H1: Common Flu\>\"", ",", "\"\<H2: Toxic Substance\>\"", 
+       ",", "\"\<H3: Hate Crime\>\"", ",", "\"\<H4: New Pathogen\>\""}], 
+      "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/target_hypotheses.\
+md\>\"", ",", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"Riffle", "[", 
+        RowBox[{"finalHypotheses", ",", "\"\<\\n\>\""}], "]"}], "]"}], 
+      ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\:2705 Target Hypotheses perfectly stored in \
+Vault.\>\"", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.981309850933262*^9, 3.981309850935205*^9}, {
+   3.981310178723342*^9, 3.98131017940724*^9}, 3.981310284770692*^9, 
+   3.9813105072444477`*^9, 3.981310648370783*^9, 3.981310912593294*^9, 
+   3.981392983941266*^9, {3.981393665641415*^9, 3.981393685859185*^9}, {
+   3.981394032648942*^9, 
+   3.98139403375613*^9}},ExpressionUUID->"65f886df-0f57-4e6c-a0b2-\
+98c0ab561439"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"--- Initializing Advanced Combinatorial Logic Tree \
+---\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9},
+ CellLabel->
+  "During evaluation of \
+In[249]:=",ExpressionUUID->"5afad39d-acd0-4a90-a15c-27798e911416"],
+
+Cell[BoxData["\<\"\\n--- Generating Master MHG Permutation Tree ---\"\>"], \
+"Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991552328*^9},
+ CellLabel->
+  "During evaluation of \
+In[249]:=",ExpressionUUID->"834ee405-0889-499d-992d-75b415e4aab5"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{
+      "Sudden Deaths", "WHO: Only Navajos", "WHO: Anyone", 
+       "WHAT: Virulent Flu", "WHAT: Unknown Pathogen", "WHAT: Chemical Toxin",
+        "WHY: Act of Nature\n(Flu Discarded)", 
+       "WHY: Intentional Act\n(Flu Discarded)", 
+       "WHY: Accidental\n(Flu Discarded)", 
+       "WHY: Act of Nature\nCredibility: 1\n[H4: New Pathogen]", 
+       "WHY: Intentional Act\nCredibility: 3\n(Pathogen Discarded)", 
+       "WHY: Accidental\n(Pathogen Discarded)", 
+       "WHY: Act of Nature\nCredibility: 1\n(Toxin Discarded)", 
+       "WHY: Intentional Act\nCredibility: 2\n[H3: Hate Crime]", 
+       "WHY: Accidental\n(Toxin Discarded)", "WHAT: Flu (General)", 
+       "WHY: Act of Nature\nCredibility: 4\n[H1: Common Flu]", 
+       "WHY: Other Causes\n(Other Discarded)"}, {{{1, 2}, {1, 3}, {2, 4}, {2, 
+       5}, {2, 6}, {4, 7}, {4, 8}, {4, 9}, {5, 10}, {5, 11}, {5, 12}, {6, 
+       13}, {6, 14}, {6, 15}, {3, 16}, {16, 17}, {16, 18}}, Null}, {EdgeStyle -> {
+         Directive[
+          RGBColor[0.3, 0.3, 0.3], 
+          AbsoluteThickness[2]]}, 
+       GraphLayout -> {
+        "LayeredDigraphEmbedding", "RootVertex" -> "Sudden Deaths", 
+         "Orientation" -> Left}, ImageSize -> {1000, 800}, PlotLabel -> 
+       Style["Multiple Hypotheses Generator: Pruned Permutation Logic", Bold, 
+         16, FontFamily -> "Helvetica"], VertexShapeFunction -> {Inset[
+          $CellContext`nodeAesthetic[#2], #]& }}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {RGBColor[0.3, 0.3, 0.3], AbsoluteThickness[2], Opacity[0.7], CapForm[
+        "Round"], Arrowheads[Medium], 
+        ArrowBox[{{-2.055555564487187, 
+         2.9699966924474466`}, {-1.0555555644871872`, 2.9699966874793993`}}, 
+         0.03023952191885318], 
+        ArrowBox[{{-2.055555564487187, 
+         2.9699966924474466`}, {-1.0555554573075994`, 3.711637507099587}}, 
+         0.03023952191885318], 
+        ArrowBox[{{-1.0555555644871872`, 
+         2.9699966874793993`}, {-0.055555671666775774`, 2.2283558628911644`}},
+          0.03023952191885318], 
+        ArrowBox[{{-1.0555555644871872`, 
+         2.9699966874793993`}, {-0.05555556448718768, 2.969996682511352}}, 
+         0.03023952191885318], 
+        ArrowBox[{{-1.0555555644871872`, 
+         2.9699966874793993`}, {-0.055555510897393634`, 3.3408170923214455`}},
+          0.03023952191885318], 
+        ArrowBox[{{-1.0555554573075994`, 
+         3.711637507099587}, {-0.05555545730759959, 3.7116375021315395`}}, 
+         0.03023952191885318], 
+        ArrowBox[{{-0.055555671666775774`, 2.2283558628911644`}, {
+         0.9444443015383268, 2.04294565301807}}, 0.03023952191885318], 
+        ArrowBox[{{-0.055555671666775774`, 2.2283558628911644`}, {
+         0.9444443283332239, 2.228355857923117}}, 0.03023952191885318], 
+        ArrowBox[{{-0.055555671666775774`, 2.2283558628911644`}, {
+         0.9444443551281209, 2.413766062828164}}, 0.03023952191885318], 
+        ArrowBox[{{-0.05555556448718768, 2.969996682511352}, {
+         0.9444443819230179, 2.5991762677332106`}}, 0.03023952191885318], 
+        ArrowBox[{{-0.05555556448718768, 2.969996682511352}, {
+         0.9444444087179149, 2.7845864726382574`}}, 0.03023952191885318], 
+        ArrowBox[{{-0.05555556448718768, 2.969996682511352}, {
+         0.944444435512812, 2.9699966775433047`}}, 0.03023952191885318], 
+        ArrowBox[{{-0.055555510897393634`, 3.3408170923214455`}, {
+         0.944444462307709, 3.1554068824483514`}}, 0.03023952191885318], 
+        ArrowBox[{{-0.055555510897393634`, 3.3408170923214455`}, {
+         0.944444489102606, 3.340817087353398}}, 0.03023952191885318], 
+        ArrowBox[{{-0.055555510897393634`, 3.3408170923214455`}, {
+         0.944444515897503, 3.5262272922584454`}}, 0.03023952191885318], 
+        ArrowBox[{{-0.05555545730759959, 3.7116375021315395`}, {
+         0.9444445426924001, 3.7116374971634922`}}, 0.03023952191885318], 
+        ArrowBox[{{-0.05555545730759959, 3.7116375021315395`}, {
+         0.9444445694872972, 3.897047702068539}}, 0.03023952191885318]}, 
+       {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], InsetBox[
+         FrameBox[
+          StyleBox["\<\"Sudden Deaths\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->GrayLevel[0.15],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0]],
+          RoundingRadius->6,
+          StripOnInput->False], {-2.055555564487187, 2.9699966924474466}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHO: Only Navajos\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0]],
+          Background->GrayLevel[1],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.7]],
+          RoundingRadius->6,
+          StripOnInput->False], {-1.0555555644871872, 2.9699966874793993}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHO: Anyone\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0]],
+          Background->GrayLevel[1],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.7]],
+          RoundingRadius->6,
+          StripOnInput->False], {-1.0555554573075994, 3.711637507099587}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHAT: Virulent Flu\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0]],
+          Background->GrayLevel[1],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.7]],
+          RoundingRadius->6,
+          StripOnInput->False], {-0.055555671666775774, 2.2283558628911644}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHAT: Unknown Pathogen\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0]],
+          Background->GrayLevel[1],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.7]],
+          RoundingRadius->6,
+          StripOnInput->False], {-0.05555556448718768, 2.969996682511352}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHAT: Chemical Toxin\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0]],
+          Background->GrayLevel[1],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.7]],
+          RoundingRadius->6,
+          StripOnInput->False], {-0.055555510897393634, 3.3408170923214455}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHY: Act of Nature\\nStatus: DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444443015383268, 2.04294565301807}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHY: Intentional Act\\nStatus: DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444443283332239, 2.228355857923117}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHY: Accidental\\nStatus: DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444443551281209, 2.413766062828164}], 
+        InsetBox[
+         FrameBox[
+          
+          StyleBox["\<\"WHY: Act of Nature\\nCredibility: 1\\n[H4: New \
+Pathogen]\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->RGBColor[0., 0., 0.6]],
+          Background->RGBColor[0.9, 0.9, 1.],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            RGBColor[0.4, 0.4, 1.]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444443819230179, 2.5991762677332106}], 
+        InsetBox[
+         FrameBox[
+          
+          StyleBox["\<\"WHY: Intentional Act\\nCredibility: 3\\nStatus: \
+DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444444087179149, 2.7845864726382574}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHY: Accidental\\nStatus: DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.944444435512812, 2.9699966775433047}], 
+        InsetBox[
+         FrameBox[
+          
+          StyleBox["\<\"WHY: Act of Nature\\nCredibility: 1\\nStatus: DISCARD\
+\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.944444462307709, 3.1554068824483514}], 
+        InsetBox[
+         FrameBox[
+          
+          StyleBox["\<\"WHY: Intentional Act\\nCredibility: 2\\n[H3: Hate \
+Crime]\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->RGBColor[0., 0., 0.6]],
+          Background->RGBColor[0.9, 0.9, 1.],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            RGBColor[0.4, 0.4, 1.]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.944444489102606, 3.340817087353398}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHY: Accidental\\nStatus: DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.944444515897503, 3.5262272922584454}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHAT: Flu (General)\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0]],
+          Background->GrayLevel[1],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.7]],
+          RoundingRadius->6,
+          StripOnInput->False], {-0.05555545730759959, 3.7116375021315395}], 
+        InsetBox[
+         FrameBox[
+          
+          StyleBox["\<\"WHY: Act of Nature\\nCredibility: 4\\n[H1: Common \
+Flu]\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->RGBColor[0., 0., 0.6]],
+          Background->RGBColor[0.9, 0.9, 1.],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            RGBColor[0.4, 0.4, 1.]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444445426924001, 3.7116374971634922}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"WHY: Other Causes\\nStatus: DISCARD\"\>",
+           StripOnInput->False,
+           TextAlignment->Center,
+           FontFamily->"Helvetica",
+           FontSize->10,
+           FontWeight->Bold,
+           FontColor->GrayLevel[0.6]],
+          Background->GrayLevel[0.96],
+          FrameMargins->10,
+          FrameStyle->Directive[
+            Thickness[0.003], 
+            GrayLevel[0.9]],
+          RoundingRadius->6,
+          StripOnInput->False], {0.9444445694872972, 3.897047702068539}]}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->"NetworkGraphics",
+  FormatType->TraditionalForm,
+  FrameTicks->None,
+  ImageSize->{1000, 800},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"Multiple Hypotheses Generator: Pruned Permutation Logic\"", Bold, 16, 
+     FontFamily -> "Helvetica", StripOnInput -> False], 
+    TraditionalForm]]], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.9813929916208153`*^9},
+ CellLabel->
+  "During evaluation of \
+In[249]:=",ExpressionUUID->"705ce11c-053b-4d2c-b781-3240dcff41e6"],
+
+Cell[BoxData["\<\"\\n\:2705 MASTER MHG TREE COMPLETE. Graph exported to \
+Vault.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.9813929918528*^9},
+ CellLabel->
+  "During evaluation of \
+In[249]:=",ExpressionUUID->"ad01a417-26f4-4589-9687-aa090bfef7f1"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 681},
+WindowMargins->{{Automatic, 274}, {Automatic, 4}},
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"df396d1f-befb-4415-ae18-41730e17c924"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 9937, 228, 1321, "Input",ExpressionUUID->"65f886df-0f57-4e6c-a0b2-98c0ab561439"],
+Cell[CellGroupData[{
+Cell[10538, 254, 377, 7, 23, "Print",ExpressionUUID->"5afad39d-acd0-4a90-a15c-27798e911416"],
+Cell[10918, 263, 372, 7, 41, "Print",ExpressionUUID->"834ee405-0889-499d-992d-75b415e4aab5"],
+Cell[11293, 272, 15096, 386, 808, "Print",ExpressionUUID->"705ce11c-053b-4d2c-b781-3240dcff41e6"],
+Cell[26392, 660, 381, 7, 42, "Print",ExpressionUUID->"ad01a417-26f4-4589-9687-aa090bfef7f1"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

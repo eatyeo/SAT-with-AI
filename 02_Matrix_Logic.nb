@@ -1,0 +1,295 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10608,        287]
+NotebookOptionsPosition[      9724,        264]
+NotebookOutlinePosition[     10116,        280]
+CellTagsIndexPosition[     10073,        277]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{"02", ":", 
+    RowBox[{
+     RowBox[{"Matrix", " ", "Logic"}], "-", 
+     RowBox[{"DYNAMIC", " ", "AI", " ", "EXECUTION"}]}]}], "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<--- Initializing Dynamic ACH Engine ---\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+    "<<", "\"\</Users/Western/Desktop/ThesisCode/Core_API_Functions.wl\>\""}],
+     ";"}], "\n", 
+   RowBox[{
+    RowBox[{"geminiService", "=", 
+     RowBox[{"ServiceConnect", "[", "\"\<GoogleGemini\>\"", "]"}]}], ";"}], 
+   "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "IMPORT"}]}], " ", "VAULT", " ", 
+      RowBox[{"DATA", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "evidencePath", 
+     "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/evidence_vault.md\>\""}\
+], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "hypothesesPath", 
+     "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/target_hypotheses.md\>\
+\""}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"evidenceList", "=", 
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{
+       RowBox[{"StringTrim", "[", 
+        RowBox[{"StringSplit", "[", 
+         RowBox[{
+          RowBox[{"Import", "[", 
+           RowBox[{"evidencePath", ",", "\"\<Text\>\""}], "]"}], 
+          ",", "\"\<\\n\>\""}], "]"}], "]"}], ",", "\"\<\>\""}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"hypothesesList", "=", 
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{
+       RowBox[{"StringTrim", "[", 
+        RowBox[{"StringSplit", "[", 
+         RowBox[{
+          RowBox[{"Import", "[", 
+           RowBox[{"hypothesesPath", ",", "\"\<Text\>\""}], "]"}], 
+          ",", "\"\<\\n\>\""}], "]"}], "]"}], ",", "\"\<\>\""}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Target Hypotheses Loaded: \>\"", ",", 
+      RowBox[{"Length", "[", "hypothesesList", "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Evidence Items Loaded: \>\"", ",", 
+      RowBox[{"Length", "[", "evidenceList", "]"}]}], "]"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "THE"}]}], " ", "GEMINI", " ", "GOD", " ", 
+      RowBox[{"PROMPT", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- Constructing the LLM Grading Prompt ---\>\"", 
+     "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "systemInstructions", 
+     "=", "\"\<You are an expert intelligence analyst executing the Analysis \
+of Competing Hypotheses (ACH). \nI will provide a list of Evidence and a list \
+of Hypotheses. You must score every piece of evidence against every \
+hypothesis. \nUse ONLY the following exact strings: \\\"C\\\", \\\"I\\\", \
+\\\"II\\\", \\\"N\\\", \\\"NA\\\". \n\nYou must output your response STRICTLY \
+as a JSON array of arrays (a 2D matrix). \nRows must represent the Evidence. \
+Columns must represent the Hypotheses.\nDo not include markdown blocks, \
+explanations, or any other text. Output ONLY the raw JSON array like this: [[\
+\\\"C\\\", \\\"I\\\"], [\\\"N\\\", \\\"II\\\"]]\>\""}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"evidenceString", "=", 
+     RowBox[{"\"\<EVIDENCE LIST:\\n\>\"", "<>", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"Riffle", "[", 
+        RowBox[{"evidenceList", ",", "\"\<\\n\>\""}], "]"}], "]"}]}]}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"hypothesesString", "=", 
+     RowBox[{"\"\<HYPOTHESES LIST:\\n\>\"", "<>", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"Riffle", "[", 
+        RowBox[{"hypothesesList", ",", "\"\<\\n\>\""}], "]"}], "]"}]}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"fullPrompt", "=", 
+     RowBox[{
+     "systemInstructions", "<>", "\"\<\\n\\n\>\"", "<>", "evidenceString", 
+      "<>", "\"\<\\n\\n\>\"", "<>", "hypothesesString"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "EXECUTE"}]}], " ", "API", " ", 
+      RowBox[{"CALL", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- Sending Matrix to Gemini API ---\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"rawResponse", "=", 
+     RowBox[{"rateLimitedExecute", "[", 
+      RowBox[{"geminiService", ",", "\"\<Chat\>\"", ",", 
+       RowBox[{"<|", 
+        RowBox[{
+         RowBox[{"\"\<Messages\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{"<|", 
+            RowBox[{
+             RowBox[{"\"\<Role\>\"", "->", "\"\<user\>\""}], ",", 
+             RowBox[{"\"\<Content\>\"", "->", "fullPrompt"}]}], "|>"}], 
+           "}"}]}], ",", 
+         RowBox[{"\"\<Model\>\"", "->", "\"\<gemini-2.5-flash\>\""}], ",", 
+         RowBox[{"\"\<Temperature\>\"", "->", "0.0"}]}], "|>"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Parse", " ", "JSON", " ", "Response"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"cleanJSON", "=", 
+     RowBox[{"StringReplace", "[", 
+      RowBox[{
+       RowBox[{"rawResponse", "[", "\"\<Content\>\"", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<```json\>\"", "->", "\"\<\>\""}], ",", 
+         RowBox[{"\"\<```\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"aiMatrix", "=", 
+     RowBox[{"ImportString", "[", 
+      RowBox[{"cleanJSON", ",", "\"\<JSON\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<\:2705 AI Matrix Scored! Dimensions: \>\"", ",", 
+      RowBox[{"Dimensions", "[", "aiMatrix", "]"}]}], "]"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "EXPORT"}]}], " ", 
+      RowBox[{"MATRIX", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/ai_scored_matrix.\
+json\>\"", ",", "aiMatrix"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\:2705 Matrix exported to Vault. Ready for Notebook \
+03.\>\"", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.9812051215895367`*^9, 3.98120512159269*^9}, 
+   3.9812066999344378`*^9, {3.98120718051591*^9, 3.981207181703064*^9}, {
+   3.9812090591334953`*^9, 3.9812090652583447`*^9}, {3.9812095184509373`*^9, 
+   3.9812095238340178`*^9}, {3.981394105717669*^9, 
+   3.9813941103377047`*^9}},ExpressionUUID->"698c5062-5bc7-499c-9e56-\
+5bb680d9b0a3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"--- Initializing Dynamic ACH Engine ---\"\>"], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528573635*^9},
+ CellLabel->
+  "During evaluation of \
+In[94]:=",ExpressionUUID->"e6652c58-80fe-4672-b09c-2687f3289b2b"],
+
+Cell[BoxData["\<\"\\n=== DATA INGESTION SUCCESSFUL ===\"\>"], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528613419*^9},
+ CellLabel->
+  "During evaluation of \
+In[94]:=",ExpressionUUID->"49166443-dc3e-41b0-8dcd-db29253fabe0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Target Hypotheses Extracted: \"\>", "\[InvisibleSpace]", "8"}],
+  
+  SequenceForm["Target Hypotheses Extracted: ", 8],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528614345*^9},
+ CellLabel->
+  "During evaluation of \
+In[94]:=",ExpressionUUID->"6af31afd-3794-4b46-97ff-c8f92cc5dbc1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Evidence Items Extracted: \"\>", "\[InvisibleSpace]", "20"}],
+  SequenceForm["Evidence Items Extracted: ", 20],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528614711*^9},
+ CellLabel->
+  "During evaluation of \
+In[94]:=",ExpressionUUID->"82c43781-ae22-45d2-9109-76eef03bce2c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nReady to generate a \"\>", "\[InvisibleSpace]", "20", 
+   "\[InvisibleSpace]", "\<\" x \"\>", "\[InvisibleSpace]", "8", 
+   "\[InvisibleSpace]", "\<\" assessment matrix.\"\>"}],
+  SequenceForm["\nReady to generate a ", 20, " x ", 8, " assessment matrix."],
+  
+  Editable->False]], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528615069*^9},
+ CellLabel->
+  "During evaluation of \
+In[94]:=",ExpressionUUID->"d0f0a7cc-abf5-4590-8f53-188e9ac0084e"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 679},
+WindowMargins->{{216, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4ad17c12-0890-4425-997b-b3c818110fa2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 7132, 185, 1096, "Input",ExpressionUUID->"698c5062-5bc7-499c-9e56-5bb680d9b0a3"],
+Cell[CellGroupData[{
+Cell[7733, 211, 289, 5, 23, "Print",ExpressionUUID->"e6652c58-80fe-4672-b09c-2687f3289b2b"],
+Cell[8025, 218, 286, 5, 41, "Print",ExpressionUUID->"49166443-dc3e-41b0-8dcd-db29253fabe0"],
+Cell[8314, 225, 413, 10, 23, "Print",ExpressionUUID->"6af31afd-3794-4b46-97ff-c8f92cc5dbc1"],
+Cell[8730, 237, 406, 9, 23, "Print",ExpressionUUID->"82c43781-ae22-45d2-9109-76eef03bce2c"],
+Cell[9139, 248, 557, 12, 41, "Print",ExpressionUUID->"d0f0a7cc-abf5-4590-8f53-188e9ac0084e"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,202 @@
+CASE NARRATIVE
+
+On 14 May 1993 in the Four Corners area of New Mexico, a young
+former track star collapsed on the way to his fiancée’s funeral and was
+rushed to the Gallup Medical Center emergency room. He died a few hours
+later. State medical investigators performed autopsies on both the man and
+his fiancée, who had died five days earlier. They noted similarities in their
+cases: flu-like symptoms of fever, coughing, and chills, with quick
+progression to acute respiratory distress and death as their lungs filled with
+fluid. Their infant daughter also exhibited the same symptoms but was not
+as severely affected.1 None of the medical personnel involved in treating
+the patients were believed to have become infected.
+Three days later, Gallup Medical Center officials linked the deaths of
+the young couple to three other respiratory fatalities in the region and sent a
+warning to the New Mexico Department of Health. Doctors were concerned
+that they were dealing with a particularly potent flu virus that could spread
+quickly across the broader population. The next day the Department of
+Health contacted the federal Centers for Disease Control (CDC) in Atlanta,
+Georgia, and asked it to investigate.2
+By 31 May 1993, the disease had claimed ten victims, eight of them
+Navajos. Young, healthy adults were dying of an infectious disease that
+appeared to have a surprisingly high case-fatality rate.3 An epidemiologist
+from the New Mexico Department of Health reported that all died shortly
+after developing symptoms similar to the flu, including a cough that quickly
+progressed to a severe respiratory ailment. The official said that the
+department did not know what the illness was or how to prevent it; initial
+laboratory polymerase chain reaction (PCR) tests for common viral and
+bacterial agents had come back negative.4
+Medical officials realized they were facing a major challenge: people
+were dying, and no one knew why. Were all these deaths related? If so,
+what common symptoms could be identified? Doctors were concerned that
+if they could not determine the underlying cause of death, they could not
+treat those who were becoming ill and they could not prevent even more
+people from dying.
+
+1: The Four Corners Region
+
+Four Corners (see Map 9.1) is a region of the United States that
+encompasses southwest Colorado, northwest New Mexico, northeast
+Arizona, and southeast Utah. The name comes from a monument that marks
+the only spot in the United States where the boundaries of four states
+intersect. The monument also denotes the boundary between two semi-
+autonomous Native American governments, the Navajo Nation, which
+maintains the monument as a tourist attraction, and the Ute Mountain Ute
+Indian Reservation.5
+Many residents of the Four Corners region depend on tourism and
+agriculture for their livelihoods. The area hosts thousands of visitors yearly
+who come to the region to visit Canyon de Chelly National Monument and
+Mesa Verde National Park, which contain ruins of early indigenous tribes,
+and Monument Valley, which is notable for its large sandstone buttes. Other
+residents earn their livelihoods from livestock farming, seasonal migratory
+agricultural work, and employment off the Navajo reservation.6
+The Four Corners Region is a high plateau: weather systems stabilize
+here and then head eastward to create snow and rain in the central portion
+of the United States. The area itself has low humidity, sparse precipitation,
+and lots of sun. The winters are mild during the day, with temperatures
+falling to or below freezing at nightfall. When El Niño occurs, usually
+every three to seven years, the winters and early springs tend to be wetter
+than usual. Stronger than usual El Niños bring significantly more rainy days
+and more rain per day. Summers are hot. Forty percent of the region’s
+precipitation comes from late-afternoon summer thunderstorms. Water
+rights and access to water are important issues in the area.7
+The Navajo Nation constitutes the bulk of the population in the Four
+Corners region. The Nation’s reservation encompasses more than twenty-
+seven-thousand square miles, with three satellite locations in central New
+Mexico. The Navajo are inheritors of a cultural legacy centered on oral
+traditions and customs passed down for hundreds of years. The tribe’s
+spiritual beliefs, collectively known as the Navajo Way, emphasize the
+importance of preserving and restoring balance and harmony with nature.
+According to cultural specialists at the Navajo Nation Museum in Window
+Rock, Arizona, sacred ceremonies performed by tribal healers are essential
+in perpetuating the Navajo Way. The Navajo medicine people (hataa’lii in
+the Navajo language) serve not only as healers but as historians with
+extensive knowledge of tribal traditions and mythology.8
+The Navajo Area Indian Health Service (NAIHS), a subagency of the
+Department of Health and Human Services, is responsible for health care
+for American Indians in the Four Corners area; its primary patients are
+members of the Navajo Nation and the Southern Band of San Juan Paiutes,
+but NAIHS also provides care to other Native Americans. All NAIHS
+physicians must be board eligible or, preferably, board certified in a Western
+medical specialty. The NAIHS sensitizes its medical professionals to the
+intertwining of Navajo religion with the concepts of being, health, disease,
+and the environment. The Navajo Nation Council’s Division of Health
+Improvement Services—later renamed the Navajo Division of Health—also
+plays a role in promoting and maintaining the overall health and well-being
+of the Navajo population. It employs hundreds of health professionals,
+paraprofessionals, and technical professionals scattered throughout the
+Navajo Nation.9
+
+2: Fear Takes Over
+
+By the end of May, at least twenty-three patients—predominantly Navajos
+—with symptoms of the illness were being treated at hospitals in the Four
+Corners area and Albuquerque, New Mexico. Communicable disease
+specialists from the Indian Health Service in Albuquerque said that they had
+not yet been able to determine why people who were closely related to each
+other (family cluster cases) developed adult respiratory distress syndrome in
+roughly the same time period. In all cases, the disease—which some labeled
+the “Navajo flu”—progressed quickly, though it did not always lead to
+death. Press reports stated that four people appeared to have recovered, but
+doctors said they did not know whether treatment, primarily with
+antibiotics, was responsible.10
+As news of the illness spread across the country, tourism to the Four
+Corners area declined. Twenty-seven young Navajos who corresponded
+with students at a private school in the Los Angeles area were discouraged
+from visiting their pen pals. Special telephone lines set up by the New
+Mexico Department of Health to handle inquiries about the illness were
+overwhelmed with calls. Hospitals in Santa Fe began seeing panicky
+patients who had visited the Navajo reservation within the past several
+weeks. Following the discovery of “new” and “unknown” diseases, it is
+typical behavior for a sensitized population within the presumably affected
+community to respond by inundating the available medical infrastructure.11
+In Atlanta, three young investigators in the Centers for Disease
+Control’s Epidemic Intelligence Service (EIS) were called on a Friday
+afternoon in late May and told to come to the office.12 They were handed
+airline tickets and gas masks, the latter suggesting the possibility that they
+could be exposed to a toxic substance. The EIS, the “special pathogens”
+branch of the CDC, is primarily deployed when a new pathogen is
+discovered or if there is an allegation or suspicion of bioterrorism. The
+service was created in 1951 during the Korean War, when the United States
+became worried about biological warfare. A preliminary survey of the
+Internet, however, revealed no postings containing extreme anti-Navajo
+rhetoric or any suggestions that terrorists might be targeting the Four
+Corners area.
+The connection with bioterrorism was not farfetched in the case of the
+“Navajo flu.” Some residents of the reservation speculated that victims had
+been exposed to a toxin stored at Fort Wingate Army Depot, a munitions
+storage and demolition facility close to both the Navajo Nation and the Zuni
+Pueblo Tribe. Others asked whether there were any reports of toxic spills on
+or near Navajo Nation lands.13
+
+3: Collecting the Pieces of the Puzzle
+
+The EIS epidemiologists were skeptical that they were dealing with a flu
+virus. They were working against the clock to determine not only the type
+of illness but its root cause. EIS personnel began working with a small
+group of investigators assembled from the state health departments, the
+University of New Mexico School of Medicine, and the Navajo Area Indian
+Health Service. They began combing through patient logs made available
+by area hospitals and clinics.
+Their research revealed that most patients lived in the Four Corners
+area, but the available data did not show the victims all visiting the same
+location or any obvious patterns. Most patients reported influenza-like
+symptoms of abrupt fever, nausea, vomiting, headache, malaise, and body
+aches—particularly abdominal and back pain. This was often followed by a
+cough, gastrointestinal manifestations, and labored breathing for four or
+more days before hospitalization with pulmonary edema or fluid in the
+lungs, along with severe hypertension and oxygen deficit in body tissues.
+Blood tests, when conducted, also showed abnormally low blood platelet
+counts, which are often associated with diseases such as rickets, the plague,
+rabbit fever, and deer fly fever.
+14 Initially, moderate cases of the illness
+were diagnosed as acute respiratory distress syndrome, juvenile diabetes,
+and even gastroenteritis. Those treating the patients did not seem to be
+contracting the illness.15
+The investigators cast a wide investigatory net. Many of the pieces or
+clues were consistent with exposure to toxic material—either accidental or
+on purpose: presence of an unexplained disease in a discrete population,
+many cases of death from an unexplained disease, a disease that is unusual
+for an age group, a disease that is much more severe than expected, the
+failure to respond to standard therapy, and the presence of munitions or
+advanced weapons delivery systems.16 A few patients reported dizziness,
+confusion, or impaired concentration, all of which are symptoms of
+exposure to toxic material. If a biological agent were being used
+deliberately to cause the deaths, one sign would be a high number of recent,
+unexplained animal deaths or crop failures, but research did not turn up any
+such evidence.
+EIS personnel also sought out Navajo tribal healers, who were the
+closest thing to a historical medical registry available. The healers told EIS
+personnel that the cause of the disease was disharmony in the Navajo world.
+They recounted that many people had died of sudden, powerful diseases
+two other times during the twentieth century, in 1918 and 1933. Tribal
+elders recalled that there were particularly abundant piñon, or pine nut,
+crops those years because of unusually wet winters and springs. According
+to tribal lore, rodent populations were also very high during those times.17
+Rodents are well known as potential carriers of disease. Investigators
+asked: Was the outbreak of a similar virus and the increase in rodent
+populations on two other occasions earlier in the century a coincidence, or
+did the correlation suggest the source of the disease? Investigators needed
+to know as soon as possible what kinds of illnesses rodents are known to
+spread and whether such illnesses were endemic to the Four Corners region.
+Preliminary research suggested some answers, as shown in Table 9.1.
+The investigators reached out to climatologists as well. The
+climatologists confirmed that precipitation levels had increased dramatically
+in 1992 and 1993 in association with El Niño. The rainfall resulted in an
+abundance of vegetation and ample food supplies for rodent populations.
+When precipitation levels returned to normal, however, rodent populations
+became stressed due to the lack of food supply, forcing them to seek new
+sources of food. The National Science Foundation and the US Fish and
+Wildlife Service recommended that medical investigators consult scientists
+associated with the Sevilleta Long-Term Ecological Research Program at
+the Sevilleta National Wildlife Refuge in central New Mexico. Ecological
+researchers provided a detailed analysis of twenty-two rodent species in the
+area. In reviewing the reports, the investigators were struck by the fact that
+there had been a tenfold increase in the rodent population between 1992 and
+1993.18
+People were getting sick, and many were dying, as investigators
+continued to collect the various pieces of the puzzle. Doctors felt a growing
+sense of urgency to discover the underlying cause of death. Public concern
+was mounting, and people deserved an explanation. More important, the
+public was demanding guidance on what to do to avoid getting sick, and
+public health officials didn’t know what to say.
