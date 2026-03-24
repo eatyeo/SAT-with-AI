@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     38756,        881]
-NotebookOptionsPosition[     37859,        858]
-NotebookOutlinePosition[     38252,        874]
-CellTagsIndexPosition[     38209,        871]
+NotebookDataLength[     17933,        454]
+NotebookOptionsPosition[     17136,        432]
+NotebookOutlinePosition[     17528,        448]
+CellTagsIndexPosition[     17485,        445]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,8 +24,9 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
+     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
+    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
   RowBox[{"(*", 
    RowBox[{"03", ":", 
     RowBox[{
@@ -33,21 +34,40 @@ Cell[BoxData[
    "*)"}], 
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
+     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
+    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
   RowBox[{
    RowBox[{
     RowBox[{
     "Print", "[", "\"\<--- Initializing Visualization Engine ---\>\"", "]"}], 
     ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"1.", " ", "Import", " ", "Dynamic", " ", "AI", " ", "Data"}], 
-    "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "1."}]}], " ", "Import", " ", "Dynamic", " ", "AI", " ", 
+      RowBox[{"Data", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "matrixPath", 
+     "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/ai_scored_matrix.json\>\
+\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "hypothesesPath", 
+     "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/target_hypotheses.md\>\
+\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "evidencePath", 
+     "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/evidence_vault.md\>\""}\
+], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"expertMatrix", "=", 
      RowBox[{"Import", "[", 
-      RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/ai_scored_matrix.\
-json\>\"", ",", "\"\<JSON\>\""}], "]"}]}], ";"}], "\n", 
+      RowBox[{"matrixPath", ",", "\"\<JSON\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"hypothesesList", "=", 
      RowBox[{"DeleteCases", "[", 
@@ -56,10 +76,9 @@ json\>\"", ",", "\"\<JSON\>\""}], "]"}]}], ";"}], "\n",
         RowBox[{"StringSplit", "[", 
          RowBox[{
           RowBox[{"Import", "[", 
-           
-           RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/target_\
-hypotheses.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
-         "]"}], ",", "\"\<\>\""}], "]"}]}], ";"}], "\n", 
+           RowBox[{"hypothesesPath", ",", "\"\<Text\>\""}], "]"}], 
+          ",", "\"\<\\n\>\""}], "]"}], "]"}], ",", "\"\<\>\""}], "]"}]}], 
+    ";"}], "\n", 
    RowBox[{
     RowBox[{"rawEvidence", "=", 
      RowBox[{"DeleteCases", "[", 
@@ -68,19 +87,16 @@ hypotheses.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
         RowBox[{"StringSplit", "[", 
          RowBox[{
           RowBox[{"Import", "[", 
-           
-           RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/evidence_\
-vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}], 
-        "]"}], ",", "\"\<\>\""}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+           RowBox[{"evidencePath", ",", "\"\<Text\>\""}], "]"}], 
+          ",", "\"\<\\n\>\""}], "]"}], "]"}], ",", "\"\<\>\""}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-     RowBox[{"1.5", " ", "The", " ", "Aesthetic", " ", 
-      RowBox[{"Fix", ":", 
-       RowBox[{
-        RowBox[{"Prepend", " ", "the", " ", "E"}], "-", 
-        RowBox[{
-        "labels", " ", "and", " ", "brutally", " ", "truncate", " ", "to", " ",
-          "fit", " ", "AspectRatio"}]}]}]}], "->", "1"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"--", 
+      RowBox[{"-", "1.5"}]}], " ", "Aesthetic", " ", 
+     RowBox[{"Fix", ":", 
+      RowBox[{
+       RowBox[{"Labels", "--"}], "-"}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"evidenceLabels", "=", 
      RowBox[{"MapIndexed", "[", 
@@ -102,8 +118,11 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
-      RowBox[{"2.", " ", "The", " ", "Math"}], "&"}], " ", "Visualization", " ",
-      "Mapping"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"--", 
+         RowBox[{"-", "2."}]}], " ", "Math"}], "&"}], " ", "Visualization", " ", 
+      RowBox[{"Mapping", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"mathMap", "=", 
      RowBox[{"{", 
@@ -117,15 +136,6 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
        RowBox[{"\"\<N\>\"", "->", "0"}], ",", 
        RowBox[{"\"\<NA\>\"", "->", "0"}]}], "}"}]}], ";"}], "\n", 
    RowBox[{
-    RowBox[{"numericMatrix", "=", 
-     RowBox[{"expertMatrix", "/.", " ", "mathMap"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"hypothesisScores", "=", 
-     RowBox[{"Total", "[", "numericMatrix", "]"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Calculates", " ", "the", " ", "column", " ", 
-     RowBox[{"sums", "!"}]}], "*)"}], "\[IndentingNewLine]", "\n", 
-   RowBox[{
     RowBox[{"visMap", "=", 
      RowBox[{"{", 
       RowBox[{
@@ -136,31 +146,32 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
        RowBox[{"\"\<N\>\"", "->", "0"}], ",", 
        RowBox[{"\"\<NA\>\"", "->", "0"}], ",", 
        RowBox[{"\"\<C\>\"", "->", "1"}], ",", 
-       RowBox[{"\"\<CC\>\"", "->", "2"}]}], "}"}]}], ";"}], "\n", 
+       RowBox[{"\"\<CC\>\"", "->", "2"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"numericMatrix", "=", 
+     RowBox[{"expertMatrix", "/.", " ", "mathMap"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"hypothesisScores", "=", 
+     RowBox[{"Total", "[", "numericMatrix", "]"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{"visMatrix", "=", 
-     RowBox[{"expertMatrix", "/.", " ", "visMap"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-      "===", "===", "===", "===", "===", "===", "==="}], "*)"}], "\n", 
+     RowBox[{"expertMatrix", "/.", " ", "visMap"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"THE", " ", 
-     RowBox[{"UPGRADE", ":", 
-      RowBox[{"Sort", " ", "by", " ", 
-       RowBox[{"Diagnosticity", "!"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
     RowBox[{
-    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-      "===", "===", "===", "===", "===", "===", "==="}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "SORT"}]}], " ", "BY", " ", 
+      RowBox[{"DIAGNOSTICITY", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"rowVariances", "=", 
      RowBox[{"Variance", "/@", "numericMatrix"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{"sortOrder", "=", 
      RowBox[{"Reverse", "[", 
-      RowBox[{"Ordering", "[", "rowVariances", "]"}], "]"}]}], ";"}], "\n", 
+      RowBox[{"Ordering", "[", "rowVariances", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"sortedVisMatrix", "=", 
      RowBox[{"visMatrix", "[", 
@@ -168,13 +179,14 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
    RowBox[{
     RowBox[{"sortedEvidenceLabels", "=", 
      RowBox[{"evidenceLabels", "[", 
-      RowBox[{"[", "sortOrder", "]"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+      RowBox[{"[", "sortOrder", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{"(*", 
     RowBox[{
-    "3.", " ", "Generate", " ", "the", " ", "Upgraded", " ", "Heatmap", " ", 
-     RowBox[{"(", 
-      RowBox[{"OLD", " ", "VISUALS"}], ")"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "3."}]}], " ", "Generate", " ", "the", " ", "Upgraded", " ", 
+      RowBox[{"Heatmap", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
     "Print", "[", "\"\<\\n--- Generating ACH MatrixPlot ---\>\"", "]"}], 
@@ -210,9 +222,8 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
            RowBox[{"Axis", ":", 
             RowBox[{"Evidence", " ", 
              RowBox[{"(", 
-              RowBox[{
-              "Sorted", " ", "and", " ", "Truncated", " ", "for", " ", 
-               "Safety"}], ")"}]}]}]}], "*)"}], 
+              RowBox[{"Protected", " ", "by", " ", "ImagePadding"}], 
+              ")"}]}]}]}], "*)"}], 
          RowBox[{
           RowBox[{"{", 
            RowBox[{
@@ -231,9 +242,11 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
           RowBox[{"(*", 
            RowBox[{"Top", " ", 
             RowBox[{"Axis", ":", 
-             RowBox[{"Hypotheses", " ", "AND", " ", 
-              RowBox[{"Scores", "!"}], " ", "Stacked", " ", "in", " ", "a", " ",
-               "Column", " ", "inside", " ", "the", " ", "Pane"}]}]}], "*)"}], 
+             RowBox[{
+              RowBox[{"Hypotheses", " ", "AND", " ", "Scores"}], "-", 
+              RowBox[{
+              "Rotated", " ", "90", " ", "degrees", " ", "to", " ", "prevent",
+                " ", "horizontal", " ", "crushing"}]}]}]}], "*)"}], 
           RowBox[{"{", 
            RowBox[{"None", ",", 
             RowBox[{"MapIndexed", "[", 
@@ -243,14 +256,14 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
                 RowBox[{
                  RowBox[{"#2", "[", 
                   RowBox[{"[", "1", "]"}], "]"}], ",", 
-                 RowBox[{"Pane", "[", 
+                 RowBox[{"Rotate", "[", 
                   RowBox[{
                    RowBox[{"Column", "[", 
                     RowBox[{
                     RowBox[{"{", 
                     RowBox[{
                     RowBox[{"Style", "[", 
-                    RowBox[{"#1", ",", "10", ",", 
+                    RowBox[{"#1", ",", "11", ",", 
                     RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", 
                     "Bold"}], "]"}], ",", 
                     RowBox[{"Style", "[", 
@@ -261,25 +274,20 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
                     RowBox[{"[", 
                     RowBox[{"#2", "[", 
                     RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "]"}]}], ",",
-                     "10", ",", 
+                     "11", ",", 
                     RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", 
                     RowBox[{"FontColor", "->", 
                     RowBox[{"Darker", "[", 
                     RowBox[{"Red", ",", "0.2"}], "]"}]}], ",", "Bold"}], 
                     "]"}]}], "}"}], ",", 
-                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", "80",
-                    ",", 
-                   RowBox[{"Alignment", "->", "Center"}]}], "]"}]}], "}"}], 
-               "&"}], ",", "hypothesesList"}], "]"}]}], "}"}]}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", "Left"}]}], "]"}], ",", 
+                   RowBox[{"Pi", "/", "2"}]}], "]"}]}], "}"}], "&"}], ",", 
+              "hypothesesList"}], "]"}]}], "}"}]}], "}"}]}], ",", 
        RowBox[{"FrameTicksStyle", "->", 
         RowBox[{"Directive", "[", 
          RowBox[{
           RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "10"}], 
          "]"}]}], ",", 
-       RowBox[{"(*", 
-        RowBox[{
-        "Reverting", " ", "to", " ", "the", " ", "classic", " ", "dashed", " ",
-          "mesh"}], "*)"}], 
        RowBox[{"Mesh", "->", "True"}], ",", 
        RowBox[{"MeshStyle", "->", 
         RowBox[{"Directive", "[", 
@@ -287,7 +295,7 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
           RowBox[{"GrayLevel", "[", "0.5", "]"}], ",", "Dashed"}], "]"}]}], ",", 
        RowBox[{"PlotLabel", "->", 
         RowBox[{"Style", "[", 
-         RowBox[{"\"\<ACH Matrix Analysis (Sorted by Diagnosticity)\>\"", ",",
+         RowBox[{"\"\<ACH Matrix Analysis (Sorted by Diagnosticity)\\n\>\"", ",",
            "Bold", ",", "16", ",", 
           RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}]}], "]"}]}], ",", 
        RowBox[{"PlotLegends", "->", 
@@ -323,18 +331,24 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
               RowBox[{
                RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "10"}],
                "]"}]}]}], "]"}], ",", "Right"}], "]"}]}], ",", 
-       RowBox[{"(*", 
-        RowBox[{
-         RowBox[{"Reverting", " ", "to", " ", "your", " ", "exact"}], ",", 
-         RowBox[{"stable", " ", "dimensional", " ", "code"}]}], "*)"}], 
-       RowBox[{"ImageSize", "->", "Large"}], ",", 
-       RowBox[{"AspectRatio", "->", "1"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
-   RowBox[{
-    RowBox[{"Print", "[", "achPlot", "]"}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+       RowBox[{"ImageSize", "->", 
+        RowBox[{"{", 
+         RowBox[{"1000", ",", "1100"}], "}"}]}], ",", 
+       RowBox[{"AspectRatio", "->", "1.5"}], ",", 
+       RowBox[{"ImagePadding", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"280", ",", "20"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"40", ",", "150"}], "}"}]}], "}"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"4.", " ", "Export", " ", "the", " ", "Visuals"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "4."}]}], " ", "Export", " ", "the", " ", 
+      RowBox[{"Visuals", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
     "exportPath", 
@@ -342,11 +356,12 @@ vault.md\>\"", ",", "\"\<Text\>\""}], "]"}], ",", "\"\<\\n\>\""}], "]"}],
 \""}], ";"}], "\n", 
    RowBox[{
     RowBox[{"Export", "[", 
-     RowBox[{"exportPath", ",", "achPlot"}], "]"}], ";"}], "\n", 
+     RowBox[{"exportPath", ",", "achPlot"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
-    "Print", "[", "\"\<\\n\:2705 VISUALIZATION COMPLETE. Plot exported to \
-Vault.\>\"", "]"}], ";"}]}]}]], "Input",
+    "Print", "[", "\"\<\\n\[Checkmark] VISUALIZATION COMPLETE. Plot exported \
+to Vault.\>\"", "]"}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.981307979171679*^9, 3.981307979174169*^9}, {
    3.981308105429634*^9, 3.981308106111722*^9}, 3.981308249027433*^9, 
    3.98130842394972*^9, 3.981308968497973*^9, 3.981309155755515*^9, 
@@ -357,9 +372,11 @@ Vault.\>\"", "]"}], ";"}]}]}]], "Input",
    3.9813957819870987`*^9}, 3.981395917930067*^9, {3.981396148914295*^9, 
    3.981396149749077*^9}, 3.9813964208882627`*^9, 3.981396611663726*^9, 
    3.9813967711051273`*^9, 3.981396911560172*^9, {3.981397060068406*^9, 
-   3.981397060808387*^9}},
+   3.981397060808387*^9}, {3.983324601643476*^9, 3.983324603394134*^9}, {
+   3.983325220904228*^9, 3.98332524878082*^9}, {3.983328835006257*^9, 
+   3.983328845946782*^9}},
  CellLabel->
-  "In[572]:=",ExpressionUUID->"1a6b01de-a1ee-4dc6-960d-f8850ab5a253"],
+  "In[672]:=",ExpressionUUID->"1a6b01de-a1ee-4dc6-960d-f8850ab5a253"],
 
 Cell[CellGroupData[{
 
@@ -370,10 +387,12 @@ Cell[BoxData["\<\"--- Initializing Visualization Engine ---\"\>"], "Print",
   3.981394931042811*^9, 3.981395058074774*^9, 3.981395258364143*^9, 
   3.981395446905128*^9, 3.981395786799458*^9, 3.981395932252462*^9, 
   3.981396155321302*^9, 3.981396428920866*^9, 3.981396617225403*^9, 
-  3.981396775377407*^9, 3.981396915677712*^9, 3.981397064987433*^9},
+  3.981396775377407*^9, 3.981396915677712*^9, 3.981397064987433*^9, 
+  3.9833246093146152`*^9, 3.9833246502085047`*^9, 3.983325254243499*^9, 
+  3.9833288548612347`*^9},
  CellLabel->
   "During evaluation of \
-In[572]:=",ExpressionUUID->"5fcaea11-2300-4163-81f0-7d2ccba17370"],
+In[672]:=",ExpressionUUID->"72e6a1ef-7ed3-4213-b43a-0c5767e5cdf7"],
 
 Cell[BoxData["\<\"\\n--- Generating ACH MatrixPlot ---\"\>"], "Print",
  CellChangeTimes->{3.9813079938837957`*^9, 3.981308110427454*^9, 
@@ -382,482 +401,37 @@ Cell[BoxData["\<\"\\n--- Generating ACH MatrixPlot ---\"\>"], "Print",
   3.981394931042811*^9, 3.981395058074774*^9, 3.981395258364143*^9, 
   3.981395446905128*^9, 3.981395786799458*^9, 3.981395932252462*^9, 
   3.981396155321302*^9, 3.981396428920866*^9, 3.981396617225403*^9, 
-  3.981396775377407*^9, 3.981396915677712*^9, 3.981397065026227*^9},
+  3.981396775377407*^9, 3.981396915677712*^9, 3.981397064987433*^9, 
+  3.9833246093146152`*^9, 3.9833246502085047`*^9, 3.983325254243499*^9, 
+  3.983328854964641*^9},
  CellLabel->
   "During evaluation of \
-In[572]:=",ExpressionUUID->"b4515ca1-441f-455c-9012-08569aa616df"],
+In[672]:=",ExpressionUUID->"4b02511f-f2b6-4cda-8799-cb1f4288b979"],
 
-Cell[BoxData[
- TemplateBox[{
-   GraphicsBox[{
-     RasterBox[CompressedData["
-1:eJxTTMoPSmVmYGDQBGIWIAaxjcHgsT2MZgCDD/a4xNPA4B0GTao5o+YPD/Nh
-9KyZIHATTo+aPzLNJ1V8sJk/1MN/1PzR9D+Yw2fU/FHzR7L5pIoTMp8BDZDq
-flzmUCt8Rpr55IoPFvePmo9qPro4qeYDAMcFvcQ=
-      "], {{0, 0}, {4, 41}}, {0, 1}], {{Antialiasing -> False, 
-       Directive[
-        GrayLevel[0.5], 
-        Dashing[{Small, Small}]], 
-       LineBox[{{{0, 41}, {4, 41}}, {{0, 40}, {4, 40}}, {{0, 39}, {4, 39}}, {{
-        0, 38}, {4, 38}}, {{0, 37}, {4, 37}}, {{0, 36}, {4, 36}}, {{0, 35}, {
-        4, 35}}, {{0, 34}, {4, 34}}, {{0, 33}, {4, 33}}, {{0, 32}, {4, 
-        32}}, {{0, 31}, {4, 31}}, {{0, 30}, {4, 30}}, {{0, 29}, {4, 29}}, {{0,
-         28}, {4, 28}}, {{0, 27}, {4, 27}}, {{0, 26}, {4, 26}}, {{0, 25}, {4, 
-        25}}, {{0, 24}, {4, 24}}, {{0, 23}, {4, 23}}, {{0, 22}, {4, 22}}, {{0,
-         21}, {4, 21}}, {{0, 20}, {4, 20}}, {{0, 19}, {4, 19}}, {{0, 18}, {4, 
-        18}}, {{0, 17}, {4, 17}}, {{0, 16}, {4, 16}}, {{0, 15}, {4, 15}}, {{0,
-         14}, {4, 14}}, {{0, 13}, {4, 13}}, {{0, 12}, {4, 12}}, {{0, 11}, {4, 
-        11}}, {{0, 10}, {4, 10}}, {{0, 9}, {4, 9}}, {{0, 8}, {4, 8}}, {{0, 
-        7}, {4, 7}}, {{0, 6}, {4, 6}}, {{0, 5}, {4, 5}}, {{0, 4}, {4, 4}}, {{
-        0, 3}, {4, 3}}, {{0, 2}, {4, 2}}, {{0, 1}, {4, 1}}, {{0, 0}, {4, 
-        0}}}]}, {Antialiasing -> False, 
-       Directive[
-        GrayLevel[0.5], 
-        Dashing[{Small, Small}]], 
-       LineBox[{{{0, 0}, {0, 41}}, {{1, 0}, {1, 41}}, {{2, 0}, {2, 41}}, {{3, 
-        0}, {3, 41}}, {{4, 0}, {4, 41}}}]}}}, AspectRatio -> 1, Frame -> True,
-     FrameLabel -> {None, None}, FrameTicks -> {{{{40.5, 
-         FormBox[
-          StyleBox[
-          "\"E27: Young, healthy adults were dyi...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {39.5, 
-         FormBox[
-          StyleBox[
-          "\"E40: Initial laboratory polymerase ...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {38.5, 
-         FormBox[
-          StyleBox[
-          "\"E38: He died a few hours later.\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {37.5, 
-         FormBox[
-          StyleBox[
-          "\"E37: None of the medical personnel ...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {36.5, 
-         FormBox[
-          StyleBox[
-          "\"E26: The disease appeared to have a...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {35.5, 
-         FormBox[
-          StyleBox[
-          "\"E22: By 31 May 1993, the disease ha...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {34.5, 
-         FormBox[
-          StyleBox[
-          "\"E13: Initially, moderate cases of t...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {33.5, 
-         FormBox[
-          StyleBox[
-          "\"E12: All victims died shortly after...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {32.5, 
-         FormBox[
-          StyleBox[
-          "\"E11: All victims died shortly after...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {31.5, 
-         FormBox[
-          StyleBox[
-          "\"E28: Young, healthy adults were dyi...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {30.5, 
-         FormBox[
-          StyleBox[
-          "\"E41: Hospitals in Santa Fe began se...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {29.5, 
-         FormBox[
-          StyleBox[
-          "\"E39: Blood tests showed abnormally ...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {28.5, 
-         FormBox[
-          StyleBox[
-          "\"E36: A few patients reported dizzin...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {27.5, 
-         FormBox[
-          StyleBox[
-          "\"E35: A few patients reported confus...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {26.5, 
-         FormBox[
-          StyleBox[
-          "\"E34: A few patients reported impair...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {25.5, 
-         FormBox[
-          StyleBox[
-          "\"E33: A few patients reported dizzin...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {24.5, 
-         FormBox[
-          StyleBox[
-          "\"E32: The disease showed failure to ...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {23.5, 
-         FormBox[
-          StyleBox[
-          "\"E30: An infant daughter exhibited t...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {22.5, 
-         FormBox[
-          StyleBox[
-          "\"E29: The infant daughter was not as...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {21.5, 
-         FormBox[
-          StyleBox[
-          "\"E24: Those treating the patients di...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {20.5, 
-         FormBox[
-          StyleBox[
-          "\"E23: By 31 May 1993, the disease ha...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {19.5, 
-         FormBox[
-          StyleBox[
-          "\"E21: People who were closely relate...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {18.5, 
-         FormBox[
-          StyleBox[
-          "\"E20: The disease progressed quickly...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {17.5, 
-         FormBox[
-          StyleBox[
-          "\"E19: The disease progressed quickly...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {16.5, 
-         FormBox[
-          StyleBox[
-          "\"E17: A young former track star coll...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {15.5, 
-         FormBox[
-          StyleBox[
-          "\"E16: By the end of May, at least tw...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {14.5, 
-         FormBox[
-          StyleBox[
-          "\"E15: Abdominal and back pain were p...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {13.5, 
-         FormBox[
-          StyleBox[
-          "\"E10: Symptoms included a cough that...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {12.5, 
-         FormBox[
-          StyleBox[
-          "\"E9: Gallup Medical Center official...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {11.5, 
-         FormBox[
-          StyleBox[
-          "\"E8: State medical investigators pe...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {10.5, 
-         FormBox[
-          StyleBox[
-          "\"E7: This was often followed by a c...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {9.5, 
-         FormBox[
-          StyleBox[
-          "\"E5: Hospitalization occurred with ...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {8.5, 
-         FormBox[
-          StyleBox[
-          "\"E4: Autopsies noted similarities i...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {7.5, 
-         FormBox[
-          StyleBox[
-          "\"E2: Their lungs filled with fluid.\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {6.5, 
-         FormBox[
-          StyleBox[
-          "\"E1: Their cases showed quick progr...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {5.5, 
-         FormBox[
-          StyleBox[
-          "\"E31: Their infant daughter exhibite...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {4.5, 
-         FormBox[
-          StyleBox[
-          "\"E25: Four people appeared to have r...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {3.5, 
-         FormBox[
-          StyleBox[
-          "\"E18: The disease did not always lea...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {2.5, 
-         FormBox[
-          StyleBox[
-          "\"E14: Most patients reported influen...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {1.5, 
-         FormBox[
-          StyleBox[
-          "\"E6: Symptoms were often followed b...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}, {0.5, 
-         FormBox[
-          StyleBox[
-          "\"E3: Their cases showed flu-like sy...\"", 10, FontFamily -> 
-           "Helvetica", StripOnInput -> False], TraditionalForm]}}, None}, {
-      None, {{0.5, 
-         FormBox[
-          PaneBox[
-           TagBox[
-            GridBox[{{
-               StyleBox[
-               "\"H1: Common Flu\"", 10, FontFamily -> "Helvetica", Bold, 
-                StripOnInput -> False]}, {
-               StyleBox[
-               "\"Score: -44\"", 10, FontFamily -> "Helvetica", FontColor -> 
-                RGBColor[0.8, 0., 0.], Bold, StripOnInput -> False]}}, 
-             GridBoxAlignment -> {"Columns" -> {{Center}}}, DefaultBaseStyle -> 
-             "Column", 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
-            "Column"], Alignment -> Center, ImageSize -> 80], 
-          TraditionalForm]}, {1.5, 
-         FormBox[
-          PaneBox[
-           TagBox[
-            GridBox[{{
-               StyleBox[
-               "\"H2: Toxic Substance\"", 10, FontFamily -> "Helvetica", Bold,
-                 StripOnInput -> False]}, {
-               StyleBox[
-               "\"Score: -4\"", 10, FontFamily -> "Helvetica", FontColor -> 
-                RGBColor[0.8, 0., 0.], Bold, StripOnInput -> False]}}, 
-             GridBoxAlignment -> {"Columns" -> {{Center}}}, DefaultBaseStyle -> 
-             "Column", 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
-            "Column"], Alignment -> Center, ImageSize -> 80], 
-          TraditionalForm]}, {2.5, 
-         FormBox[
-          PaneBox[
-           TagBox[
-            GridBox[{{
-               StyleBox[
-               "\"H3: Hate Crime\"", 10, FontFamily -> "Helvetica", Bold, 
-                StripOnInput -> False]}, {
-               StyleBox[
-               "\"Score: 0\"", 10, FontFamily -> "Helvetica", FontColor -> 
-                RGBColor[0.8, 0., 0.], Bold, StripOnInput -> False]}}, 
-             GridBoxAlignment -> {"Columns" -> {{Center}}}, DefaultBaseStyle -> 
-             "Column", 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
-            "Column"], Alignment -> Center, ImageSize -> 80], 
-          TraditionalForm]}, {3.5, 
-         FormBox[
-          PaneBox[
-           TagBox[
-            GridBox[{{
-               StyleBox[
-               "\"H4: New Pathogen\"", 10, FontFamily -> "Helvetica", Bold, 
-                StripOnInput -> False]}, {
-               StyleBox[
-               "\"Score: 0\"", 10, FontFamily -> "Helvetica", FontColor -> 
-                RGBColor[0.8, 0., 0.], Bold, StripOnInput -> False]}}, 
-             GridBoxAlignment -> {"Columns" -> {{Center}}}, DefaultBaseStyle -> 
-             "Column", 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
-            "Column"], Alignment -> Center, ImageSize -> 80], 
-          TraditionalForm]}}}}, FrameTicksStyle -> 
-    Directive[FontFamily -> "Helvetica", 10], GridLinesStyle -> Directive[
-      GrayLevel[0.5, 0.4]], ImageSize -> Large, 
-    Method -> {
-     "GridLinesInFront" -> True, "AxisPadding" -> Scaled[0.02], 
-      "DefaultBoundaryStyle" -> Automatic, 
-      "DefaultGraphicsInteraction" -> {
-       "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
-        "Effects" -> {
-         "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
-          "Droplines" -> {
-           "freeformCursorMode" -> True, 
-            "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
-      "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
-      "RangePadding" -> Scaled[0.05]}, PlotLabel -> FormBox[
-      StyleBox[
-      "\"ACH Matrix Analysis (Sorted by Diagnosticity)\"", Bold, 16, 
-       FontFamily -> "Helvetica", StripOnInput -> False], TraditionalForm]], 
-   FormBox[
-    FormBox[
-     TemplateBox[{
-      "\"Highly Inconsistent (II)\"", "\"Inconsistent (I)\"", 
-       "\"Neutral / NA (N/NA)\"", "\"Consistent (C)\"", 
-       "\"Highly Consistent (CC)\""}, "SwatchLegend", 
-      DisplayFunction -> (FormBox[
-        StyleBox[
-         StyleBox[
-          PaneBox[
-           TagBox[
-            GridBox[{{
-               StyleBox[
-                StyleBox[
-                "\"Diagnosticity Key\"", Bold, 12, FontFamily -> "Helvetica", 
-                 StripOnInput -> False], {
-                 Directive[FontFamily -> "Helvetica", 10], FontFamily -> 
-                 "Arial"}, Background -> Automatic, StripOnInput -> False]}, {
-              
-               TagBox[
-                GridBox[{{
-                   TagBox[
-                    GridBox[{{
-                    GraphicsBox[{
-                    Directive[
-                    EdgeForm[
-                    Directive[
-                    Opacity[0.3], 
-                    GrayLevel[0]]], 
-                    PointSize[0.5], 
-                    AbsoluteThickness[1.6], 
-                    RGBColor[0.6, 0., 0.]], 
-                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
-                    AspectRatio -> Full, ImageSize -> {10, 10}, 
-                    PlotRangePadding -> None, ImagePadding -> Automatic, 
-                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #}, {
-                    GraphicsBox[{
-                    Directive[
-                    EdgeForm[
-                    Directive[
-                    Opacity[0.3], 
-                    GrayLevel[0]]], 
-                    PointSize[0.5], 
-                    AbsoluteThickness[1.6], 
-                    RGBColor[1., 0.4, 0.4]], 
-                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
-                    AspectRatio -> Full, ImageSize -> {10, 10}, 
-                    PlotRangePadding -> None, ImagePadding -> Automatic, 
-                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #2}, {
-                    GraphicsBox[{
-                    Directive[
-                    EdgeForm[
-                    Directive[
-                    Opacity[0.3], 
-                    GrayLevel[0]]], 
-                    PointSize[0.5], 
-                    AbsoluteThickness[1.6], 
-                    RGBColor[0.95, 0.95, 0.95]], 
-                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
-                    AspectRatio -> Full, ImageSize -> {10, 10}, 
-                    PlotRangePadding -> None, ImagePadding -> Automatic, 
-                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #3}, {
-                    GraphicsBox[{
-                    Directive[
-                    EdgeForm[
-                    Directive[
-                    Opacity[0.3], 
-                    GrayLevel[0]]], 
-                    PointSize[0.5], 
-                    AbsoluteThickness[1.6], 
-                    RGBColor[0.6, 0.6, 1.]], 
-                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
-                    AspectRatio -> Full, ImageSize -> {10, 10}, 
-                    PlotRangePadding -> None, ImagePadding -> Automatic, 
-                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #4}, {
-                    GraphicsBox[{
-                    Directive[
-                    EdgeForm[
-                    Directive[
-                    Opacity[0.3], 
-                    GrayLevel[0]]], 
-                    PointSize[0.5], 
-                    AbsoluteThickness[1.6], 
-                    RGBColor[0., 0., 0.6]], 
-                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
-                    AspectRatio -> Full, ImageSize -> {10, 10}, 
-                    PlotRangePadding -> None, ImagePadding -> Automatic, 
-                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #5}}, 
-                    GridBoxAlignment -> {
-                    "Columns" -> {Center, Left}, "Rows" -> {{Baseline}}}, 
-                    AutoDelete -> False, 
-                    GridBoxDividers -> {
-                    "Columns" -> {{False}}, "Rows" -> {{False}}}, 
-                    GridBoxItemSize -> {
-                    "Columns" -> {{All}}, "Rows" -> {{All}}}, 
-                    GridBoxSpacings -> {
-                    "Columns" -> {{0.3}}, "Rows" -> {{0.5}}}], "Grid"]}}, 
-                 GridBoxAlignment -> {
-                  "Columns" -> {{Left}}, "Rows" -> {{Top}}}, AutoDelete -> 
-                 False, GridBoxItemSize -> {
-                  "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-                 GridBoxSpacings -> {"Columns" -> {{1}}, "Rows" -> {{0}}}], 
-                "Grid"]}}, GridBoxAlignment -> {"Columns" -> {{Center}}}, 
-             AutoDelete -> False, 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-             GridBoxSpacings -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 
-           Alignment -> Left, AppearanceElements -> None, 
-           ImageMargins -> {{5, 5}, {5, 5}}, ImageSizeAction -> 
-           "ResizeToFit"], LineIndent -> 0, StripOnInput -> False], {
-          Directive[FontFamily -> "Helvetica", 10], FontFamily -> "Arial"}, 
-         Background -> Automatic, StripOnInput -> False], TraditionalForm]& ),
-       InterpretationFunction :> (RowBox[{"SwatchLegend", "[", 
-         RowBox[{
-           RowBox[{"{", 
-             RowBox[{
-               
-               TemplateBox[<|"color" -> RGBColor[0.6, 0., 0.]|>, 
-                "RGBColorSwatchTemplate"], ",", 
-               
-               TemplateBox[<|"color" -> RGBColor[1., 0.4, 0.4]|>, 
-                "RGBColorSwatchTemplate"], ",", 
-               
-               TemplateBox[<|"color" -> RGBColor[0.95, 0.95, 0.95]|>, 
-                "RGBColorSwatchTemplate"], ",", 
-               
-               TemplateBox[<|"color" -> RGBColor[0.6, 0.6, 1.]|>, 
-                "RGBColorSwatchTemplate"], ",", 
-               
-               TemplateBox[<|"color" -> RGBColor[0., 0., 0.6]|>, 
-                "RGBColorSwatchTemplate"]}], "}"}], ",", 
-           RowBox[{"{", 
-             RowBox[{#, ",", #2, ",", #3, ",", #4, ",", #5}], "}"}], ",", 
-           RowBox[{"LabelStyle", "\[Rule]", 
-             RowBox[{"Directive", "[", 
-               RowBox[{
-                 RowBox[{"FontFamily", "\[Rule]", "\"Helvetica\""}], ",", 
-                 "10"}], "]"}]}], ",", 
-           RowBox[{"LegendLabel", "\[Rule]", 
-             StyleBox[
-             "\"Diagnosticity Key\"", Bold, 12, FontFamily -> "Helvetica", 
-              StripOnInput -> False]}], ",", 
-           RowBox[{"LegendLayout", "\[Rule]", "\"Column\""}]}], "]"}]& ), 
-      Editable -> True], TraditionalForm], TraditionalForm]},
-  "Legended",
-  DisplayFunction->(GridBox[{{
-      TagBox[
-       ItemBox[
-        PaneBox[
-         TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
-         BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
-       "SkipImageSizeLevel"], 
-      ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
-    GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
-    AutoDelete -> False, GridBoxItemSize -> Automatic, 
-    BaselinePosition -> {1, 1}]& ),
-  Editable->True,
-  InterpretationFunction->(RowBox[{"Legended", "[", 
-     RowBox[{#, ",", 
-       RowBox[{"Placed", "[", 
-         RowBox[{#2, ",", "After"}], "]"}]}], "]"}]& )]], "Print",
+Cell[BoxData["\<\"\\n\[Checkmark] VISUALIZATION COMPLETE. Plot exported to \
+Vault.\"\>"], "Print",
  CellChangeTimes->{3.9813079938837957`*^9, 3.981308110427454*^9, 
   3.981308253622814*^9, 3.981308428393157*^9, 3.981308976259676*^9, 
   3.981309159392312*^9, 3.981309307760725*^9, 3.981394526190465*^9, 
   3.981394931042811*^9, 3.981395058074774*^9, 3.981395258364143*^9, 
   3.981395446905128*^9, 3.981395786799458*^9, 3.981395932252462*^9, 
   3.981396155321302*^9, 3.981396428920866*^9, 3.981396617225403*^9, 
-  3.981396775377407*^9, 3.981396915677712*^9, 3.9813970650843163`*^9},
+  3.981396775377407*^9, 3.981396915677712*^9, 3.981397064987433*^9, 
+  3.9833246093146152`*^9, 3.9833246502085047`*^9, 3.983325254243499*^9, 
+  3.983328855583275*^9},
  CellLabel->
   "During evaluation of \
-In[572]:=",ExpressionUUID->"9435e93b-6e77-49b0-917d-692b45b8327c"],
-
-Cell[BoxData["\<\"\\n\:2705 VISUALIZATION COMPLETE. Plot exported to Vault.\"\
-\>"], "Print",
- CellChangeTimes->{3.9813079938837957`*^9, 3.981308110427454*^9, 
-  3.981308253622814*^9, 3.981308428393157*^9, 3.981308976259676*^9, 
-  3.981309159392312*^9, 3.981309307760725*^9, 3.981394526190465*^9, 
-  3.981394931042811*^9, 3.981395058074774*^9, 3.981395258364143*^9, 
-  3.981395446905128*^9, 3.981395786799458*^9, 3.981395932252462*^9, 
-  3.981396155321302*^9, 3.981396428920866*^9, 3.981396617225403*^9, 
-  3.981396775377407*^9, 3.981396915677712*^9, 3.9813970654313803`*^9},
- CellLabel->
-  "During evaluation of \
-In[572]:=",ExpressionUUID->"965eeae8-2089-4226-86e2-0eda784a3c77"]
+In[672]:=",ExpressionUUID->"10b91f9d-75b7-499b-90f3-2eacfe2a5852"]
 }, Open  ]]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.981309183719252*^9, 3.98130918546658*^9}},
  CellLabel->
-  "In[592]:=",ExpressionUUID->"3bde7246-1d7b-4758-8d09-cb7aa62aa58c"]
+  "In[694]:=",ExpressionUUID->"3bde7246-1d7b-4758-8d09-cb7aa62aa58c"]
 },
-WindowSize->{1396, 723},
-WindowMargins->{{Automatic, 12}, {14, Automatic}},
+WindowSize->{1042, 785},
+WindowMargins->{{34, Automatic}, {1, Automatic}},
 FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"baf36510-2471-4ecd-a130-edf586091e9b"
@@ -874,15 +448,14 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[576, 22, 13887, 339, 1032, "Input",ExpressionUUID->"1a6b01de-a1ee-4dc6-960d-f8850ab5a253"],
+Cell[576, 22, 14026, 356, 1275, "Input",ExpressionUUID->"1a6b01de-a1ee-4dc6-960d-f8850ab5a253"],
 Cell[CellGroupData[{
-Cell[14488, 365, 661, 10, 23, "Print",ExpressionUUID->"5fcaea11-2300-4163-81f0-7d2ccba17370"],
-Cell[15152, 377, 656, 10, 41, "Print",ExpressionUUID->"b4515ca1-441f-455c-9012-08569aa616df"],
-Cell[15811, 389, 21159, 447, 459, "Print",ExpressionUUID->"9435e93b-6e77-49b0-917d-692b45b8327c"],
-Cell[36973, 838, 681, 11, 42, "Print",ExpressionUUID->"965eeae8-2089-4226-86e2-0eda784a3c77"]
+Cell[14627, 382, 761, 12, 23, "Print",ExpressionUUID->"72e6a1ef-7ed3-4213-b43a-0c5767e5cdf7"],
+Cell[15391, 396, 754, 12, 41, "Print",ExpressionUUID->"4b02511f-f2b6-4cda-8799-cb1f4288b979"],
+Cell[16148, 410, 783, 13, 41, "Print",ExpressionUUID->"10b91f9d-75b7-499b-90f3-2eacfe2a5852"]
 }, Open  ]]
 }, Open  ]],
-Cell[37681, 853, 174, 3, 29, "Input",ExpressionUUID->"3bde7246-1d7b-4758-8d09-cb7aa62aa58c"]
+Cell[16958, 427, 174, 3, 55, "Input",ExpressionUUID->"3bde7246-1d7b-4758-8d09-cb7aa62aa58c"]
 }
 ]
 *)

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     14797,        380]
-NotebookOptionsPosition[     12882,        346]
-NotebookOutlinePosition[     13272,        362]
-CellTagsIndexPosition[     13229,        359]
+NotebookDataLength[     20369,        500]
+NotebookOptionsPosition[     18729,        469]
+NotebookOutlinePosition[     19121,        485]
+CellTagsIndexPosition[     19078,        482]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,8 +24,9 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
+     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
+    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
   RowBox[{"(*", 
    RowBox[{"01", ":", 
     RowBox[{
@@ -34,20 +35,14 @@ Cell[BoxData[
      RowBox[{"(", "EVIDENCE", ")"}]}]}], "*)"}], 
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
+     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
+    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
   RowBox[{
    RowBox[{
     RowBox[{
     "<<", "\"\</Users/Western/Desktop/ThesisCode/Core_API_Functions.wl\>\""}],
-     ";"}], "\[IndentingNewLine]", "\n", 
-   RowBox[{
-    RowBox[{"Print", "[", "\"\<--- Connecting to Gemini ---\>\"", "]"}], 
-    ";"}], "\n", 
-   RowBox[{
-    RowBox[{"geminiService", "=", 
-     RowBox[{"ServiceConnect", "[", "\"\<GoogleGemini\>\"", "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+     ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{
     "filePath", "=", "\"\</Users/Western/Desktop/ThesisCode/case.txt\>\""}], 
@@ -59,29 +54,55 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"docText", "=", 
      RowBox[{"Import", "[", 
-      RowBox[{"filePath", ",", "\"\<Text\>\""}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+      RowBox[{"filePath", ",", "\"\<Text\>\""}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", 
-    RowBox[{"NEW", " ", 
-     RowBox[{"PROMPT", ":", 
-      RowBox[{
-      "Brutally", " ", "strict", " ", "evidence", " ", "extraction"}]}]}], 
-    "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"Extraction", " ", 
+     RowBox[{"prompt", ":", 
+      RowBox[{"clinical", " ", "AND", " ", 
+       RowBox[{"epidemiological", "/", "environmental"}], " ", "facts"}]}]}], 
+    "*)"}], "\n", 
    RowBox[{
     RowBox[{"prompt", "=", 
-     RowBox[{"\"\<Using ONLY the following text, extract all hard clinical \
-evidence, facts, and symptoms. DO NOT extract hypotheses, theories, or \
-explanations. Output as a plain list of sentences. Do not use Markdown \
-formatting or bullet points.\\nText:\\n\>\"", "<>", "docText"}]}], ";"}], 
-   "\n", "\[IndentingNewLine]", 
+     RowBox[{"\"\<Using ONLY the following text, extract all hard facts, \
+evidence, and observable findings. This includes:\\n- Clinical symptoms and \
+medical findings\\n- Epidemiological patterns (who is affected, case counts, \
+spread)\\n- Environmental and ecological observations\\n- Investigative \
+findings (lab results, surveys, negative findings)\\nDO NOT extract \
+hypotheses, theories, analyst interpretations, or explanations.\\nOutput each \
+fact as a single plain sentence on its own line.\\nDo NOT use numbers, \
+bullets, dashes, or any other prefix before each sentence.\\nDo NOT use \
+Markdown formatting.\\nOne sentence per line, nothing else.\\nText:\\n\>\"", "<>",
+       "docText"}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"--", 
+     RowBox[{"-", 
+      RowBox[{"DEBUG", ":", 
+       RowBox[{
+        RowBox[{
+        "Test", " ", "connection", " ", "before", " ", "running", " ", "full",
+          " ", 
+         RowBox[{"loop", "--"}]}], "-"}]}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<--- Testing Gemini connection ---\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"testRes", "=", 
+     RowBox[{"callGemini", "[", 
+      RowBox[{"\"\<Say hello.\>\"", ",", "0.3"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\[Checkmark] Connection successful.\>\"", "]"}], ";"}],
+    "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{
-     RowBox[{
-      RowBox[{"--", 
-       RowBox[{"-", "EXECUTION"}]}], " ", 
-      RowBox[{"LOOP", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"--", 
+      RowBox[{"-", "EXECUTION"}]}], " ", 
+     RowBox[{"LOOP", ":", 
+      RowBox[{
+       RowBox[{"5", " ", "stochastic", " ", "calls", " ", "for", " ", 
+        RowBox[{"consensus", "--"}]}], "-"}]}]}], "*)"}], "\n", 
    RowBox[{
-    RowBox[{"numCalls", "=", "10"}], ";"}], "\n", 
+    RowBox[{"numCalls", "=", "5"}], ";"}], "\n", 
    RowBox[{
     RowBox[{"allOutputs", "=", 
      RowBox[{"Table", "[", 
@@ -94,44 +115,27 @@ formatting or bullet points.\\nText:\\n\>\"", "<>", "docText"}]}], ";"}],
            RowBox[{"\"\<--- API Call \>\"", "<>", 
             RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\< of \>\"", "<>", 
             RowBox[{"ToString", "[", "numCalls", "]"}], 
-            "<>", "\"\< ---\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+            "<>", "\"\< ---\>\""}], "]"}], ";", "\n", 
           RowBox[{"res", "=", 
-           RowBox[{"rateLimitedExecute", "[", 
-            RowBox[{"geminiService", ",", "\"\<Chat\>\"", ",", 
-             RowBox[{"<|", 
-              RowBox[{
-               RowBox[{"\"\<Messages\>\"", "->", 
-                RowBox[{"{", 
-                 RowBox[{"<|", 
-                  RowBox[{
-                   RowBox[{"\"\<Role\>\"", "->", "\"\<user\>\""}], ",", 
-                   RowBox[{"\"\<Content\>\"", "->", "prompt"}]}], "|>"}], 
-                 "}"}]}], ",", 
-               RowBox[{"\"\<Model\>\"", "->", "\"\<gemini-2.5-flash\>\""}], ",", 
-               RowBox[{"\"\<Temperature\>\"", "->", "0.3"}]}], "|>"}]}], 
-            "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"callGemini", "[", 
+            RowBox[{"prompt", ",", "0.3"}], "]"}]}], ";", "\n", 
           RowBox[{"If", "[", 
            RowBox[{
-            RowBox[{
-             RowBox[{"AssociationQ", "[", "res", "]"}], "&&", 
-             RowBox[{"KeyExistsQ", "[", 
-              RowBox[{"res", ",", "\"\<Content\>\""}], "]"}]}], ",", 
-            RowBox[{"res", "[", "\"\<Content\>\"", "]"}], ",", 
+            RowBox[{"res", "===", "\"\<$Failed\>\""}], ",", 
             RowBox[{
              RowBox[{"Print", "[", 
-              RowBox[{"\"\<\:26a0\:fe0f Call \>\"", "<>", 
+              RowBox[{"\"\<\\\\[Warning] Call \>\"", "<>", 
                RowBox[{"ToString", "[", "i", "]"}], 
-               "<>", "\"\< failed or returned empty.\>\""}], "]"}], 
-             ";", "\"\<\>\""}]}], "]"}]}]}], "]"}], ",", 
+               "<>", "\"\< failed.\>\""}], "]"}], ";", "\n", "\"\<\>\""}], ",",
+             "res"}], "]"}]}]}], "]"}], ",", 
        RowBox[{"{", 
-        RowBox[{"i", ",", "numCalls"}], "}"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+        RowBox[{"i", ",", "numCalls"}], "}"}]}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{"allOutputs", "=", 
      RowBox[{"DeleteCases", "[", 
       RowBox[{"allOutputs", ",", 
-       RowBox[{"\"\<\>\"", "|", "Null"}]}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+       RowBox[{"\"\<\>\"", "|", "Null", "|", "\"\<$Failed\>\""}]}], "]"}]}], 
+    ";"}], "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -139,32 +143,69 @@ formatting or bullet points.\\nText:\\n\>\"", "<>", "docText"}]}], ";"}],
        RowBox[{
         RowBox[{"--", 
          RowBox[{"-", "SMART"}]}], " ", "PARSING"}], "&"}], " ", 
-      RowBox[{"CLUSTERING", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"CLUSTERING", "--"}]}], "-"}], "*)"}], "\n", 
    RowBox[{
-    RowBox[{"Print", "[", "\"\<--- Processing Text ---\>\"", "]"}], ";"}], "\n", 
+    RowBox[{
+    "Print", "[", "\"\<--- Processing Text & Clustering ---\>\"", "]"}], 
+    ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Split", " ", "each", " ", "output", " ", "by", " ", "newlines"}],
+     "*)"}], "\n", 
    RowBox[{
     RowBox[{"allSentences", "=", 
      RowBox[{"Flatten", "[", 
-      RowBox[{"TextSentences", "/@", "allOutputs"}], "]"}]}], ";"}], "\n", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringSplit", "[", 
+         RowBox[{"#", ",", "\"\<\\n\>\""}], "]"}], "&"}], "/@", 
+       "allOutputs"}], "]"}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Strip", " ", "any", " ", "residual", " ", "numbering", " ", "prefixes", " ",
+      "Gemini", " ", "may", " ", "still", " ", "add"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"allSentences", "=", 
-     RowBox[{"DeleteCases", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"StringReplace", "[", 
+        RowBox[{"#", ",", 
+         RowBox[{
+          RowBox[{"StartOfString", "~~", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"DigitCharacter", ".."}], "~~", 
+             RowBox[{"\"\<. \>\"", "|", "\"\<- \>\"", "|", "\"\<* \>\""}]}], 
+            ")"}]}], "->", "\"\<\>\""}]}], "]"}], "&"}], "/@", 
+      "allSentences"}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Drop", " ", "blank", " ", "lines"}], ",", 
+     RowBox[{"pure", " ", "numbers"}], ",", 
+     RowBox[{"or", " ", "very", " ", "short", " ", "fragments"}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"allSentences", "=", 
+     RowBox[{"Select", "[", 
       RowBox[{
        RowBox[{"StringTrim", "[", "allSentences", "]"}], ",", 
-       RowBox[{"\"\<\>\"", "|", 
-        RowBox[{"WhitespaceCharacter", ".."}]}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
-   RowBox[{
-    RowBox[{
-    "Print", "[", "\"\<--- Clustering Semantically Similar Sentences ---\>\"",
-      "]"}], ";"}], "\n", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringLength", "[", "#", "]"}], ">", "15"}], "&&", 
+         RowBox[{"!", 
+          RowBox[{"StringMatchQ", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{
+             RowBox[{"DigitCharacter", ".."}], "~~", 
+             RowBox[{"\"\<.\>\"", ".."}]}]}], "]"}]}]}], "&"}]}], "]"}]}], 
+    ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{"If", "[", 
      RowBox[{
       RowBox[{
        RowBox[{"Length", "[", "allSentences", "]"}], "<", "2"}], ",", 
-      RowBox[{"clusters", "=", 
-       RowBox[{"{", "allSentences", "}"}]}], ",", 
+      RowBox[{
+       RowBox[{"clusters", "=", 
+        RowBox[{"{", "allSentences", "}"}]}], ";"}], ",", 
       RowBox[{
        RowBox[{"clusters", "=", 
         RowBox[{"FindClusters", "[", 
@@ -172,42 +213,101 @@ formatting or bullet points.\\nText:\\n\>\"", "<>", "docText"}]}], ";"}],
           RowBox[{"FeatureExtractor", "->", "\"\<TFIDF\>\""}], ",", 
           RowBox[{"DistanceFunction", "->", "CosineDistance"}], ",", 
           RowBox[{"Method", "->", "\"\<Agglomerate\>\""}]}], "]"}]}], ";"}]}],
-      "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+      "]"}], ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{"reliableEvidence", "=", 
      RowBox[{"{", "}"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{"hallucinations", "=", 
-     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{"Do", "[", 
      RowBox[{
       RowBox[{"If", "[", 
        RowBox[{
         RowBox[{
-         RowBox[{"Length", "[", "cluster", "]"}], ">", "2"}], ",", 
-        RowBox[{"AppendTo", "[", 
-         RowBox[{"reliableEvidence", ",", 
-          RowBox[{"First", "[", "cluster", "]"}]}], "]"}], ",", 
-        RowBox[{"AppendTo", "[", 
-         RowBox[{"hallucinations", ",", 
-          RowBox[{"First", "[", "cluster", "]"}]}], "]"}]}], "]"}], ",", 
+         RowBox[{"Length", "[", "cluster", "]"}], ">=", "2"}], ",", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"reliableEvidence", ",", 
+           RowBox[{"First", "[", "cluster", "]"}]}], "]"}], ";"}], ",", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"hallucinations", ",", 
+           RowBox[{"First", "[", "cluster", "]"}]}], "]"}], ";"}]}], "]"}], ",", 
       RowBox[{"{", 
-       RowBox[{"cluster", ",", "clusters"}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+       RowBox[{"cluster", ",", "clusters"}], "}"}]}], "]"}], ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{"Print", "[", 
-     RowBox[{"\"\<Found \>\"", "<>", 
+     RowBox[{"\"\<Before deduplication: \>\"", "<>", 
       RowBox[{"ToString", "[", 
        RowBox[{"Length", "[", "reliableEvidence", "]"}], "]"}], 
-      "<>", "\"\< reliable evidence points.\>\""}], "]"}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+      "<>", "\"\< evidence points.\>\""}], "]"}], ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"--", 
+     RowBox[{"-", 
+      RowBox[{"DEDUPLICATION", ":", 
+       RowBox[{
+        RowBox[{
+        "remove", " ", "sentences", " ", "that", " ", "are", " ", 
+         "substrings", " ", "of", " ", "longer", " ", 
+         RowBox[{"ones", "--"}]}], "-"}]}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"reliableEvidence", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{"reliableEvidence", ",", 
+       RowBox[{"s1", "|->", 
+        RowBox[{"NoneTrue", "[", 
+         RowBox[{"reliableEvidence", ",", 
+          RowBox[{"s2", "|->", 
+           RowBox[{
+            RowBox[{"s1", "=!=", "s2"}], "&&", 
+            RowBox[{"StringContainsQ", "[", 
+             RowBox[{"s2", ",", "s1"}], "]"}]}]}]}], "]"}]}]}], "]"}]}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<After deduplication: \>\"", "<>", 
+      RowBox[{"ToString", "[", 
+       RowBox[{"Length", "[", "reliableEvidence", "]"}], "]"}], 
+      "<>", "\"\< evidence points.\>\""}], "]"}], ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"--", 
+       RowBox[{"-", "FORMAT"}]}], " ", "AS", " ", "NUMBERED", " ", "LIST", " ",
+       "FOR", " ", "HCI", " ", 
+      RowBox[{"READABILITY", "--"}]}], "-"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"numberedEvidence", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"#2", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", "\"\<. \>\"", "<>", 
+          "#1", "<>", "\"\<\\n\>\""}], "&"}], ",", "reliableEvidence"}], 
+       "]"}], "]"}]}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{"numberedHallucinations", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"ToString", "[", 
+           RowBox[{"#2", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", "\"\<. \>\"", "<>", 
+          "#1", "<>", "\"\<\\n\>\""}], "&"}], ",", "hallucinations"}], "]"}], 
+      "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
       RowBox[{"--", 
        RowBox[{"-", "EXPORT"}]}], " ", "TO", " ", 
-      RowBox[{"VAULT", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"VAULT", "--"}]}], "-"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{
     "exportPathReliable", 
@@ -217,135 +317,158 @@ formatting or bullet points.\\nText:\\n\>\"", "<>", "docText"}]}], ";"}],
     RowBox[{
     "exportPathHallucinations", 
      "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/evidence_\
-hallucinations.md\>\""}], ";"}], "\[IndentingNewLine]", "\n", 
+hallucinations.md\>\""}], ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{"Export", "[", 
-     RowBox[{"exportPathReliable", ",", 
-      RowBox[{"StringJoin", "[", 
-       RowBox[{"Riffle", "[", 
-        RowBox[{"reliableEvidence", ",", "\"\<\\n\>\""}], "]"}], "]"}], 
-      ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", 
+     RowBox[{
+     "exportPathReliable", ",", "numberedEvidence", ",", "\"\<Text\>\""}], 
+     "]"}], ";"}], "\n", 
    RowBox[{
     RowBox[{"Export", "[", 
-     RowBox[{"exportPathHallucinations", ",", 
-      RowBox[{"StringJoin", "[", 
-       RowBox[{"Riffle", "[", 
-        RowBox[{"hallucinations", ",", "\"\<\\n\>\""}], "]"}], "]"}], 
-      ",", "\"\<Text\>\""}], "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+     RowBox[{
+     "exportPathHallucinations", ",", "numberedHallucinations", 
+      ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{
-    "Print", "[", "\"\<\:2705 DONE. Pure evidence exported to Vault.\>\"", 
-     "]"}], ";"}]}]}]], "Input",
+    "Print", "[", "\"\<\[Checkmark] DONE. Numbered evidence exported to \
+Vault.\>\"", "]"}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.9812039060915127`*^9, 3.981203982816805*^9}, {
    3.9812040298488817`*^9, 3.981204042016595*^9}, {3.98139391312748*^9, 
-   3.9813939211708508`*^9}, 3.981394007505642*^9},
+   3.9813939211708508`*^9}, 3.981394007505642*^9, {3.983312897073278*^9, 
+   3.983312898304454*^9}, 3.983313502945199*^9, {3.983313545959692*^9, 
+   3.983313577263833*^9}, {3.983314210042273*^9, 3.983314227212757*^9}, {
+   3.9833146819168673`*^9, 3.983314692245351*^9}, {3.983314997340295*^9, 
+   3.983315008497561*^9}, {3.983315800814479*^9, 3.9833158035088797`*^9}, {
+   3.983319966009603*^9, 3.98331996866149*^9}, {3.9833202364887*^9, 
+   3.983320237731765*^9}},
  CellLabel->
-  "In[259]:=",ExpressionUUID->"b2ae9d7a-a810-44c4-a078-9241a4f2e49f"],
+  "In[378]:=",ExpressionUUID->"b2ae9d7a-a810-44c4-a078-9241a4f2e49f"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["\<\"--- Connecting to Gemini ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9},
- CellLabel->
-  "During evaluation of \
-In[259]:=",ExpressionUUID->"d6961b8d-7f1e-4445-a9f2-1eb461184838"],
-
 Cell[BoxData["\<\"--- Loading Case from: \
 /Users/Western/Desktop/ThesisCode/case.txt ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394013028987*^9},
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.9833202552115297`*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"6d0601cd-8bc0-40e4-a702-5b86aad493ba"],
+In[378]:=",ExpressionUUID->"e46a96fb-8775-40d7-a421-452a272fca46"],
 
-Cell[BoxData["\<\"--- API Call 1 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394013046708*^9},
+Cell[BoxData["\<\"--- Testing Gemini connection ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320255212344*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"162cd8b7-6527-4c88-9f6e-4c8a1c0c0eb7"],
+In[378]:=",ExpressionUUID->"285ad80c-811c-4fb5-89e5-76c26658d914"],
 
-Cell[BoxData["\<\"--- API Call 2 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394027230338*^9},
+Cell[BoxData["\<\"\[Checkmark] Connection successful.\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.9833202561477118`*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"90e41401-a573-46b2-91e4-39f17e6aa6f6"],
+In[378]:=",ExpressionUUID->"e16dd061-3d2a-4857-842e-d5e7c8eb9db2"],
 
-Cell[BoxData["\<\"--- API Call 3 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394047343459*^9},
+Cell[BoxData["\<\"--- API Call 1 of 5 ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320256148839*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"952bf59b-c92b-4de7-af1f-c94a4c28b7d4"],
+In[378]:=",ExpressionUUID->"3fe779ea-4d51-4af3-bdbe-6d50354fc788"],
 
-Cell[BoxData["\<\"--- API Call 4 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394066116826*^9},
+Cell[BoxData["\<\"[API] Waiting 9.1s for rate limit...\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320256149436*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"223e9424-9f58-4bfb-ba63-26b576bbdf5f"],
+In[378]:=",ExpressionUUID->"d5113e45-336b-4496-956c-8a251d5c0ed4"],
 
-Cell[BoxData["\<\"--- API Call 5 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394081023525*^9},
+Cell[BoxData["\<\"--- API Call 2 of 5 ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.98332028462243*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"028c4433-6531-4880-98d3-2236ad845986"],
+In[378]:=",ExpressionUUID->"6600dfa1-8ca0-4bbd-8f70-6a39f1858331"],
 
-Cell[BoxData["\<\"--- API Call 6 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394092150106*^9},
+Cell[BoxData["\<\"--- API Call 3 of 5 ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320314496798*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"c3ee633e-05cf-402c-b4d6-17a8d944b146"],
+In[378]:=",ExpressionUUID->"e07b64c0-7b7e-4a2b-9f31-d12bc920a99f"],
 
-Cell[BoxData["\<\"--- API Call 7 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394113158676*^9},
+Cell[BoxData["\<\"--- API Call 4 of 5 ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.9833203499276047`*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"8190a912-2fbd-48b8-b751-680b68289687"],
+In[378]:=",ExpressionUUID->"4ed3ed87-e22c-42b7-a4d1-9987609d4327"],
 
-Cell[BoxData["\<\"--- API Call 8 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394128129911*^9},
+Cell[BoxData["\<\"--- API Call 5 of 5 ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320380909258*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"a037aec6-6cd3-4756-944a-cb40a44d9a6b"],
+In[378]:=",ExpressionUUID->"1165e7c1-ef66-4994-bf3b-0fb846609e12"],
 
-Cell[BoxData["\<\"--- API Call 9 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394143848494*^9},
+Cell[BoxData["\<\"--- Processing Text & Clustering ---\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320405750987*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"d8c036a1-5ff9-46ae-a525-2ac311a61092"],
+In[378]:=",ExpressionUUID->"c401b898-e4cf-40ce-aac7-ba7941658bd3"],
 
-Cell[BoxData["\<\"--- API Call 10 of 10 ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394153391509*^9},
+Cell[BoxData["\<\"Before deduplication: 142 evidence points.\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.9833204100948*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"cf9ffd5d-41b6-4812-82a8-4c15ad8aa798"],
+In[378]:=",ExpressionUUID->"5736b765-2c68-4644-b4fa-813076285947"],
 
-Cell[BoxData["\<\"--- Processing Text ---\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394161595847*^9},
+Cell[BoxData["\<\"After deduplication: 142 evidence points.\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320410111272*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"ccf8cc98-410d-4bb8-8759-5c7cc23d4627"],
+In[378]:=",ExpressionUUID->"535b2ee2-2e7e-4a57-8d32-0adb179e7836"],
 
-Cell[BoxData["\<\"--- Clustering Semantically Similar Sentences ---\"\>"], \
-"Print",
- CellChangeTimes->{3.9812043878739*^9, 3.981394161705257*^9},
+Cell[BoxData["\<\"\[Checkmark] DONE. Numbered evidence exported to \
+Vault.\"\>"], "Print",
+ CellChangeTimes->{3.9812043878739*^9, 3.9813940129592667`*^9, 
+  3.9813942175902576`*^9, 3.98331292018078*^9, 3.983313506874178*^9, 
+  3.983314248172744*^9, 3.98331470067348*^9, 3.983315014493092*^9, 
+  3.983315811961012*^9, 3.983319035448238*^9, 3.983320410114798*^9},
  CellLabel->
   "During evaluation of \
-In[259]:=",ExpressionUUID->"162ae3c1-47fe-420b-813f-3bf84796c29d"],
-
-Cell[BoxData["\<\"Found 41 reliable evidence points.\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.9813941624402637`*^9},
- CellLabel->
-  "During evaluation of \
-In[259]:=",ExpressionUUID->"a3ffe971-7893-4b48-a5e3-b9551b634c8e"],
-
-Cell[BoxData["\<\"\:2705 DONE. Pure evidence exported to Vault.\"\>"], "Print",
- CellChangeTimes->{3.9812043878739*^9, 3.9813941624432993`*^9},
- CellLabel->
-  "During evaluation of \
-In[259]:=",ExpressionUUID->"ef658584-8de7-4be4-a973-85063a9ca935"]
+In[378]:=",ExpressionUUID->"4fb4090b-2857-431f-b79e-c94a79f25776"]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{808, 679},
-WindowMargins->{{4, Automatic}, {Automatic, 4}},
+WindowMargins->{{56, Automatic}, {Automatic, 25}},
 FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"c26c7949-79b1-4a4d-b304-7c4278960467"
@@ -362,24 +485,21 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[576, 22, 8477, 220, 1295, "Input",ExpressionUUID->"b2ae9d7a-a810-44c4-a078-9241a4f2e49f"],
+Cell[576, 22, 12252, 322, 1826, "Input",ExpressionUUID->"b2ae9d7a-a810-44c4-a078-9241a4f2e49f"],
 Cell[CellGroupData[{
-Cell[9078, 246, 232, 4, 23, "Print",ExpressionUUID->"d6961b8d-7f1e-4445-a9f2-1eb461184838"],
-Cell[9313, 252, 273, 5, 23, "Print",ExpressionUUID->"6d0601cd-8bc0-40e4-a702-5b86aad493ba"],
-Cell[9589, 259, 226, 4, 23, "Print",ExpressionUUID->"162cd8b7-6527-4c88-9f6e-4c8a1c0c0eb7"],
-Cell[9818, 265, 226, 4, 23, "Print",ExpressionUUID->"90e41401-a573-46b2-91e4-39f17e6aa6f6"],
-Cell[10047, 271, 226, 4, 23, "Print",ExpressionUUID->"952bf59b-c92b-4de7-af1f-c94a4c28b7d4"],
-Cell[10276, 277, 226, 4, 23, "Print",ExpressionUUID->"223e9424-9f58-4bfb-ba63-26b576bbdf5f"],
-Cell[10505, 283, 226, 4, 23, "Print",ExpressionUUID->"028c4433-6531-4880-98d3-2236ad845986"],
-Cell[10734, 289, 226, 4, 23, "Print",ExpressionUUID->"c3ee633e-05cf-402c-b4d6-17a8d944b146"],
-Cell[10963, 295, 226, 4, 23, "Print",ExpressionUUID->"8190a912-2fbd-48b8-b751-680b68289687"],
-Cell[11192, 301, 226, 4, 23, "Print",ExpressionUUID->"a037aec6-6cd3-4756-944a-cb40a44d9a6b"],
-Cell[11421, 307, 226, 4, 23, "Print",ExpressionUUID->"d8c036a1-5ff9-46ae-a525-2ac311a61092"],
-Cell[11650, 313, 227, 4, 23, "Print",ExpressionUUID->"cf9ffd5d-41b6-4812-82a8-4c15ad8aa798"],
-Cell[11880, 319, 225, 4, 23, "Print",ExpressionUUID->"ccf8cc98-410d-4bb8-8759-5c7cc23d4627"],
-Cell[12108, 325, 253, 5, 23, "Print",ExpressionUUID->"162ae3c1-47fe-420b-813f-3bf84796c29d"],
-Cell[12364, 332, 238, 4, 23, "Print",ExpressionUUID->"a3ffe971-7893-4b48-a5e3-b9551b634c8e"],
-Cell[12605, 338, 249, 4, 23, "Print",ExpressionUUID->"ef658584-8de7-4be4-a973-85063a9ca935"]
+Cell[12853, 348, 484, 8, 23, "Print",ExpressionUUID->"e46a96fb-8775-40d7-a421-452a272fca46"],
+Cell[13340, 358, 444, 7, 23, "Print",ExpressionUUID->"285ad80c-811c-4fb5-89e5-76c26658d914"],
+Cell[13787, 367, 448, 7, 23, "Print",ExpressionUUID->"e16dd061-3d2a-4857-842e-d5e7c8eb9db2"],
+Cell[14238, 376, 434, 7, 23, "Print",ExpressionUUID->"3fe779ea-4d51-4af3-bdbe-6d50354fc788"],
+Cell[14675, 385, 447, 7, 23, "Print",ExpressionUUID->"d5113e45-336b-4496-956c-8a251d5c0ed4"],
+Cell[15125, 394, 433, 7, 23, "Print",ExpressionUUID->"6600dfa1-8ca0-4bbd-8f70-6a39f1858331"],
+Cell[15561, 403, 434, 7, 23, "Print",ExpressionUUID->"e07b64c0-7b7e-4a2b-9f31-d12bc920a99f"],
+Cell[15998, 412, 436, 7, 23, "Print",ExpressionUUID->"4ed3ed87-e22c-42b7-a4d1-9987609d4327"],
+Cell[16437, 421, 434, 7, 23, "Print",ExpressionUUID->"1165e7c1-ef66-4994-bf3b-0fb846609e12"],
+Cell[16874, 430, 447, 7, 23, "Print",ExpressionUUID->"c401b898-e4cf-40ce-aac7-ba7941658bd3"],
+Cell[17324, 439, 451, 7, 23, "Print",ExpressionUUID->"5736b765-2c68-4644-b4fa-813076285947"],
+Cell[17778, 448, 452, 7, 23, "Print",ExpressionUUID->"535b2ee2-2e7e-4a57-8d32-0adb179e7836"],
+Cell[18233, 457, 468, 8, 23, "Print",ExpressionUUID->"4fb4090b-2857-431f-b79e-c94a79f25776"]
 }, Open  ]]
 }, Open  ]]
 }

@@ -1,4 +1,12 @@
-H1: Common Flu
-H2: Toxic Substance
-H3: Hate Crime
-H4: New Pathogen
+[H1: Zoonotic Virus]
+[H2: Accidental Viral Exposure]
+[H3: Zoonotic Bacteria]
+[H4: Accidental Bacterial Exposure]
+[H5: Natural Toxin]
+[H6: Accidental Toxin Exposure]
+[H7: Widespread Zoonotic Virus]
+[H8: Widespread Accidental Viral Exposure]
+[H9: Widespread Zoonotic Bacteria]
+[H10: Widespread Accidental Bacterial Exposure]
+[H11: Widespread Natural Toxin]
+[H12: Widespread Accidental Toxin Exposure]

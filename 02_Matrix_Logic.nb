@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     10608,        287]
-NotebookOptionsPosition[      9724,        264]
-NotebookOutlinePosition[     10116,        280]
-CellTagsIndexPosition[     10073,        277]
+NotebookDataLength[     18677,        458]
+NotebookOptionsPosition[     17506,        432]
+NotebookOutlinePosition[     17896,        448]
+CellTagsIndexPosition[     17853,        445]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,8 +24,9 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
+     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
+    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
   RowBox[{"(*", 
    RowBox[{"02", ":", 
     RowBox[{
@@ -33,8 +34,9 @@ Cell[BoxData[
      RowBox[{"DYNAMIC", " ", "AI", " ", "EXECUTION"}]}]}], "*)"}], 
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
-     "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
+     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
+    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
   RowBox[{
    RowBox[{
     RowBox[{
@@ -43,11 +45,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
     "<<", "\"\</Users/Western/Desktop/ThesisCode/Core_API_Functions.wl\>\""}],
-     ";"}], "\n", 
-   RowBox[{
-    RowBox[{"geminiService", "=", 
-     RowBox[{"ServiceConnect", "[", "\"\<GoogleGemini\>\"", "]"}]}], ";"}], 
-   "\n", "\[IndentingNewLine]", 
+     ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
@@ -87,37 +85,52 @@ Cell[BoxData[
           ",", "\"\<\\n\>\""}], "]"}], "]"}], ",", "\"\<\>\""}], "]"}]}], 
     ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{"Print", "[", 
-     RowBox[{"\"\<Target Hypotheses Loaded: \>\"", ",", 
-      RowBox[{"Length", "[", "hypothesesList", "]"}]}], "]"}], ";"}], "\n", 
+    RowBox[{"numRows", "=", 
+     RowBox[{"Length", "[", "evidenceList", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"numCols", "=", 
+     RowBox[{"Length", "[", "hypothesesList", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"Print", "[", 
-     RowBox[{"\"\<Evidence Items Loaded: \>\"", ",", 
-      RowBox[{"Length", "[", "evidenceList", "]"}]}], "]"}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+     RowBox[{"\"\<Target Hypotheses Loaded: \>\"", ",", "numCols"}], "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Evidence Items Loaded: \>\"", ",", "numRows"}], "]"}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
       RowBox[{"--", 
-       RowBox[{"-", "THE"}]}], " ", "GEMINI", " ", "GOD", " ", 
+       RowBox[{"-", "THE"}]}], " ", "GEMINI", " ", 
       RowBox[{"PROMPT", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
     "Print", "[", "\"\<\\n--- Constructing the LLM Grading Prompt ---\>\"", 
-     "]"}], ";"}], "\n", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{
-    "systemInstructions", 
-     "=", "\"\<You are an expert intelligence analyst executing the Analysis \
-of Competing Hypotheses (ACH). \nI will provide a list of Evidence and a list \
-of Hypotheses. You must score every piece of evidence against every \
-hypothesis. \nUse ONLY the following exact strings: \\\"C\\\", \\\"I\\\", \
-\\\"II\\\", \\\"N\\\", \\\"NA\\\". \n\nYou must output your response STRICTLY \
-as a JSON array of arrays (a 2D matrix). \nRows must represent the Evidence. \
-Columns must represent the Hypotheses.\nDo not include markdown blocks, \
-explanations, or any other text. Output ONLY the raw JSON array like this: [[\
-\\\"C\\\", \\\"I\\\"], [\\\"N\\\", \\\"II\\\"]]\>\""}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
+    RowBox[{"systemInstructions", "=", 
+     RowBox[{"\"\<You are an expert intelligence analyst executing the \
+Analysis of Competing Hypotheses (ACH).\\nI will provide a list of exactly \>\
+\"", "<>", 
+      RowBox[{"ToString", "[", "numRows", "]"}], 
+      "<>", "\"\< Evidence items and exactly \>\"", "<>", 
+      RowBox[{"ToString", "[", "numCols", "]"}], 
+      "<>", "\"\< Hypotheses.\\nYou must score every piece of evidence \
+against every hypothesis.\\nUse ONLY the following exact strings: \\\"C\\\" \
+(Consistent), \\\"I\\\" (Inconsistent), \\\"II\\\" (Highly Inconsistent), \
+\\\"N\\\" (Neutral), \\\"NA\\\" (Not Applicable).\\n\\nTo prevent repetitive \
+patterns, you must output your response STRICTLY as a JSON Object (key-value \
+pairs).\\nThe keys MUST be the numeric ID of the Evidence (1 through \>\"", "<>", 
+      RowBox[{"ToString", "[", "numRows", "]"}], 
+      "<>", "\"\<).\\nThe values MUST be an array of exactly \>\"", "<>", 
+      RowBox[{"ToString", "[", "numCols", "]"}], 
+      "<>", "\"\< scores corresponding to the Hypotheses in order.\\nDo not \
+include markdown blocks, explanations, or any other text.\\nOutput ONLY the \
+raw JSON object like this: {\\\"1\\\": [\\\"C\\\", \\\"I\\\", \\\"N\\\", \
+\\\"C\\\"], \\\"2\\\": [\\\"II\\\", \\\"C\\\", \\\"C\\\", \
+\\\"N\\\"]}\>\""}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"evidenceString", "=", 
      RowBox[{"\"\<EVIDENCE LIST:\\n\>\"", "<>", 
@@ -131,7 +144,7 @@ explanations, or any other text. Output ONLY the raw JSON array like this: [[\
       RowBox[{"StringJoin", "[", 
        RowBox[{"Riffle", "[", 
         RowBox[{"hypothesesList", ",", "\"\<\\n\>\""}], "]"}], "]"}]}]}], 
-    ";"}], "\n", 
+    ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"fullPrompt", "=", 
      RowBox[{
@@ -147,123 +160,278 @@ explanations, or any other text. Output ONLY the raw JSON array like this: [[\
    RowBox[{
     RowBox[{
     "Print", "[", "\"\<\\n--- Sending Matrix to Gemini API ---\>\"", "]"}], 
-    ";"}], "\n", 
+    ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"rawResponse", "=", 
-     RowBox[{"rateLimitedExecute", "[", 
-      RowBox[{"geminiService", ",", "\"\<Chat\>\"", ",", 
-       RowBox[{"<|", 
-        RowBox[{
-         RowBox[{"\"\<Messages\>\"", "->", 
-          RowBox[{"{", 
-           RowBox[{"<|", 
-            RowBox[{
-             RowBox[{"\"\<Role\>\"", "->", "\"\<user\>\""}], ",", 
-             RowBox[{"\"\<Content\>\"", "->", "fullPrompt"}]}], "|>"}], 
-           "}"}]}], ",", 
-         RowBox[{"\"\<Model\>\"", "->", "\"\<gemini-2.5-flash\>\""}], ",", 
-         RowBox[{"\"\<Temperature\>\"", "->", "0.0"}]}], "|>"}]}], "]"}]}], 
-    ";"}], "\n", "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{"Parse", " ", "JSON", " ", "Response"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"cleanJSON", "=", 
-     RowBox[{"StringReplace", "[", 
-      RowBox[{
-       RowBox[{"rawResponse", "[", "\"\<Content\>\"", "]"}], ",", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"\"\<```json\>\"", "->", "\"\<\>\""}], ",", 
-         RowBox[{"\"\<```\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], ";"}],
-    "\n", 
-   RowBox[{
-    RowBox[{"aiMatrix", "=", 
-     RowBox[{"ImportString", "[", 
-      RowBox[{"cleanJSON", ",", "\"\<JSON\>\""}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\n", 
-   RowBox[{
-    RowBox[{"Print", "[", 
-     RowBox[{"\"\<\:2705 AI Matrix Scored! Dimensions: \>\"", ",", 
-      RowBox[{"Dimensions", "[", "aiMatrix", "]"}]}], "]"}], ";"}], "\n", 
+     RowBox[{"callGemini", "[", 
+      RowBox[{"fullPrompt", ",", "0.2"}], "]"}]}], ";"}], "\n", 
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
       RowBox[{"--", 
-       RowBox[{"-", "EXPORT"}]}], " ", 
-      RowBox[{"MATRIX", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"-", "Parse"}]}], " ", "JSON", " ", 
+      RowBox[{"Response", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"cleanJSON", "=", 
+     RowBox[{"StringTrim", "[", "rawResponse", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"cleanJSON", "=", 
+     RowBox[{"StringReplace", "[", 
+      RowBox[{"cleanJSON", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<```json\\n\>\"", "->", "\"\<\>\""}], ",", 
+         RowBox[{"\"\<```json\>\"", "->", "\"\<\>\""}], ",", 
+         RowBox[{"\"\<```\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], ";"}],
+    "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"CRITICAL", " ", 
+     RowBox[{"FIX", ":", 
+      RowBox[{
+      "Use", " ", "\"\<RawJSON\>\"", " ", "to", " ", "guarantee", " ", "an", " ",
+        "Association", " ", "object"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"jsonAssoc", "=", 
+     RowBox[{"ImportString", "[", 
+      RowBox[{"cleanJSON", ",", "\"\<RawJSON\>\""}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Fail", "-", 
+     RowBox[{"safe", " ", "check"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"jsonAssoc", "===", "$Failed"}], "||", 
+       RowBox[{"!", 
+        RowBox[{"AssociationQ", "[", "jsonAssoc", "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{
+       "Print", 
+        "[", "\"\<[ERROR] Failed to parse JSON object. Response was truncated \
+or malformed.\>\"", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Raw string length: \>\"", ",", 
+         RowBox[{"StringLength", "[", "cleanJSON", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Abort", "[", "]"}], ";"}]}], "]"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Rebuild", " ", "2", "D", " ", "Matrix", " ", "safely", " ", "and", " ", 
+     "guarantee", " ", "rectangular", " ", "dimensions"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"aiMatrix", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"row", "=", 
+           RowBox[{"Lookup", "[", 
+            RowBox[{"jsonAssoc", ",", 
+             RowBox[{"ToString", "[", "i", "]"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{"\"\<N\>\"", ",", 
+               RowBox[{"{", "numCols", "}"}]}], "]"}]}], "]"}]}], "}"}], ",", 
+         
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"!", 
+             RowBox[{"ListQ", "[", "row", "]"}]}], ",", 
+            RowBox[{"row", "=", 
+             RowBox[{"{", "row", "}"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"PadRight", "[", 
+           RowBox[{
+            RowBox[{"Take", "[", 
+             RowBox[{"row", ",", 
+              RowBox[{"UpTo", "[", "numCols", "]"}]}], "]"}], ",", "numCols", 
+            ",", "\"\<N\>\""}], "]"}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "numRows"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<\[Checkmark] AI Matrix Scored! Dimensions: \>\"", ",", 
+      RowBox[{"Dimensions", "[", "aiMatrix", "]"}]}], "]"}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"--", 
+        RowBox[{"-", "FORMAT"}]}], "&"}], " ", "EXPORT", " ", "MARKDOWN", " ", 
+      RowBox[{"TABLE", "--"}]}], "-"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- Formatting Markdown Table for Obsidian ---\>\"",
+      "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Safely", " ", "stringify", " ", "the", " ", "headers"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"headerRow", "=", 
+     RowBox[{"\"\<| Evidence | \>\"", "<>", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"Riffle", "[", 
+        RowBox[{
+         RowBox[{"ToString", "/@", "hypothesesList"}], ",", "\"\< | \>\""}], 
+        "]"}], "]"}], "<>", "\"\< |\\n\>\""}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"separatorRow", "=", 
+     RowBox[{"\"\<|---\>\"", "<>", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{"\"\<|---\>\"", ",", 
+         RowBox[{"{", "numCols", "}"}]}], "]"}], "]"}], 
+      "<>", "\"\<|\\n\>\""}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Safely", " ", "stringify", " ", "every", " ", "cell", " ", "in", " ", 
+     "the", " ", "matrix"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataRows", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"\"\<| \>\"", "<>", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"evidenceList", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "]"}], "<>", "\"\< | \>\"", "<>", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"Riffle", "[", 
+           RowBox[{
+            RowBox[{"ToString", "/@", 
+             RowBox[{"aiMatrix", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ",", "\"\< | \>\""}], "]"}], 
+          "]"}], "<>", "\"\< |\\n\>\""}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "numRows"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"mdTable", "=", 
+     RowBox[{"headerRow", "<>", "separatorRow", "<>", "dataRows"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/ai_scored_matrix.md\
+\>\"", ",", "mdTable", ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", 
    RowBox[{
     RowBox[{"Export", "[", 
      RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/ai_scored_matrix.\
-json\>\"", ",", "aiMatrix"}], "]"}], ";"}], "\n", 
+json\>\"", ",", "aiMatrix"}], "]"}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{
-    "Print", "[", "\"\<\:2705 Matrix exported to Vault. Ready for Notebook \
-03.\>\"", "]"}], ";"}]}]}]], "Input",
+    "Print", "[", "\"\<\[Checkmark] DONE. Matrix exported as .md (for \
+Obsidian) and .json (for Notebook 03).\>\"", "]"}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.9812051215895367`*^9, 3.98120512159269*^9}, 
    3.9812066999344378`*^9, {3.98120718051591*^9, 3.981207181703064*^9}, {
    3.9812090591334953`*^9, 3.9812090652583447`*^9}, {3.9812095184509373`*^9, 
-   3.9812095238340178`*^9}, {3.981394105717669*^9, 
-   3.9813941103377047`*^9}},ExpressionUUID->"698c5062-5bc7-499c-9e56-\
-5bb680d9b0a3"],
+   3.9812095238340178`*^9}, {3.981394105717669*^9, 3.9813941103377047`*^9}, {
+   3.9833209739049387`*^9, 3.983320981348131*^9}, {3.9833213690667133`*^9, 
+   3.9833213703260527`*^9}, {3.9833223665180607`*^9, 3.983322367786273*^9}, {
+   3.983322633563755*^9, 3.983322634613707*^9}, {3.983323004181191*^9, 
+   3.983323005590542*^9}, {3.9833233890224047`*^9, 3.983323390154333*^9}},
+ CellLabel->
+  "In[572]:=",ExpressionUUID->"698c5062-5bc7-499c-9e56-5bb680d9b0a3"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData["\<\"--- Initializing Dynamic ACH Engine ---\"\>"], "Print",
  CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
-  3.981207183469592*^9, 3.981209528573635*^9},
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.9833233951414127`*^9},
  CellLabel->
   "During evaluation of \
-In[94]:=",ExpressionUUID->"e6652c58-80fe-4672-b09c-2687f3289b2b"],
-
-Cell[BoxData["\<\"\\n=== DATA INGESTION SUCCESSFUL ===\"\>"], "Print",
- CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
-  3.981207183469592*^9, 3.981209528613419*^9},
- CellLabel->
-  "During evaluation of \
-In[94]:=",ExpressionUUID->"49166443-dc3e-41b0-8dcd-db29253fabe0"],
+In[572]:=",ExpressionUUID->"57cc04ba-9671-4156-b6e5-cfc8b4c9b128"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Target Hypotheses Extracted: \"\>", "\[InvisibleSpace]", "8"}],
-  
-  SequenceForm["Target Hypotheses Extracted: ", 8],
+  RowBox[{"\<\"Target Hypotheses Loaded: \"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["Target Hypotheses Loaded: ", 12],
   Editable->False]], "Print",
  CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
-  3.981207183469592*^9, 3.981209528614345*^9},
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.983323395164146*^9},
  CellLabel->
   "During evaluation of \
-In[94]:=",ExpressionUUID->"6af31afd-3794-4b46-97ff-c8f92cc5dbc1"],
+In[572]:=",ExpressionUUID->"9d617f69-c979-4d7e-9a5a-0836853f354a"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Evidence Items Extracted: \"\>", "\[InvisibleSpace]", "20"}],
-  SequenceForm["Evidence Items Extracted: ", 20],
+  RowBox[{"\<\"Evidence Items Loaded: \"\>", "\[InvisibleSpace]", "142"}],
+  SequenceForm["Evidence Items Loaded: ", 142],
   Editable->False]], "Print",
  CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
-  3.981207183469592*^9, 3.981209528614711*^9},
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.98332339516512*^9},
  CellLabel->
   "During evaluation of \
-In[94]:=",ExpressionUUID->"82c43781-ae22-45d2-9109-76eef03bce2c"],
+In[572]:=",ExpressionUUID->"ec4bc96f-5ddb-46be-af07-ad9c34b18fa5"],
+
+Cell[BoxData["\<\"\\n--- Constructing the LLM Grading Prompt ---\"\>"], \
+"Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.983323395165533*^9},
+ CellLabel->
+  "During evaluation of \
+In[572]:=",ExpressionUUID->"acd9c07b-f0ff-4e0f-bf24-78e750649b4e"],
+
+Cell[BoxData["\<\"\\n--- Sending Matrix to Gemini API ---\"\>"], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.9833233951659317`*^9},
+ CellLabel->
+  "During evaluation of \
+In[572]:=",ExpressionUUID->"2f04ee86-0aa6-4cd1-96b5-c5ac9077e467"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"\\nReady to generate a \"\>", "\[InvisibleSpace]", "20", 
-   "\[InvisibleSpace]", "\<\" x \"\>", "\[InvisibleSpace]", "8", 
-   "\[InvisibleSpace]", "\<\" assessment matrix.\"\>"}],
-  SequenceForm["\nReady to generate a ", 20, " x ", 8, " assessment matrix."],
-  
+  RowBox[{"\<\"\[Checkmark] AI Matrix Scored! Dimensions: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"142", ",", "12"}], "}"}]}],
+  SequenceForm["\[Checkmark] AI Matrix Scored! Dimensions: ", {142, 12}],
   Editable->False]], "Print",
  CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
-  3.981207183469592*^9, 3.981209528615069*^9},
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.983323477251094*^9},
  CellLabel->
   "During evaluation of \
-In[94]:=",ExpressionUUID->"d0f0a7cc-abf5-4590-8f53-188e9ac0084e"]
+In[572]:=",ExpressionUUID->"745918d6-f194-4375-aae1-0cecc5798b70"],
+
+Cell[BoxData["\<\"\\n--- Formatting Markdown Table for Obsidian ---\"\>"], \
+"Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.9833234772529707`*^9},
+ CellLabel->
+  "During evaluation of \
+In[572]:=",ExpressionUUID->"b3d759a3-e66a-4f33-9625-9cb1c868e5f6"],
+
+Cell[BoxData["\<\"\[Checkmark] DONE. Matrix exported as .md (for Obsidian) \
+and .json (for Notebook 03).\"\>"], "Print",
+ CellChangeTimes->{3.981205154735528*^9, 3.981206705900387*^9, 
+  3.981207183469592*^9, 3.981209528573635*^9, 3.9813944674634523`*^9, 
+  3.983320988969366*^9, 3.983321377724162*^9, 3.9833223850107327`*^9, 
+  3.983322649402669*^9, 3.9833230118948517`*^9, 3.983323477265442*^9},
+ CellLabel->
+  "During evaluation of \
+In[572]:=",ExpressionUUID->"e997ddca-6ada-4bb2-ba47-1f455329d90d"]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{808, 679},
-WindowMargins->{{216, Automatic}, {Automatic, 0}},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"4ad17c12-0890-4425-997b-b3c818110fa2"
@@ -280,13 +448,16 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[576, 22, 7132, 185, 1096, "Input",ExpressionUUID->"698c5062-5bc7-499c-9e56-5bb680d9b0a3"],
+Cell[576, 22, 12695, 315, 1888, "Input",ExpressionUUID->"698c5062-5bc7-499c-9e56-5bb680d9b0a3"],
 Cell[CellGroupData[{
-Cell[7733, 211, 289, 5, 23, "Print",ExpressionUUID->"e6652c58-80fe-4672-b09c-2687f3289b2b"],
-Cell[8025, 218, 286, 5, 41, "Print",ExpressionUUID->"49166443-dc3e-41b0-8dcd-db29253fabe0"],
-Cell[8314, 225, 413, 10, 23, "Print",ExpressionUUID->"6af31afd-3794-4b46-97ff-c8f92cc5dbc1"],
-Cell[8730, 237, 406, 9, 23, "Print",ExpressionUUID->"82c43781-ae22-45d2-9109-76eef03bce2c"],
-Cell[9139, 248, 557, 12, 41, "Print",ExpressionUUID->"d0f0a7cc-abf5-4590-8f53-188e9ac0084e"]
+Cell[13296, 341, 458, 7, 23, "Print",ExpressionUUID->"57cc04ba-9671-4156-b6e5-cfc8b4c9b128"],
+Cell[13757, 350, 573, 11, 23, "Print",ExpressionUUID->"9d617f69-c979-4d7e-9a5a-0836853f354a"],
+Cell[14333, 363, 568, 11, 23, "Print",ExpressionUUID->"ec4bc96f-5ddb-46be-af07-ad9c34b18fa5"],
+Cell[14904, 376, 465, 8, 41, "Print",ExpressionUUID->"acd9c07b-f0ff-4e0f-bf24-78e750649b4e"],
+Cell[15372, 386, 458, 7, 41, "Print",ExpressionUUID->"2f04ee86-0aa6-4cd1-96b5-c5ac9077e467"],
+Cell[15833, 395, 665, 13, 23, "Print",ExpressionUUID->"745918d6-f194-4375-aae1-0cecc5798b70"],
+Cell[16501, 410, 470, 8, 41, "Print",ExpressionUUID->"b3d759a3-e66a-4f33-9625-9cb1c868e5f6"],
+Cell[16974, 420, 504, 8, 23, "Print",ExpressionUUID->"e997ddca-6ada-4bb2-ba47-1f455329d90d"]
 }, Open  ]]
 }, Open  ]]
 }
