@@ -1,12 +1,5 @@
-[H1: Zoonotic Virus]
-[H2: Accidental Viral Exposure]
-[H3: Zoonotic Bacteria]
-[H4: Accidental Bacterial Exposure]
-[H5: Natural Toxin]
-[H6: Accidental Toxin Exposure]
-[H7: Widespread Zoonotic Virus]
-[H8: Widespread Accidental Viral Exposure]
-[H9: Widespread Zoonotic Bacteria]
-[H10: Widespread Accidental Bacterial Exposure]
-[H11: Widespread Natural Toxin]
-[H12: Widespread Accidental Toxin Exposure]
+H1: The acute respiratory distress syndrome outbreak is caused by a naturally occurring infectious pathogen primarily affecting the Navajo population.
+H2: The acute respiratory distress syndrome outbreak is caused by a naturally occurring infectious pathogen affecting anyone exposed in the Four Corners region.
+H3: The acute respiratory distress syndrome outbreak is caused by a naturally occurring chemical toxin affecting anyone exposed in the Four Corners region.
+H4: The acute respiratory distress syndrome outbreak is caused by an infectious pathogen resulting from an accidental human-caused exposure, affecting anyone exposed in the Four Corners region.
+H5: The acute respiratory distress syndrome outbreak is caused by a naturally occurring chemical toxin primarily affecting the Navajo population.

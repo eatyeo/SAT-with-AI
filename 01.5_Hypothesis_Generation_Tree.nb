@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     21284,        499]
-NotebookOptionsPosition[     20110,        473]
-NotebookOutlinePosition[     20505,        489]
-CellTagsIndexPosition[     20462,        486]
+NotebookDataLength[     90216,       2085]
+NotebookOptionsPosition[     87587,       2044]
+NotebookOutlinePosition[     87977,       2060]
+CellTagsIndexPosition[     87934,       2057]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,344 +24,973 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
-     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
-    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  
+  RowBox[{"(*", 
    RowBox[{"01.5", ":", 
     RowBox[{
-     RowBox[{"Hypothesis", " ", "Generation"}], " ", "-", " ", 
-     RowBox[{"MHG", " ", "TREE"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Multiple", " ", "Hypotheses", " ", "Generator"}], "-", 
+     RowBox[{"Permutation", " ", "Tree"}]}]}], "*)"}], 
   RowBox[{"(*", " ", 
    RowBox[{
-   "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===",
-     " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", " ", "===", 
-    " ", "===", " ", "===", " ", "===", " ", "===", " ", "==="}], "*)"}], 
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{
-    "<<", "\"\</Users/Western/Desktop/ThesisCode/Core_API_Functions.wl\>\""}],
-     ";"}], "\n", "\n", 
-   RowBox[{
-    RowBox[{
-    "Print", "[", "\"\<--- Initializing Advanced Combinatorial Logic Tree ---\
-\>\"", "]"}], ";"}], "\n", "\n", 
-   RowBox[{"(*", 
-    RowBox[{
+    RowBox[{"Get", "[", 
      RowBox[{
-      RowBox[{"--", 
-       RowBox[{"-", "Load"}]}], " ", "consensus"}], "-", 
-     RowBox[{"approved", " ", "evidence", " ", "from", " ", 
-      RowBox[{"Vault", "--"}]}], "-"}], "*)"}], "\n", 
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      "<>", "\"\<Core_API_Functions.wl\>\""}], "]"}], ";"}], "\n", 
    RowBox[{
     RowBox[{
-    "vaultPath", 
-     "=", "\"\</Users/Western/Desktop/ThesisCode/Vault/evidence_vault.md\>\""}\
-], ";"}], "\n", 
+    "Print", "[", "\"\<--- Initializing MHG Permutation Tree ---\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"numberedEvidence", "=", 
      RowBox[{"Import", "[", 
-      RowBox[{"vaultPath", ",", "\"\<Text\>\""}], "]"}]}], ";"}], "\n", 
+      RowBox[{
+       RowBox[{"$vaultDir", "<>", "\"\<evidence_vault.md\>\""}], 
+       ",", "\"\<Text\>\""}], "]"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{
     "Print", "[", "\"\<\[Checkmark] Vault evidence loaded.\>\"", "]"}], ";"}],
-    "\n", "\n", 
+    "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{"hypothesisPrompt", "=", 
-     RowBox[{"\"\<You are an expert intelligence analyst applying the \
-Multiple Hypotheses Generator (MHG) technique from Beebe & Pherson (2015).\\n\
-\\nYour task: generate a WHO -> WHAT -> WHY hypothesis permutation tree from \
-the verified evidence below.\\n\\nSTRICT STRUCTURE RULES - these are \
-non-negotiable:\\n1. The root node must be exactly: \\\"Sudden \
-Deaths\\\"\\n2. Level 1 (WHO): Abstract the victims into exactly TWO mutually \
-exclusive demographic groups based on the evidence. Do not list individuals \
-or specific symptoms as WHO nodes. WHO answers: who is the affected \
-population?\\n   - One branch for a specific/isolated demographic (e.g. only \
-Navajos)\\n   - One branch for a general/indiscriminate population (e.g. \
-anyone)\\n3. Level 2 (WHAT): For EACH WHO branch, generate 2-3 plausible \
-disease agents or mechanisms. WHAT answers: what type of agent or \
-mechanism?\\n4. Level 3 (WHY - TERMINAL NODES ONLY): For EACH WHAT branch, \
-generate exactly 3 causes: Act of Nature, Intentional Act, Accidental \
-Exposure.\\n5. Every path MUST go: Root -> WHO -> WHAT -> WHY. No skipping \
-levels.\\n6. Low credibility terminal nodes must end with (X Discarded).\\n7. \
-Active hypothesis terminal nodes must include [H#: short label] and \
-Credibility: N where N is 1-4.\\n\\nOutput ONLY a valid JSON array of edge \
-pairs. No explanation, no markdown.\\nFormat: [[\\\"Sudden Deaths\\\", \
-\\\"WHO: ...\\\"], [\\\"WHO: ...\\\", \\\"WHAT: ...\\\"], [\\\"WHAT: ...\\\", \
-\\\"WHY: ...\\\\nCredibility: N\\\\n[H#: Label]\\\"]]\\n\\nEvidence:\\n>\>\"",
-       "<>", "numberedEvidence"}]}], ";"}], "\n", "\n", 
+    RowBox[{"centralQuestionFile", "=", 
+     RowBox[{"$vaultDir", "<>", "\"\<central_question.md\>\""}]}], ";"}], "\n", 
    RowBox[{
+    RowBox[{"centralQuestionContext", "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"FileExistsQ", "[", "centralQuestionFile", "]"}], ",", 
+       RowBox[{"\"\<The central analytical question for this case is:\\n\>\"",
+         "<>", 
+        RowBox[{"StringReplace", "[", 
+         RowBox[{
+          RowBox[{"Import", "[", 
+           RowBox[{"centralQuestionFile", ",", "\"\<Text\>\""}], "]"}], ",", 
+          
+          RowBox[{"\"\<# Central Analytical Question\\n\\n\>\"", 
+           "->", "\"\<\>\""}]}], "]"}], "<>", "\"\<\\n\\n\>\""}], 
+       ",", "\"\<\>\""}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
     RowBox[{
-    "Print", "[", "\"\<\\n--- Querying Gemini for Dynamic Hypothesis Tree ---\
-\>\"", "]"}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"rawResponse", "=", 
-     RowBox[{"callGemini", "[", 
-      RowBox[{"hypothesisPrompt", ",", "0.2"}], "]"}]}], ";"}], "\n", "\n", 
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-     RowBox[{
-      RowBox[{"--", 
-       RowBox[{"-", "Parse"}]}], " ", "JSON", " ", "response", " ", "into", " ", 
-      RowBox[{"edges", "--"}]}], "-"}], "*)"}], "\n", 
+     RowBox[{"STEP", " ", "1"}], ":", 
+     RowBox[{"Identify", " ", "analytical", " ", "dimensions"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"jsonText", "=", 
-     RowBox[{"StringTrim", "[", "rawResponse", "]"}]}], ";"}], "\n", 
+    RowBox[{
+    "Print", "[", "\"\<\\n--- STEP 1: Identifying Analytical Dimensions ---\>\
+\"", "]"}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{"jsonText", "=", 
+    RowBox[{"dimensionPrompt", "=", 
+     RowBox[{"\"\<You are an expert intelligence analyst applying the \
+Multiple \>\"", 
+      "<>", "\"\<Hypotheses Generator (MHG) from Beebe & Pherson \
+(2015).\\n\\n\>\"", "<>", "centralQuestionContext", 
+      "<>", "\"\<Identify the 2-3 most analytically useful component \
+dimensions \>\"", 
+      "<>", "\"\<for this case. The most useful are ones like:\\n\>\"", 
+      "<>", "\"\<- WHO is affected or responsible?\\n\>\"", 
+      "<>", "\"\<- WHAT is the mechanism or agent?\\n\>\"", 
+      "<>", "\"\<- WHY / HOW did it happen (intentional, accidental, \
+natural)?\\n\\n\>\"", 
+      "<>", "\"\<Pick dimensions where different answers lead to meaningfully \
+\>\"", "<>", "\"\<different hypotheses. For each, provide 2-4 mutually \
+exclusive options.\\n\\n\>\"", 
+      "<>", "\"\<Output ONLY valid JSON in exactly this structure:\\n\>\"", 
+      "<>", "\"\<{\\n\>\"", "<>", "\"\<  \\\"dimensions\\\": [\\n\>\"", 
+      "<>", "\"\<    {\\\"name\\\": \\\"Who?\\\", \\\"options\\\": [\\\"Only \
+Navajos\\\", \\\"Anyone\\\"]},\\n\>\"", 
+      "<>", "\"\<    {\\\"name\\\": \\\"What?\\\", \\\"options\\\": \
+[\\\"Common flu\\\", \\\"Unknown pathogen\\\", \\\"Chemical toxin\\\"]},\\n\>\
+\"", "<>", "\"\<    {\\\"name\\\": \\\"Why?\\\", \\\"options\\\": [\\\"Act of \
+nature\\\", \\\"Intentional act\\\", \\\"Accidental exposure\\\"]}\\n\>\"", 
+      "<>", "\"\<  ]\\n\>\"", "<>", "\"\<}\\n\\n\>\"", 
+      "<>", "\"\<No markdown, no explanation, no extra keys. Raw JSON \
+only.\\n\\n\>\"", "<>", "\"\<Evidence:\\n\>\"", "<>", "numberedEvidence"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rawDimensions", "=", 
+     RowBox[{"callGemini", "[", 
+      RowBox[{"dimensionPrompt", ",", "0.2"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"cleanDimensions", "=", 
+     RowBox[{"StringTrim", "[", "rawDimensions", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"cleanDimensions", "=", 
      RowBox[{"StringReplace", "[", 
-      RowBox[{"jsonText", ",", 
+      RowBox[{"cleanDimensions", ",", 
        RowBox[{"{", 
         RowBox[{
          RowBox[{"\"\<```json\\n\>\"", "->", "\"\<\>\""}], ",", 
          RowBox[{"\"\<```json\>\"", "->", "\"\<\>\""}], ",", 
          RowBox[{"\"\<```\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], ";"}],
-    "\n", "\n", 
+    "\n", 
    RowBox[{
-    RowBox[{"edgePairs", "=", 
+    RowBox[{"dimData", "=", 
      RowBox[{"ImportString", "[", 
-      RowBox[{"jsonText", ",", "\"\<JSON\>\""}], "]"}]}], ";"}], "\n", "\n", 
-   RowBox[{"(*", 
-    RowBox[{"Fail", "-", 
-     RowBox[{
-     "safe", " ", "check", " ", "to", " ", "prevent", " ", "graph", " ", 
-      "generation", " ", "crashes"}]}], "*)"}], "\n", 
+      RowBox[{"cleanDimensions", ",", "\"\<RawJSON\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"If", "[", 
      RowBox[{
       RowBox[{
-       RowBox[{"edgePairs", "===", "$Failed"}], "||", 
+       RowBox[{"dimData", "===", "$Failed"}], "||", 
        RowBox[{"!", 
-        RowBox[{"ListQ", "[", "edgePairs", "]"}]}]}], ",", 
+        RowBox[{"AssociationQ", "[", "dimData", "]"}]}], "||", 
+       RowBox[{"!", 
+        RowBox[{"KeyExistsQ", "[", 
+         RowBox[{"dimData", ",", "\"\<dimensions\>\""}], "]"}]}]}], ",", 
       RowBox[{
        RowBox[{"Print", "[", 
-        RowBox[{"\"\<[ERROR] Failed to parse JSON. Raw response:\\n\>\"", ",",
-          "rawResponse"}], "]"}], ";", "\n", 
-       RowBox[{"Abort", "[", "]"}], ";"}]}], "]"}], ";"}], "\n", "\n", 
+        RowBox[{"\"\<[ERROR] Failed to parse dimension JSON. Raw: \>\"", "<>",
+          "rawDimensions"}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{"edges", "=", 
-     RowBox[{"DirectedEdge", "@@@", "edgePairs"}]}], ";"}], "\n", 
+    RowBox[{"dimensions", "=", 
+     RowBox[{"dimData", "[", "\"\<dimensions\>\"", "]"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{"Print", "[", 
-     RowBox[{"\"\<Generated \>\"", "<>", 
+     RowBox[{"\"\<[Validated] \>\"", "<>", 
       RowBox[{"ToString", "[", 
-       RowBox[{"Length", "[", "edges", "]"}], "]"}], 
-      "<>", "\"\< edges from vault evidence.\>\""}], "]"}], ";"}], "\n", "\n", 
+       RowBox[{"Length", "[", "dimensions", "]"}], "]"}], 
+      "<>", "\"\< dimensions:\>\""}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<  \>\"", "<>", 
+        RowBox[{
+         RowBox[{"dimensions", "[", 
+          RowBox[{"[", "d", "]"}], "]"}], "[", "\"\<name\>\"", "]"}], 
+        "<>", "\"\<: \>\"", "<>", 
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"Riffle", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"dimensions", "[", 
+             RowBox[{"[", "d", "]"}], "]"}], "[", "\"\<options\>\"", "]"}], 
+           ",", "\"\<, \>\""}], "]"}], "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"d", ",", 
+        RowBox[{"Length", "[", "dimensions", "]"}]}], "}"}]}], "]"}], ";"}], 
+   "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-     RowBox[{
-      RowBox[{"--", 
-       RowBox[{"-", "Node"}]}], " ", 
-      RowBox[{"styling", "--"}]}], "-"}], "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"ClearAll", "[", "nodeAesthetic", "]"}], ";"}], "\n", 
+     RowBox[{"STEP", " ", "2"}], ":", 
+     RowBox[{"Generate", " ", "all", " ", "permutations"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"nodeAesthetic", "[", "name_String", "]"}], ":=", 
-     RowBox[{"Module", "[", 
+    "Print", "[", "\"\<\\n--- STEP 2: Generating All Permutations ---\>\"", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"dimNames", "=", 
+     RowBox[{"Map", "[", 
       RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", "\"\<name\>\"", "]"}], "&"}], ",", "dimensions"}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"optionLists", "=", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", "\"\<options\>\"", "]"}], "&"}], ",", 
+       "dimensions"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"allCombinations", "=", 
+     RowBox[{"Tuples", "[", "optionLists", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"numPermutations", "=", 
+     RowBox[{"Length", "[", "allCombinations", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Total permutations before scoring: \>\"", "<>", 
+      RowBox[{"ToString", "[", "numPermutations", "]"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"permutationSentences", "=", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{"Function", "[", 
+        RowBox[{"combo", ",", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"Riffle", "[", 
+           RowBox[{
+            RowBox[{"MapThread", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"#1", "<>", "\"\<: \>\"", "<>", "#2"}], ")"}], "&"}], 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"dimNames", ",", "combo"}], "}"}]}], "]"}], 
+            ",", "\"\< | \>\""}], "]"}], "]"}]}], "]"}], ",", 
+       "allCombinations"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"STEP", " ", "3"}], ":", 
+     RowBox[{"Score", " ", "permutations"}]}], "*)"}], "\[IndentingNewLine]", 
+   
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- STEP 3: Scoring Permutations ---\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"permutationBlock", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"ToString", "[", 
+            RowBox[{"#2", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", "\"\<. \>\"", "<>", 
+           "#1", "<>", "\"\<\\n\>\""}], ")"}], "&"}], ",", 
+        "permutationSentences"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"scoringPrompt", "=", 
+     RowBox[{"\"\<You are an expert intelligence analyst applying the \
+Multiple \>\"", 
+      "<>", "\"\<Hypotheses Generator (MHG) from Beebe & Pherson \
+(2015).\\n\\n\>\"", "<>", "centralQuestionContext", 
+      "<>", "\"\<Score each permutation 1-5 for credibility, or \\\"discard\\\
+\" if \>\"", 
+      "<>", "\"\<logically contradictory or implausible given the \
+evidence.\\n\\n\>\"", 
+      "<>", "\"\<Output ONLY a JSON array, one object per permutation, same \
+order as input:\\n\>\"", 
+      "<>", "\"\<[{\\\"permutation\\\": \\\"...\\\", \\\"score\\\": 3, \>\"", 
+      "<>", "\"\<\\\"hypothesis\\\": \\\"Plain English statement of this \
+scenario.\\\"},\\n\>\"", 
+      "<>", "\"\< {\\\"permutation\\\": \\\"...\\\", \\\"score\\\": \
+\\\"discard\\\", \\\"hypothesis\\\": \\\"\\\"}]\\n\\n\>\"", 
+      "<>", "\"\<The hypothesis field is a single plain English sentence \
+restating \>\"", 
+      "<>", "\"\<the permutation as a testable claim (e.g. \\\"People are \
+dying from a \>\"", 
+      "<>", "\"\<naturally occurring unknown pathogen.\\\"). \>\"", 
+      "<>", "\"\<Leave empty string for discarded items.\\n\\n\>\"", 
+      "<>", "\"\<No markdown, no explanation. Raw JSON array only.\\n\\n\>\"",
+       "<>", "\"\<Evidence:\\n\>\"", "<>", "numberedEvidence", 
+      "<>", "\"\<\\n\\n\>\"", "<>", "\"\<Permutations to score:\\n\>\"", "<>",
+       "permutationBlock"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rawScoring", "=", 
+     RowBox[{"callGemini", "[", 
+      RowBox[{"scoringPrompt", ",", "0.2"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"cleanScoring", "=", 
+     RowBox[{"StringTrim", "[", "rawScoring", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"cleanScoring", "=", 
+     RowBox[{"StringReplace", "[", 
+      RowBox[{"cleanScoring", ",", 
        RowBox[{"{", 
         RowBox[{
-        "bgColor", ",", "fontColor", ",", "borderColor", ",", 
-         "textToDisplay"}], "}"}], ",", 
-       RowBox[{
-        RowBox[{"textToDisplay", "=", 
-         RowBox[{"StringReplace", "[", 
-          RowBox[{"name", ",", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{
-             "RegularExpression", "[", "\"\<\\\\([^)]+Discarded\\\\)\>\"", 
-              "]"}], "->", "\"\<Status: DISCARD\>\""}], "}"}]}], "]"}]}], ";",
-         "\n", 
-        RowBox[{"Which", "[", 
-         RowBox[{
-          RowBox[{"StringContainsQ", "[", 
-           RowBox[{"name", ",", "\"\<[H\>\""}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"bgColor", "=", 
-            RowBox[{"Lighter", "[", 
-             RowBox[{"Blue", ",", "0.9"}], "]"}]}], ";", 
-           RowBox[{"fontColor", "=", 
-            RowBox[{"Darker", "[", 
-             RowBox[{"Blue", ",", "0.4"}], "]"}]}], ";", 
-           RowBox[{"borderColor", "=", 
-            RowBox[{"Lighter", "[", 
-             RowBox[{"Blue", ",", "0.4"}], "]"}]}], ";"}], ",", 
-          RowBox[{
-           RowBox[{"StringContainsQ", "[", 
-            RowBox[{"name", ",", "\"\<DISCARD\>\""}], "]"}], "||", 
-           RowBox[{"StringContainsQ", "[", 
-            RowBox[{"name", ",", "\"\<Discarded\>\""}], "]"}]}], ",", 
-          RowBox[{
-           RowBox[{"bgColor", "=", 
-            RowBox[{"GrayLevel", "[", "0.96", "]"}]}], ";", 
-           RowBox[{"fontColor", "=", 
-            RowBox[{"GrayLevel", "[", "0.6", "]"}]}], ";", 
-           RowBox[{"borderColor", "=", 
-            RowBox[{"GrayLevel", "[", "0.9", "]"}]}], ";"}], ",", 
-          RowBox[{"StringContainsQ", "[", 
-           RowBox[{"name", ",", "\"\<Sudden Deaths\>\""}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"bgColor", "=", 
-            RowBox[{"GrayLevel", "[", "0.15", "]"}]}], ";", 
-           RowBox[{"fontColor", "=", "White"}], ";", 
-           RowBox[{"borderColor", "=", "Black"}], ";"}], ",", 
-          RowBox[{"StringContainsQ", "[", 
-           RowBox[{"name", ",", "\"\<WHO:\>\""}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"bgColor", "=", 
-            RowBox[{"Lighter", "[", 
-             RowBox[{"Gray", ",", "0.85"}], "]"}]}], ";", 
-           RowBox[{"fontColor", "=", "Black"}], ";", 
-           RowBox[{"borderColor", "=", 
-            RowBox[{"GrayLevel", "[", "0.6", "]"}]}], ";"}], ",", 
-          RowBox[{"StringContainsQ", "[", 
-           RowBox[{"name", ",", "\"\<WHAT:\>\""}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"bgColor", "=", 
-            RowBox[{"Lighter", "[", 
-             RowBox[{"Orange", ",", "0.85"}], "]"}]}], ";", 
-           RowBox[{"fontColor", "=", 
-            RowBox[{"Darker", "[", 
-             RowBox[{"Orange", ",", "0.4"}], "]"}]}], ";", 
-           RowBox[{"borderColor", "=", 
-            RowBox[{"Lighter", "[", 
-             RowBox[{"Orange", ",", "0.5"}], "]"}]}], ";"}], ",", "True", ",", 
-          RowBox[{
-           RowBox[{"bgColor", "=", "White"}], ";", 
-           RowBox[{"fontColor", "=", "Black"}], ";", 
-           RowBox[{"borderColor", "=", 
-            RowBox[{"GrayLevel", "[", "0.7", "]"}]}], ";"}]}], "]"}], ";", 
-        "\n", 
-        RowBox[{"Framed", "[", 
-         RowBox[{
-          RowBox[{"Style", "[", 
-           RowBox[{"textToDisplay", ",", "10", ",", 
-            RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "Bold", ",", 
-            RowBox[{"FontColor", "->", "fontColor"}], ",", 
-            RowBox[{"TextAlignment", "->", "Center"}]}], "]"}], ",", 
-          RowBox[{"Background", "->", "bgColor"}], ",", 
-          RowBox[{"FrameStyle", "->", 
-           RowBox[{"Directive", "[", 
-            RowBox[{
-             RowBox[{"Thickness", "[", "0.003", "]"}], ",", "borderColor"}], 
-            "]"}]}], ",", 
-          RowBox[{"RoundingRadius", "->", "6"}], ",", 
-          RowBox[{"FrameMargins", "->", "10"}]}], "]"}]}]}], "]"}]}], ";"}], 
-   "\n", "\n", 
-   RowBox[{"(*", 
-    RowBox[{
+         RowBox[{"\"\<```json\\n\>\"", "->", "\"\<\>\""}], ",", 
+         RowBox[{"\"\<```json\>\"", "->", "\"\<\>\""}], ",", 
+         RowBox[{"\"\<```\>\"", "->", "\"\<\>\""}]}], "}"}]}], "]"}]}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"scoredData", "=", 
+     RowBox[{"ImportString", "[", 
+      RowBox[{"cleanScoring", ",", "\"\<RawJSON\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"If", "[", 
      RowBox[{
       RowBox[{
-       RowBox[{"--", 
-        RowBox[{"-", "Build"}]}], "&"}], " ", "export", " ", 
-      RowBox[{"tree", "--"}]}], "-"}], "*)"}], "\n", 
+       RowBox[{"scoredData", "===", "$Failed"}], "||", 
+       RowBox[{"!", 
+        RowBox[{"ListQ", "[", "scoredData", "]"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<[ERROR] Failed to parse scoring JSON. Raw: \>\"", "<>", 
+         "rawScoring"}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";"}], "\n", 
    RowBox[{
-    RowBox[{
-    "Print", "[", "\"\<\\n--- Generating Master MHG Permutation Tree ---\>\"",
-      "]"}], ";"}], "\n", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<[Validated] \>\"", "<>", 
+      RowBox[{"ToString", "[", 
+       RowBox[{"Length", "[", "scoredData", "]"}], "]"}], 
+      "<>", "\"\< permutations scored.\>\""}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{"treePlot", "=", 
-     RowBox[{"Graph", "[", 
-      RowBox[{"edges", ",", 
-       RowBox[{"VertexShapeFunction", "->", 
-        RowBox[{"(", 
-         RowBox[{
-          RowBox[{"Inset", "[", 
-           RowBox[{
-            RowBox[{"nodeAesthetic", "[", "#2", "]"}], ",", "#1"}], "]"}], 
-          "&"}], ")"}]}], ",", 
-       RowBox[{"EdgeStyle", "->", 
-        RowBox[{"Directive", "[", 
-         RowBox[{
-          RowBox[{"Darker", "[", 
-           RowBox[{"Gray", ",", "0.4"}], "]"}], ",", 
-          RowBox[{"AbsoluteThickness", "[", "2", "]"}]}], "]"}]}], ",", 
-       RowBox[{"GraphLayout", "->", 
-        RowBox[{"{", 
-         RowBox[{"\"\<LayeredDigraphEmbedding\>\"", ",", 
-          RowBox[{"\"\<RootVertex\>\"", "->", "\"\<Sudden Deaths\>\""}], ",", 
-          
-          RowBox[{"\"\<Orientation\>\"", "->", "Left"}]}], "}"}]}], ",", 
-       RowBox[{"ImageSize", "->", 
-        RowBox[{"{", 
-         RowBox[{"1200", ",", "900"}], "}"}]}], ",", 
-       RowBox[{"PlotLabel", "->", 
-        RowBox[{"Style", "[", 
-         RowBox[{"\"\<Multiple Hypotheses Generator: Pruned Permutation Logic\
-\>\"", ",", "Bold", ",", "16", ",", 
-          RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}]}], "]"}]}]}], 
-      "]"}]}], ";"}], "\n", "\n", 
-   RowBox[{
-    RowBox[{"Export", "[", 
-     RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/Permutation_Tree_\
-Master.pdf\>\"", ",", "treePlot"}], "]"}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{
-    "Print", "[", "\"\<\[Checkmark] MASTER MHG TREE COMPLETE. Graph exported \
-to Vault.\>\"", "]"}], ";"}], "\n", "\n", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"--", 
-       RowBox[{"-", "Dynamically"}]}], " ", "extract", " ", "final", " ", 
-      RowBox[{"hypotheses", "--"}]}], "-"}], "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"allNodes", "=", 
-     RowBox[{"Union", "[", 
-      RowBox[{"Flatten", "[", 
-       RowBox[{"List", "@@@", "edges"}], "]"}], "]"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"hNodes", "=", 
+    RowBox[{"keptPermutations", "=", 
      RowBox[{"Select", "[", 
-      RowBox[{"allNodes", ",", 
-       RowBox[{
-        RowBox[{"StringContainsQ", "[", 
-         RowBox[{"#", ",", "\"\<[H\>\""}], "]"}], "&"}]}], "]"}]}], ";"}], "\n", 
+      RowBox[{"scoredData", ",", 
+       RowBox[{"Function", "[", 
+        RowBox[{"p", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"p", "[", "\"\<score\>\"", "]"}], 
+           "=!=", "\"\<discard\>\""}], "&&", 
+          RowBox[{
+           RowBox[{"p", "[", "\"\<score\>\"", "]"}], "=!=", "0"}], "&&", 
+          RowBox[{"StringQ", "[", 
+           RowBox[{"p", "[", "\"\<hypothesis\>\"", "]"}], "]"}], "&&", 
+          RowBox[{
+           RowBox[{"StringLength", "[", 
+            RowBox[{"p", "[", "\"\<hypothesis\>\"", "]"}], "]"}], ">", 
+           "0"}]}]}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"discardedPermutations", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{"scoredData", ",", 
+       RowBox[{"Function", "[", 
+        RowBox[{"p", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"p", "[", "\"\<score\>\"", "]"}], 
+           "===", "\"\<discard\>\""}], "||", 
+          RowBox[{
+           RowBox[{"p", "[", "\"\<score\>\"", "]"}], "===", "0"}]}]}], 
+        "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Kept: \>\"", "<>", 
+      RowBox[{"ToString", "[", 
+       RowBox[{"Length", "[", "keptPermutations", "]"}], "]"}], 
+      "<>", "\"\< | Discarded: \>\"", "<>", 
+      RowBox[{"ToString", "[", 
+       RowBox[{"Length", "[", "discardedPermutations", "]"}], "]"}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"keptPermutations", "=", 
+     RowBox[{"SortBy", "[", 
+      RowBox[{"keptPermutations", ",", 
+       RowBox[{"Function", "[", 
+        RowBox[{"p", ",", 
+         RowBox[{"-", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"NumberQ", "[", 
+             RowBox[{"p", "[", "\"\<score\>\"", "]"}], "]"}], ",", 
+            RowBox[{"p", "[", "\"\<score\>\"", "]"}], ",", "0"}], "]"}]}]}], 
+        "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"maxHypotheses", "=", "5"}], ";"}], "\n", 
    RowBox[{
     RowBox[{"finalHypotheses", "=", 
-     RowBox[{"Flatten", "[", 
+     RowBox[{"MapIndexed", "[", 
       RowBox[{
        RowBox[{
-        RowBox[{"StringCases", "[", 
-         RowBox[{"#", ",", 
-          RowBox[{"\"\<[H\>\"", "~~", 
-           RowBox[{"Shortest", "[", "__", "]"}], "~~", "\"\<]\>\""}]}], "]"}],
-         "&"}], "/@", "hNodes"}], "]"}]}], ";"}], "\n", "\n", 
+        RowBox[{"(", 
+         RowBox[{"\"\<H\>\"", "<>", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"#2", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", "\"\<: \>\"", "<>", 
+          RowBox[{"#1", "[", "\"\<hypothesis\>\"", "]"}]}], ")"}], "&"}], ",", 
+       RowBox[{"Take", "[", 
+        RowBox[{"keptPermutations", ",", 
+         RowBox[{"UpTo", "[", "maxHypotheses", "]"}]}], "]"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
-    RowBox[{"finalHypotheses", "=", 
-     RowBox[{"SortBy", "[", 
-      RowBox[{"finalHypotheses", ",", 
-       RowBox[{
-        RowBox[{"ToExpression", "[", 
-         RowBox[{"First", "[", 
-          RowBox[{"StringCases", "[", 
-           RowBox[{"#", ",", 
-            RowBox[{
-             RowBox[{"\"\<H\>\"", "~~", 
-              RowBox[{"d", ":", 
-               RowBox[{"DigitCharacter", ".."}]}]}], ":>", "d"}]}], "]"}], 
-          "]"}], "]"}], "&"}]}], "]"}]}], ";"}], "\n", "\n", 
+    RowBox[{"Print", "[", "\"\<\\nFinal hypotheses (survivors):\>\"", "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<  \>\"", "<>", 
+        RowBox[{"finalHypotheses", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "finalHypotheses", "]"}]}], "}"}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{
     RowBox[{"Export", "[", 
-     RowBox[{"\"\</Users/Western/Desktop/ThesisCode/Vault/target_hypotheses.\
-md\>\"", ",", 
+     RowBox[{
+      RowBox[{"$vaultDir", "<>", "\"\<target_hypotheses.md\>\""}], ",", 
       RowBox[{"StringJoin", "[", 
        RowBox[{"Riffle", "[", 
         RowBox[{"finalHypotheses", ",", "\"\<\\n\>\""}], "]"}], "]"}], 
-      ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", "\n", 
+      ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", 
    RowBox[{
     RowBox[{
-    "Print", "[", "\"\<\[Checkmark] Target hypotheses dynamically extracted \
-and stored in Vault.\>\"", "]"}], ";"}], "\n", 
+    "Print", "[", "\"\<\[Checkmark] Hypotheses exported to Vault.\>\"", "]"}],
+     ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"FIX", ":", 
+     RowBox[{"replace", "|", 
+      RowBox[{
+      "in", " ", "permutation", " ", "strings", " ", "so", " ", "they", " ", 
+       RowBox[{"don", "'"}], "t", " ", "break", " ", "markdown", " ", 
+       "columns"}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"Print", "[", 
-     RowBox[{"\"\<Hypotheses: \>\"", "<>", 
-      RowBox[{"StringJoin", "[", 
-       RowBox[{"Riffle", "[", 
-        RowBox[{"finalHypotheses", ",", "\"\< | \>\""}], "]"}], "]"}]}], 
+    RowBox[{
+     RowBox[{"safePermutation", "[", "s_", "]"}], ":=", 
+     RowBox[{"StringReplace", "[", 
+      RowBox[{"s", ",", 
+       RowBox[{"\"\< | \>\"", "->", "\"\< / \>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"$vaultDir", "<>", "\"\<permutation_scores.md\>\""}], ",", 
+      RowBox[{"\"\<# MHG Permutation Scoring\\n\\n\>\"", 
+       "<>", "\"\<| # | Permutation | Score | Hypothesis |\\n\>\"", 
+       "<>", "\"\<|---|---|---|---|\\n\>\"", "<>", 
+       RowBox[{"StringJoin", "[", 
+        RowBox[{"MapIndexed", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"\"\<| \>\"", "<>", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"#2", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", "\"\< | \>\"", "<>", 
+             RowBox[{"safePermutation", "[", 
+              RowBox[{"#1", "[", "\"\<permutation\>\"", "]"}], "]"}], 
+             "<>", "\"\< | \>\"", "<>", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"#1", "[", "\"\<score\>\"", "]"}], "]"}], 
+             "<>", "\"\< | \>\"", "<>", 
+             RowBox[{"#1", "[", "\"\<hypothesis\>\"", "]"}], 
+             "<>", "\"\< |\\n\>\""}], ")"}], "&"}], ",", "scoredData"}], 
+         "]"}], "]"}]}], ",", "\"\<Text\>\""}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\[Checkmark] Scoring table saved to \
+Vault/permutation_scores.md\>\"", "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"STEP", " ", "4"}], ":", 
+     RowBox[{"Permutation", " ", "Tree", " ", "Visualization"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "*)"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- STEP 4: Building Permutation Tree ---\>\"", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"levelColors", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"GrayLevel", "[", "0.25", "]"}], ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0.2", ",", "0.35", ",", "0.65"}], "]"}], ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0.15", ",", "0.55", ",", "0.40"}], "]"}], ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0.65", ",", "0.30", ",", "0.20"}], "]"}], ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0.50", ",", "0.25", ",", "0.60"}], "]"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"nodeStyle", "[", 
+      RowBox[{"label_", ",", "color_", ",", "w_"}], "]"}], ":=", 
+     RowBox[{"Framed", "[", 
+      RowBox[{
+       RowBox[{"Style", "[", 
+        RowBox[{"label", ",", "9", ",", 
+         RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", "White", ",",
+          "Bold", ",", 
+         RowBox[{"LineBreakWithin", "->", "True"}]}], "]"}], ",", 
+       RowBox[{"Background", "->", "color"}], ",", 
+       RowBox[{"RoundingRadius", "->", "5"}], ",", 
+       RowBox[{"FrameStyle", "->", "None"}], ",", 
+       RowBox[{"ImageSize", "->", 
+        RowBox[{"{", 
+         RowBox[{"w", ",", "Automatic"}], "}"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"leafStyle", "[", 
+      RowBox[{"label_", ",", "score_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"color", ",", "scoreStr"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"color", "=", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"score", "===", "\"\<discard\>\""}], ",", 
+           RowBox[{"Darker", "[", 
+            RowBox[{"Red", ",", "0.4"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"NumberQ", "[", "score", "]"}], "&&", 
+            RowBox[{"score", ">=", "4"}]}], ",", 
+           RowBox[{"Darker", "[", 
+            RowBox[{"Green", ",", "0.35"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"NumberQ", "[", "score", "]"}], "&&", 
+            RowBox[{"score", ">=", "2"}]}], ",", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0.75", ",", "0.5", ",", "0.1"}], "]"}], ",", "True", ",", 
+           RowBox[{"GrayLevel", "[", "0.5", "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"scoreStr", "=", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"score", "===", "\"\<discard\>\""}], ",", "\"\<discard\>\"",
+            ",", 
+           RowBox[{"\"\<Score: \>\"", "<>", 
+            RowBox[{"ToString", "[", "score", "]"}]}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Framed", "[", 
+         RowBox[{
+          RowBox[{"Column", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"label", ",", "8", ",", 
+                RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", 
+                "White", ",", 
+                RowBox[{"LineBreakWithin", "->", "True"}]}], "]"}], ",", 
+              RowBox[{"Style", "[", 
+               RowBox[{"scoreStr", ",", "8", ",", 
+                RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}], ",", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"score", "===", "\"\<discard\>\""}], ",", "Pink", ",",
+                   "Yellow"}], "]"}], ",", "Bold"}], "]"}]}], "}"}], ",", 
+            RowBox[{"Alignment", "->", "Left"}], ",", 
+            RowBox[{"Spacings", "->", "0.2"}]}], "]"}], ",", 
+          RowBox[{"Background", "->", "color"}], ",", 
+          RowBox[{"RoundingRadius", "->", "4"}], ",", 
+          RowBox[{"FrameStyle", "->", "None"}], ",", 
+          RowBox[{"ImageSize", "->", 
+           RowBox[{"{", 
+            RowBox[{"150", ",", "Automatic"}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"rootLabel", "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"FileExistsQ", "[", "centralQuestionFile", "]"}], ",", 
+       RowBox[{"StringTrim", "[", 
+        RowBox[{"StringReplace", "[", 
+         RowBox[{
+          RowBox[{"Import", "[", 
+           RowBox[{"centralQuestionFile", ",", "\"\<Text\>\""}], "]"}], ",", 
+          
+          RowBox[{"\"\<# Central Analytical Question\\n\\n\>\"", 
+           "->", "\"\<\>\""}]}], "]"}], "]"}], 
+       ",", "\"\<Analytical Question\>\""}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"rootDisplay", "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringLength", "[", "rootLabel", "]"}], ">", "40"}], ",", 
+       RowBox[{
+        RowBox[{"StringTake", "[", 
+         RowBox[{"rootLabel", ",", "40"}], "]"}], "<>", "\"\<...\>\""}], ",", 
+       "rootLabel"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"allNodes", "=", 
+     RowBox[{"{", "\"\<__ROOT__\>\"", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"allEdges", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"nodeLabels", "=", 
+     RowBox[{"<|", 
+      RowBox[{"\"\<__ROOT__\>\"", "->", "rootDisplay"}], "|>"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"nodeTypes", "=", 
+     RowBox[{"<|", 
+      RowBox[{"\"\<__ROOT__\>\"", "->", "\"\<root\>\""}], "|>"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"nodeScores", "=", 
+     RowBox[{"<|", "|>"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"numDims", "=", 
+     RowBox[{"Min", "[", 
+      RowBox[{
+       RowBox[{"Length", "[", "dimensions", "]"}], ",", "3"}], "]"}]}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"dim1Options", "=", 
+     RowBox[{
+      RowBox[{"dimensions", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", "\"\<options\>\"", "]"}]}], ";"}],
+    "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"d1", "=", 
+        RowBox[{"dim1Options", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"nodeKey", "=", 
+        RowBox[{"\"\<D1_\>\"", "<>", "d1"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"allNodes", ",", "nodeKey"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"allEdges", ",", 
+         RowBox[{"DirectedEdge", "[", 
+          RowBox[{"\"\<__ROOT__\>\"", ",", "nodeKey"}], "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"nodeLabels", "[", "nodeKey", "]"}], "=", "d1"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"nodeTypes", "[", "nodeKey", "]"}], "=", "\"\<dim1\>\""}], 
+       ";"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "dim1Options", "]"}]}], "}"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"numDims", ">=", "2"}], ",", 
+      RowBox[{
+       RowBox[{"dim2Options", "=", 
+        RowBox[{
+         RowBox[{"dimensions", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "[", "\"\<options\>\"", "]"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"d1", "=", 
+           RowBox[{"dim1Options", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Do", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"d2", "=", 
+              RowBox[{"dim2Options", "[", 
+               RowBox[{"[", "j", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"nodeKey", "=", 
+              
+              RowBox[{"\"\<D1_\>\"", "<>", "d1", "<>", "\"\<|D2_\>\"", "<>", 
+               "d2"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"allNodes", ",", "nodeKey"}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"allEdges", ",", 
+               RowBox[{"DirectedEdge", "[", 
+                RowBox[{
+                 RowBox[{"\"\<D1_\>\"", "<>", "d1"}], ",", "nodeKey"}], 
+                "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"nodeLabels", "[", "nodeKey", "]"}], "=", "d2"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"nodeTypes", "[", "nodeKey", "]"}], "=", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"numDims", "==", "2"}], ",", "\"\<leaf\>\"", 
+                ",", "\"\<dim2\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"numDims", "==", "2"}], ",", 
+               RowBox[{
+                RowBox[{"matchedScore", "=", "\"\<discard\>\""}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"Do", "[", 
+                 RowBox[{
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<permutation\>\"",
+                     "]"}], ",", "d1"}], "]"}], "&&", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<permutation\>\"",
+                     "]"}], ",", "d2"}], "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"matchedScore", "=", 
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<score\>\"", 
+                    "]"}]}], ";", 
+                    RowBox[{"Break", "[", "]"}]}]}], "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"s", ",", 
+                    RowBox[{"Length", "[", "scoredData", "]"}]}], "}"}]}], 
+                 "]"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"nodeScores", "[", "nodeKey", "]"}], "=", 
+                 "matchedScore"}], ";"}]}], "]"}], ";"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"j", ",", 
+              RowBox[{"Length", "[", "dim2Options", "]"}]}], "}"}]}], "]"}]}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"Length", "[", "dim1Options", "]"}]}], "}"}]}], "]"}]}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"numDims", ">=", "3"}], ",", 
+      RowBox[{
+       RowBox[{"dim2Options", "=", 
+        RowBox[{
+         RowBox[{"dimensions", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "[", "\"\<options\>\"", "]"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"dim3Options", "=", 
+        RowBox[{
+         RowBox[{"dimensions", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "[", "\"\<options\>\"", "]"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"d1", "=", 
+           RowBox[{"dim1Options", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Do", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"d2", "=", 
+              RowBox[{"dim2Options", "[", 
+               RowBox[{"[", "j", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"parentKey", "=", 
+              
+              RowBox[{"\"\<D1_\>\"", "<>", "d1", "<>", "\"\<|D2_\>\"", "<>", 
+               "d2"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"Do", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"d3", "=", 
+                 RowBox[{"dim3Options", "[", 
+                  RowBox[{"[", "k", "]"}], "]"}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"leafKey", "=", 
+                 
+                 RowBox[{"\"\<D1_\>\"", "<>", "d1", "<>", "\"\<|D2_\>\"", "<>",
+                   "d2", "<>", "\"\<|D3_\>\"", "<>", "d3"}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"allNodes", ",", "leafKey"}], "]"}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"allEdges", ",", 
+                  RowBox[{"DirectedEdge", "[", 
+                   RowBox[{"parentKey", ",", "leafKey"}], "]"}]}], "]"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"nodeLabels", "[", "leafKey", "]"}], "=", "d3"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"nodeTypes", "[", "leafKey", "]"}], 
+                 "=", "\"\<leaf\>\""}], ";", "\[IndentingNewLine]", 
+                RowBox[{"matchedScore", "=", "\"\<discard\>\""}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"Do", "[", 
+                 RowBox[{
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<permutation\>\"",
+                     "]"}], ",", "d1"}], "]"}], "&&", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<permutation\>\"",
+                     "]"}], ",", "d2"}], "]"}], "&&", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<permutation\>\"",
+                     "]"}], ",", "d3"}], "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"matchedScore", "=", 
+                    RowBox[{
+                    RowBox[{"scoredData", "[", 
+                    RowBox[{"[", "s", "]"}], "]"}], "[", "\"\<score\>\"", 
+                    "]"}]}], ";", 
+                    RowBox[{"Break", "[", "]"}]}]}], "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"s", ",", 
+                    RowBox[{"Length", "[", "scoredData", "]"}]}], "}"}]}], 
+                 "]"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"nodeScores", "[", "leafKey", "]"}], "=", 
+                 "matchedScore"}], ";"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"k", ",", 
+                 RowBox[{"Length", "[", "dim3Options", "]"}]}], "}"}]}], 
+              "]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"j", ",", 
+              RowBox[{"Length", "[", "dim2Options", "]"}]}], "}"}]}], "]"}]}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"Length", "[", "dim1Options", "]"}]}], "}"}]}], "]"}]}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"vertexShapeFunc", "=", 
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"coords", ",", "name", ",", "size"}], "}"}], ",", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"ntype", ",", "label", ",", "score"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"ntype", "=", 
+           RowBox[{"Lookup", "[", 
+            RowBox[{"nodeTypes", ",", "name", ",", "\"\<dim1\>\""}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"label", "=", 
+           RowBox[{"Lookup", "[", 
+            RowBox[{"nodeLabels", ",", "name", ",", "name"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"score", "=", 
+           RowBox[{"Lookup", "[", 
+            RowBox[{"nodeScores", ",", "name", ",", 
+             RowBox[{"Missing", "[", "]"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Which", "[", 
+           RowBox[{
+            RowBox[{"name", "===", "\"\<__ROOT__\>\""}], ",", 
+            RowBox[{"Inset", "[", 
+             RowBox[{
+              RowBox[{"nodeStyle", "[", 
+               RowBox[{"label", ",", 
+                RowBox[{"GrayLevel", "[", "0.25", "]"}], ",", "160"}], "]"}], 
+              ",", "coords"}], "]"}], ",", 
+            RowBox[{"ntype", "===", "\"\<leaf\>\""}], ",", 
+            RowBox[{"Inset", "[", 
+             RowBox[{
+              RowBox[{"leafStyle", "[", 
+               RowBox[{"label", ",", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"MissingQ", "[", "score", "]"}], 
+                  ",", "\"\<discard\>\"", ",", "score"}], "]"}]}], "]"}], ",",
+               "coords"}], "]"}], ",", 
+            RowBox[{"ntype", "===", "\"\<dim1\>\""}], ",", 
+            RowBox[{"Inset", "[", 
+             RowBox[{
+              RowBox[{"nodeStyle", "[", 
+               RowBox[{"label", ",", 
+                RowBox[{"levelColors", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], ",", "130"}], "]"}], ",", 
+              "coords"}], "]"}], ",", 
+            RowBox[{"ntype", "===", "\"\<dim2\>\""}], ",", 
+            RowBox[{"Inset", "[", 
+             RowBox[{
+              RowBox[{"nodeStyle", "[", 
+               RowBox[{"label", ",", 
+                RowBox[{"levelColors", "[", 
+                 RowBox[{"[", "3", "]"}], "]"}], ",", "120"}], "]"}], ",", 
+              "coords"}], "]"}], ",", "True", ",", 
+            RowBox[{"Inset", "[", 
+             RowBox[{
+              RowBox[{"nodeStyle", "[", 
+               RowBox[{"label", ",", 
+                RowBox[{"levelColors", "[", 
+                 RowBox[{"[", "4", "]"}], "]"}], ",", "110"}], "]"}], ",", 
+              "coords"}], "]"}]}], "]"}]}]}], "]"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"imageH", "=", 
+     RowBox[{"Max", "[", 
+      RowBox[{"500", ",", 
+       RowBox[{
+        RowBox[{"Length", "[", "allNodes", "]"}], "*", "28"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"permTree", "=", 
+     RowBox[{"Graph", "[", 
+      RowBox[{"allNodes", ",", "allEdges", ",", 
+       RowBox[{"VertexShapeFunction", "->", "vertexShapeFunc"}], ",", 
+       RowBox[{"EdgeStyle", "->", 
+        RowBox[{"Directive", "[", 
+         RowBox[{
+          RowBox[{"GrayLevel", "[", "0.55", "]"}], ",", 
+          RowBox[{"AbsoluteThickness", "[", "1.5", "]"}], ",", 
+          RowBox[{"Arrowheads", "[", "0.015", "]"}]}], "]"}]}], ",", 
+       RowBox[{"GraphLayout", "->", 
+        RowBox[{"{", 
+         RowBox[{"\"\<LayeredDigraphEmbedding\>\"", ",", 
+          RowBox[{"\"\<RootVertex\>\"", "->", "\"\<__ROOT__\>\""}], ",", 
+          RowBox[{"\"\<Orientation\>\"", "->", "Left"}]}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "->", 
+        RowBox[{"{", 
+         RowBox[{"1000", ",", "imageH"}], "}"}]}], ",", 
+       RowBox[{"PlotLabel", "->", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          
+          RowBox[{"\"\<Multiple Hypotheses Generator: Permutation Tree\\n\>\"",
+            "<>", "\"\<Green = high credibility (4-5)  |  Orange = medium \
+(2-3)  |  Red = discarded\>\""}], ",", "Bold", ",", "12", ",", 
+          RowBox[{"FontFamily", "->", "\"\<Helvetica\>\""}]}], "]"}]}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\n", "permTree", "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"$vaultDir", "<>", "\"\<Permutation_Tree_Master.pdf\>\""}], ",",
+       "permTree"}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\[Checkmark] Permutation tree exported to Vault.\>\"", 
      "]"}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.981309850933262*^9, 3.981309850935205*^9}, {
    3.981310178723342*^9, 3.98131017940724*^9}, 3.981310284770692*^9, 
@@ -372,107 +1001,1049 @@ and stored in Vault.\>\"", "]"}], ";"}], "\n",
    3.983313131431848*^9, 3.983313142571117*^9}, {3.983313610636775*^9, 
    3.9833136553814*^9}, {3.983319506306073*^9, 3.983319519124666*^9}, {
    3.9833195544809217`*^9, 3.983319560223278*^9}, {3.983320558816115*^9, 
-   3.983320596853201*^9}},
- CellLabel->
-  "In[407]:=",ExpressionUUID->"65f886df-0f57-4e6c-a0b2-98c0ab561439"],
+   3.983320596853201*^9}, 3.983559454312645*^9, {3.9835662543478947`*^9, 
+   3.9835662611700583`*^9}, {3.983566313480085*^9, 3.983566332175815*^9}, {
+   3.983567208587826*^9, 3.983567215011159*^9}, {3.98356815016147*^9, 
+   3.9835681535717077`*^9}, {3.983573229421461*^9, 3.983573251547031*^9}, {
+   3.983574196977831*^9, 3.9835741978668213`*^9}, {3.983574239359614*^9, 
+   3.983574239916519*^9}, 3.983574587987637*^9, 3.983574956503718*^9, {
+   3.983575175508142*^9, 3.983575268000025*^9}, {3.983575687330101*^9, 
+   3.983575688383567*^9}, {3.983576865758596*^9, 
+   3.983576870239935*^9}},ExpressionUUID->"65f886df-0f57-4e6c-a0b2-\
+98c0ab561439"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData["\<\"--- Initializing Advanced Combinatorial Logic Tree \
----\"\>"], "Print",
+Cell[BoxData["\<\"--- Initializing MHG Permutation Tree ---\"\>"], "Print",
  CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
   3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
   3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
   3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9},
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575695797949*^9},
  CellLabel->
   "During evaluation of \
-In[407]:=",ExpressionUUID->"27840396-638e-4110-8097-e6cc0a1740d1"],
+In[679]:=",ExpressionUUID->"c3942f4e-3db4-4a29-8eed-4f8c36b0c65a"],
 
 Cell[BoxData["\<\"\[Checkmark] Vault evidence loaded.\"\>"], "Print",
  CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
   3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
   3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
   3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607737714*^9},
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575695802965*^9},
  CellLabel->
   "During evaluation of \
-In[407]:=",ExpressionUUID->"a25a0a0c-01a6-4b68-a0b0-90ee3e049346"],
+In[679]:=",ExpressionUUID->"ca9042aa-4e96-4ca3-9822-4257cfd0f2ae"],
 
-Cell[BoxData["\<\"\\n--- Querying Gemini for Dynamic Hypothesis Tree \
----\"\>"], "Print",
- CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
-  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
-  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
-  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.9833206077387238`*^9},
- CellLabel->
-  "During evaluation of \
-In[407]:=",ExpressionUUID->"ee7b4129-07a8-4498-8c29-c42e5fa41354"],
-
-Cell[BoxData["\<\"Generated 26 edges from vault evidence.\"\>"], "Print",
- CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
-  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
-  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
-  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.9833206390422993`*^9},
- CellLabel->
-  "During evaluation of \
-In[407]:=",ExpressionUUID->"9552bc9d-976a-4d36-8ce3-88fe12a295d7"],
-
-Cell[BoxData["\<\"\\n--- Generating Master MHG Permutation Tree ---\"\>"], \
+Cell[BoxData["\<\"\\n--- STEP 1: Identifying Analytical Dimensions ---\"\>"], \
 "Print",
  CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
   3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
   3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
   3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320639043537*^9},
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575695824677*^9},
  CellLabel->
   "During evaluation of \
-In[407]:=",ExpressionUUID->"d2a2cb0c-4812-45fc-be2a-1e4e5f98f3da"],
+In[679]:=",ExpressionUUID->"6c9f88e6-5399-47fd-a325-38ee62e53ba1"],
 
-Cell[BoxData["\<\"\[Checkmark] MASTER MHG TREE COMPLETE. Graph exported to \
-Vault.\"\>"], "Print",
+Cell[BoxData["\<\"[Validated] 3 dimensions identified:\"\>"], "Print",
  CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
   3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
   3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
   3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.9833206393514147`*^9},
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575705965671*^9},
  CellLabel->
   "During evaluation of \
-In[407]:=",ExpressionUUID->"b52dc818-9c4d-4b1a-918e-f5f5bb6878ee"],
+In[679]:=",ExpressionUUID->"6b2db443-4e65-4e37-a581-5f23b8b36fb7"],
 
-Cell[BoxData["\<\"\[Checkmark] Target hypotheses dynamically extracted and \
-stored in Vault.\"\>"], "Print",
+Cell[BoxData["\<\"  Affected Population: Primarily Navajo, General Population\
+\"\>"], "Print",
  CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
   3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
   3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
   3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320639352165*^9},
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575705966951*^9},
  CellLabel->
   "During evaluation of \
-In[407]:=",ExpressionUUID->"5d5b0c5e-fa97-4d63-9676-1f5b2d36d62a"],
+In[679]:=",ExpressionUUID->"cc501e49-5219-4bd1-865f-7d0f7ee50c7a"],
 
-Cell[BoxData["\<\"Hypotheses: [H1: Zoonotic Virus] | [H2: Accidental Viral \
-Exposure] | [H3: Zoonotic Bacteria] | [H4: Accidental Bacterial Exposure] | \
-[H5: Natural Toxin] | [H6: Accidental Toxin Exposure] | [H7: Widespread \
-Zoonotic Virus] | [H8: Widespread Accidental Viral Exposure] | [H9: \
-Widespread Zoonotic Bacteria] | [H10: Widespread Accidental Bacterial \
-Exposure] | [H11: Widespread Natural Toxin] | [H12: Widespread Accidental \
-Toxin Exposure]\"\>"], "Print",
+Cell[BoxData["\<\"  Agent Type: Biological Pathogen, Chemical Toxin\"\>"], \
+"Print",
  CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
   3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
   3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
   3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
-  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320639352582*^9},
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.98357570596772*^9},
  CellLabel->
   "During evaluation of \
-In[407]:=",ExpressionUUID->"446fe717-d0d7-4e49-892c-a18760e0a462"]
-}, Open  ]]
+In[679]:=",ExpressionUUID->"41f5373e-ac0e-46bf-8032-184810c1a2ff"],
+
+Cell[BoxData["\<\"  Exposure Origin: Natural Environmental, Accidental \
+Human-Caused, Intentional Human-Caused\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757059688597`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"0882032f-0dad-4104-8ad1-52817ad8a94a"],
+
+Cell[BoxData["\<\"\\n--- STEP 2: Generating All Permutations ---\"\>"], \
+"Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757059696217`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"d158d1dc-296f-44f2-8ee8-aed12a441305"],
+
+Cell[BoxData["\<\"Total permutations before scoring: 12\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575705970311*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"0c6e4d38-de6f-4fe2-945a-c75eea467bfb"],
+
+Cell[BoxData["\<\"\\n--- STEP 3: Scoring Permutations ---\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575705971012*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"23020bbc-26fb-42e2-82c3-128ff92fd631"],
+
+Cell[BoxData["\<\"[Validated] 12 permutations scored.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.98357573279397*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"48d4b641-f9b0-429e-a2af-c6fa16dd2fc8"],
+
+Cell[BoxData["\<\"Kept: 10 | Discarded: 2\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575732795217*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"0a19c5eb-54ea-4a27-907f-8ab8c8b34c04"],
+
+Cell[BoxData["\<\"\\nFinal hypotheses (survivors):\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757327958193`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"c932169b-0990-4e55-83cc-16977bf4ebf6"],
+
+Cell[BoxData["\<\"  H1: The acute respiratory illness and deaths in the Four \
+Corners region are caused by a naturally occurring biological pathogen \
+primarily affecting the Navajo population.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757327964153`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"a43d90c8-1018-4a2e-b5dd-6ac8c199576d"],
+
+Cell[BoxData["\<\"  H2: The acute respiratory illness and deaths in the Four \
+Corners region are caused by a naturally occurring biological pathogen \
+affecting the general population.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575732797331*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"45056adb-ba9a-48d1-a209-ac41d1f1ece9"],
+
+Cell[BoxData["\<\"  H3: The acute respiratory illness and deaths in the Four \
+Corners region are caused by an accidentally released biological pathogen \
+primarily affecting the Navajo population.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575732797908*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"f5e61e77-4a7b-4b44-9795-d2ff30fab341"],
+
+Cell[BoxData["\<\"  H4: The acute respiratory illness and deaths in the Four \
+Corners region are caused by an accidentally released chemical toxin \
+primarily affecting the Navajo population.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575732798497*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"79500752-f1e5-43fc-8e87-a485cd801be6"],
+
+Cell[BoxData["\<\"  H5: The acute respiratory illness and deaths in the Four \
+Corners region are caused by a naturally occurring chemical toxin primarily \
+affecting the Navajo population.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757327991037`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"b7016077-c379-44bf-a282-a995ee69119f"],
+
+Cell[BoxData["\<\"\[Checkmark] Hypotheses exported to Vault.\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757327996893`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"6b62a271-ee7e-415b-8ad4-1b160b976f4c"],
+
+Cell[BoxData["\<\"\[Checkmark] Scoring table saved to \
+Vault/permutation_scores.md\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575732800233*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"66307d82-754b-4f80-9a58-1fae3952e0be"],
+
+Cell[BoxData["\<\"\\n--- STEP 4: Building Permutation Tree ---\"\>"], "Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.983575732800768*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"7d41bf83-d390-4435-8916-21d62126a916"]
+}, Open  ]],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{
+      "__ROOT__", "D1_Primarily Navajo", "D1_General Population", 
+       "D1_Primarily Navajo|D2_Biological Pathogen", 
+       "D1_Primarily Navajo|D2_Chemical Toxin", 
+       "D1_General Population|D2_Biological Pathogen", 
+       "D1_General Population|D2_Chemical Toxin", 
+       "D1_Primarily Navajo|D2_Biological Pathogen|D3_Natural Environmental", 
+       "D1_Primarily Navajo|D2_Biological Pathogen|D3_Accidental \
+Human-Caused", 
+       "D1_Primarily Navajo|D2_Biological Pathogen|D3_Intentional \
+Human-Caused", 
+       "D1_Primarily Navajo|D2_Chemical Toxin|D3_Natural Environmental", 
+       "D1_Primarily Navajo|D2_Chemical Toxin|D3_Accidental Human-Caused", 
+       "D1_Primarily Navajo|D2_Chemical Toxin|D3_Intentional Human-Caused", 
+       "D1_General Population|D2_Biological Pathogen|D3_Natural \
+Environmental", 
+       "D1_General Population|D2_Biological Pathogen|D3_Accidental \
+Human-Caused", 
+       "D1_General Population|D2_Biological Pathogen|D3_Intentional \
+Human-Caused", 
+       "D1_General Population|D2_Chemical Toxin|D3_Natural Environmental", 
+       "D1_General Population|D2_Chemical Toxin|D3_Accidental Human-Caused", 
+       "D1_General Population|D2_Chemical Toxin|D3_Intentional \
+Human-Caused"}, {{{1, 2}, {1, 3}, {2, 4}, {2, 5}, {3, 6}, {3, 7}, {4, 8}, {4, 
+       9}, {4, 10}, {5, 11}, {5, 12}, {5, 13}, {6, 14}, {6, 15}, {6, 16}, {7, 
+       17}, {7, 18}, {7, 19}}, Null}, {EdgeStyle -> {
+         Directive[
+          GrayLevel[0.55], 
+          AbsoluteThickness[1.5], 
+          Arrowheads[0.015]]}, 
+       GraphLayout -> {
+        "LayeredDigraphEmbedding", "RootVertex" -> "__ROOT__", "Orientation" -> 
+         Left}, ImageSize -> {1000, 532}, PlotLabel -> 
+       Style["Multiple Hypotheses Generator: Permutation Tree\nGreen = high \
+credibility (4-5)  |  Orange = medium (2-3)  |  Red = discarded", Bold, 12, 
+         FontFamily -> "Helvetica"], VertexShapeFunction -> {
+         Function[{$CellContext`coords, $CellContext`name, $CellContext`size}, 
+          
+          Module[{$CellContext`ntype, $CellContext`label, \
+$CellContext`score}, $CellContext`ntype = 
+            Lookup[$CellContext`nodeTypes, $CellContext`name, 
+              "dim1"]; $CellContext`label = 
+            Lookup[$CellContext`nodeLabels, $CellContext`name, \
+$CellContext`name]; $CellContext`score = 
+            Lookup[$CellContext`nodeScores, $CellContext`name, 
+              Missing[]]; Which[$CellContext`name === "__ROOT__", 
+             Inset[
+              $CellContext`nodeStyle[$CellContext`label, 
+               GrayLevel[0.25], 
+               160], $CellContext`coords], $CellContext`ntype === "leaf", 
+             Inset[
+              $CellContext`leafStyle[$CellContext`label, 
+               If[
+                MissingQ[$CellContext`score], 
+                "discard", $CellContext`score]], $CellContext`coords], \
+$CellContext`ntype === "dim1", 
+             Inset[
+              $CellContext`nodeStyle[$CellContext`label, 
+               Part[$CellContext`levelColors, 2], 
+               130], $CellContext`coords], $CellContext`ntype === "dim2", 
+             Inset[
+              $CellContext`nodeStyle[$CellContext`label, 
+               Part[$CellContext`levelColors, 3], 120], $CellContext`coords], 
+             True, 
+             Inset[
+              $CellContext`nodeStyle[$CellContext`label, 
+               Part[$CellContext`levelColors, 4], 
+               110], $CellContext`coords]]]]}}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {GrayLevel[0.55], AbsoluteThickness[1.5], Opacity[0.7], CapForm[
+        "Round"], Arrowheads[0.015], 
+        ArrowBox[{{-1.000000038076958, 
+         2.8506448210011555`}, {-3.8076958475130596`*^-8, 
+         2.8506448164847487`}}, 0.03023952230316093], 
+        ArrowBox[{{-1.000000038076958, 2.8506448210011555`}, {
+         4.230773265057053*^-8, 3.356309020713144}}, 0.03023952230316093], 
+        ArrowBox[{{-3.8076958475130596`*^-8, 2.8506448164847487`}, {
+         0.9999998815383501, 2.3449806077399464`}}, 0.03023952230316093], 
+        ArrowBox[{{-3.8076958475130596`*^-8, 2.8506448164847487`}, {
+         0.9999999619230412, 2.850644811968342}}, 0.03023952230316093], 
+        ArrowBox[{{4.230773265057053*^-8, 3.356309020713144}, {
+         1.0000000423077324`, 3.3563090161967373`}}, 0.03023952230316093], 
+        ArrowBox[{{4.230773265057053*^-8, 3.356309020713144}, {
+         1.0000001226924238`, 3.861973220425133}}, 0.03023952230316093], 
+        ArrowBox[{{0.9999998815383501, 2.3449806077399464`}, {
+         1.9999998547434528`, 2.176425868480741}}, 0.03023952230316093], 
+        ArrowBox[{{0.9999998815383501, 2.3449806077399464`}, {
+         1.9999998815383497`, 2.3449806032235396`}}, 0.03023952230316093], 
+        ArrowBox[{{0.9999998815383501, 2.3449806077399464`}, {
+         1.9999999083332467`, 2.513535337966338}}, 0.03023952230316093], 
+        ArrowBox[{{0.9999999619230412, 2.850644811968342}, {1.999999935128144,
+          2.6820900727091366`}}, 0.03023952230316093], 
+        ArrowBox[{{0.9999999619230412, 2.850644811968342}, {
+         1.9999999619230409`, 2.850644807451935}}, 0.03023952230316093], 
+        ArrowBox[{{0.9999999619230412, 2.850644811968342}, {
+         1.9999999887179378`, 3.0191995421947335`}}, 0.03023952230316093], 
+        ArrowBox[{{1.0000000423077324`, 3.3563090161967373`}, {
+         2.000000015512835, 3.187754276937532}}, 0.03023952230316093], 
+        ArrowBox[{{1.0000000423077324`, 3.3563090161967373`}, {
+         2.000000042307732, 3.356309011680331}}, 0.03023952230316093], 
+        ArrowBox[{{1.0000000423077324`, 3.3563090161967373`}, {
+         2.000000069102629, 3.524863746423129}}, 0.03023952230316093], 
+        ArrowBox[{{1.0000001226924238`, 3.861973220425133}, {
+         2.000000095897526, 3.693418481165928}}, 0.03023952230316093], 
+        ArrowBox[{{1.0000001226924238`, 3.861973220425133}, {
+         2.0000001226924233`, 3.8619732159087263`}}, 0.03023952230316093], 
+        ArrowBox[{{1.0000001226924238`, 3.861973220425133}, {
+         2.0000001494873203`, 4.030527950651525}}, 0.03023952230316093]}, 
+       {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[0.7]}], InsetBox[
+         FrameBox[
+          StyleBox["\<\"What is the underlying cause of the acut...\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->GrayLevel[0.25],
+          FrameStyle->None,
+          ImageSize->{160, Automatic},
+          RoundingRadius->5,
+          StripOnInput->False], {-1.000000038076958, 2.8506448210011555}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"Primarily Navajo\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->RGBColor[0.2, 0.35, 0.65],
+          FrameStyle->None,
+          ImageSize->{130, Automatic},
+          RoundingRadius->5,
+          
+          StripOnInput->
+           False], {-3.8076958475130596*^-8, 2.8506448164847487}], InsetBox[
+         FrameBox[
+          StyleBox["\<\"General Population\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->RGBColor[0.2, 0.35, 0.65],
+          FrameStyle->None,
+          ImageSize->{130, Automatic},
+          RoundingRadius->5,
+          StripOnInput->False], {4.230773265057053*^-8, 3.356309020713144}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"Biological Pathogen\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->RGBColor[0.15, 0.55, 0.4],
+          FrameStyle->None,
+          ImageSize->{120, Automatic},
+          RoundingRadius->5,
+          StripOnInput->False], {0.9999998815383501, 2.3449806077399464}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"Chemical Toxin\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->RGBColor[0.15, 0.55, 0.4],
+          FrameStyle->None,
+          ImageSize->{120, Automatic},
+          RoundingRadius->5,
+          StripOnInput->False], {0.9999999619230412, 2.850644811968342}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"Biological Pathogen\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->RGBColor[0.15, 0.55, 0.4],
+          FrameStyle->None,
+          ImageSize->{120, Automatic},
+          RoundingRadius->5,
+          StripOnInput->False], {1.0000000423077324, 3.3563090161967373}], 
+        InsetBox[
+         FrameBox[
+          StyleBox["\<\"Chemical Toxin\"\>",
+           StripOnInput->False,
+           LineBreakWithin->True,
+           LineColor->GrayLevel[1],
+           FrontFaceColor->GrayLevel[1],
+           BackFaceColor->GrayLevel[1],
+           GraphicsColor->GrayLevel[1],
+           FontFamily->"Helvetica",
+           FontSize->9,
+           FontWeight->Bold,
+           FontColor->GrayLevel[1]],
+          Background->RGBColor[0.15, 0.55, 0.4],
+          FrameStyle->None,
+          ImageSize->{120, Automatic},
+          RoundingRadius->5,
+          StripOnInput->False], {1.0000001226924238, 3.861973220425133}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Natural Environmental\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 5\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0., 0.65, 0.],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {1.9999998547434528, 2.176425868480741}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Accidental Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 2\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0.75, 0.5, 0.1],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {1.9999998815383497, 2.3449806032235396}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Intentional Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 1\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->GrayLevel[0.5],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {1.9999999083332467, 2.513535337966338}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Natural Environmental\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 2\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0.75, 0.5, 0.1],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {1.999999935128144, 2.6820900727091366}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Accidental Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 2\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0.75, 0.5, 0.1],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {1.9999999619230409, 2.850644807451935}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Intentional Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 1\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->GrayLevel[0.5],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {1.9999999887179378, 3.0191995421947335}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Natural Environmental\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 3\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0.75, 0.5, 0.1],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {2.000000015512835, 3.187754276937532}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Accidental Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 1\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->GrayLevel[0.5],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {2.000000042307732, 3.356309011680331}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Intentional Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"discard\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 0.5, 0.5],
+               FrontFaceColor->RGBColor[1, 0.5, 0.5],
+               BackFaceColor->RGBColor[1, 0.5, 0.5],
+               GraphicsColor->RGBColor[1, 0.5, 0.5],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 0.5, 0.5]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0.6, 0., 0.],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {2.000000069102629, 3.524863746423129}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Natural Environmental\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 1\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->GrayLevel[0.5],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {2.000000095897526, 3.693418481165928}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Accidental Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"Score: 1\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 1, 0],
+               FrontFaceColor->RGBColor[1, 1, 0],
+               BackFaceColor->RGBColor[1, 1, 0],
+               GraphicsColor->RGBColor[1, 1, 0],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 1, 0]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->GrayLevel[0.5],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {2.0000001226924233, 3.8619732159087263}], 
+        InsetBox[
+         FrameBox[
+          TagBox[GridBox[{
+             {
+              StyleBox["\<\"Intentional Human-Caused\"\>",
+               StripOnInput->False,
+               LineBreakWithin->True,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontColor->GrayLevel[1]]},
+             {
+              StyleBox["\<\"discard\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[1, 0.5, 0.5],
+               FrontFaceColor->RGBColor[1, 0.5, 0.5],
+               BackFaceColor->RGBColor[1, 0.5, 0.5],
+               GraphicsColor->RGBColor[1, 0.5, 0.5],
+               FontFamily->"Helvetica",
+               FontSize->8,
+               FontWeight->Bold,
+               FontColor->RGBColor[1, 0.5, 0.5]]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.2}}}],
+           
+           "Column"],
+          Background->RGBColor[0.6, 0., 0.],
+          FrameStyle->None,
+          ImageSize->{150, Automatic},
+          RoundingRadius->4,
+          StripOnInput->False], {2.0000001494873203, 4.030527950651525}]}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->"NetworkGraphics",
+  FormatType->TraditionalForm,
+  FrameTicks->None,
+  ImageSize->{1000, 532},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"Multiple Hypotheses Generator: Permutation Tree\\nGreen = high \
+credibility (4-5)  |  Orange = medium (2-3)  |  Red = discarded\"", Bold, 12, 
+     FontFamily -> "Helvetica", StripOnInput -> False], 
+    TraditionalForm]]], "Output",
+ CellChangeTimes->{3.983574780561009*^9, 3.9835749730484953`*^9, 
+  3.983575291984745*^9, 3.98357573286665*^9},
+ CellLabel->
+  "Out[742]=",ExpressionUUID->"69810ba5-f689-40c6-b327-177245a4ae81"],
+
+Cell[BoxData["\<\"\[Checkmark] Permutation tree exported to Vault.\"\>"], \
+"Print",
+ CellChangeTimes->{3.981309871281905*^9, 3.98131018587008*^9, 
+  3.981310289264639*^9, 3.981310512325379*^9, 3.9813106524604807`*^9, 
+  3.981310917408371*^9, 3.981392991551762*^9, 3.98139440979082*^9, 
+  3.983312093864789*^9, 3.983313150460265*^9, 3.9833193237312613`*^9, 
+  3.983319524119671*^9, 3.9833195673025293`*^9, 3.983320607733156*^9, 
+  3.983564986453388*^9, 3.98356679988785*^9, 3.983567222113625*^9, 
+  3.9835683709224863`*^9, 3.983574768798553*^9, 3.983574960839342*^9, 
+  3.983575283056093*^9, 3.9835757331372538`*^9},
+ CellLabel->
+  "During evaluation of \
+In[679]:=",ExpressionUUID->"2218e2f8-aea7-4310-a3ec-971fc568f5aa"]
 }, Open  ]]
 },
-WindowSize->{1087, 799},
-WindowMargins->{{159, Automatic}, {-56, Automatic}},
+WindowSize->{723, 799},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"df396d1f-befb-4415-ae18-41730e17c924"
@@ -489,17 +2060,32 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[576, 22, 14761, 354, 1826, "Input",ExpressionUUID->"65f886df-0f57-4e6c-a0b2-98c0ab561439"],
+Cell[576, 22, 41176, 990, 5503, "Input",ExpressionUUID->"65f886df-0f57-4e6c-a0b2-98c0ab561439"],
 Cell[CellGroupData[{
-Cell[15362, 380, 540, 9, 23, "Print",ExpressionUUID->"27840396-638e-4110-8097-e6cc0a1740d1"],
-Cell[15905, 391, 519, 8, 23, "Print",ExpressionUUID->"a25a0a0c-01a6-4b68-a0b0-90ee3e049346"],
-Cell[16427, 401, 542, 9, 41, "Print",ExpressionUUID->"ee7b4129-07a8-4498-8c29-c42e5fa41354"],
-Cell[16972, 412, 525, 8, 23, "Print",ExpressionUUID->"9552bc9d-976a-4d36-8ce3-88fe12a295d7"],
-Cell[17500, 422, 535, 9, 41, "Print",ExpressionUUID->"d2a2cb0c-4812-45fc-be2a-1e4e5f98f3da"],
-Cell[18038, 433, 551, 9, 23, "Print",ExpressionUUID->"b52dc818-9c4d-4b1a-918e-f5f5bb6878ee"],
-Cell[18592, 444, 559, 9, 23, "Print",ExpressionUUID->"5d5b0c5e-fa97-4d63-9676-1f5b2d36d62a"],
-Cell[19154, 455, 928, 14, 79, "Print",ExpressionUUID->"446fe717-d0d7-4e49-892c-a18760e0a462"]
-}, Open  ]]
+Cell[41777, 1016, 711, 11, 23, "Print",ExpressionUUID->"c3942f4e-3db4-4a29-8eed-4f8c36b0c65a"],
+Cell[42491, 1029, 705, 11, 23, "Print",ExpressionUUID->"ca9042aa-4e96-4ca3-9822-4257cfd0f2ae"],
+Cell[43199, 1042, 724, 12, 41, "Print",ExpressionUUID->"6c9f88e6-5399-47fd-a325-38ee62e53ba1"],
+Cell[43926, 1056, 706, 11, 23, "Print",ExpressionUUID->"6b2db443-4e65-4e37-a581-5f23b8b36fb7"],
+Cell[44635, 1069, 731, 12, 23, "Print",ExpressionUUID->"cc501e49-5219-4bd1-865f-7d0f7ee50c7a"],
+Cell[45369, 1083, 720, 12, 23, "Print",ExpressionUUID->"41f5373e-ac0e-46bf-8032-184810c1a2ff"],
+Cell[46092, 1097, 765, 12, 41, "Print",ExpressionUUID->"0882032f-0dad-4104-8ad1-52817ad8a94a"],
+Cell[46860, 1111, 720, 12, 41, "Print",ExpressionUUID->"d158d1dc-296f-44f2-8ee8-aed12a441305"],
+Cell[47583, 1125, 707, 11, 23, "Print",ExpressionUUID->"0c6e4d38-de6f-4fe2-945a-c75eea467bfb"],
+Cell[48293, 1138, 709, 11, 41, "Print",ExpressionUUID->"23020bbc-26fb-42e2-82c3-128ff92fd631"],
+Cell[49005, 1151, 704, 11, 23, "Print",ExpressionUUID->"48d4b641-f9b0-429e-a2af-c6fa16dd2fc8"],
+Cell[49712, 1164, 693, 11, 23, "Print",ExpressionUUID->"0a19c5eb-54ea-4a27-907f-8ab8c8b34c04"],
+Cell[50408, 1177, 704, 11, 41, "Print",ExpressionUUID->"c932169b-0990-4e55-83cc-16977bf4ebf6"],
+Cell[51115, 1190, 848, 13, 60, "Print",ExpressionUUID->"a43d90c8-1018-4a2e-b5dd-6ac8c199576d"],
+Cell[51966, 1205, 837, 13, 60, "Print",ExpressionUUID->"45056adb-ba9a-48d1-a209-ac41d1f1ece9"],
+Cell[52806, 1220, 849, 13, 60, "Print",ExpressionUUID->"f5e61e77-4a7b-4b44-9795-d2ff30fab341"],
+Cell[53658, 1235, 844, 13, 60, "Print",ExpressionUUID->"79500752-f1e5-43fc-8e87-a485cd801be6"],
+Cell[54505, 1250, 843, 13, 60, "Print",ExpressionUUID->"b7016077-c379-44bf-a282-a995ee69119f"],
+Cell[55351, 1265, 714, 11, 23, "Print",ExpressionUUID->"6b62a271-ee7e-415b-8ad4-1b160b976f4c"],
+Cell[56068, 1278, 735, 12, 23, "Print",ExpressionUUID->"66307d82-754b-4f80-9a58-1fae3952e0be"],
+Cell[56806, 1292, 714, 11, 41, "Print",ExpressionUUID->"7d41bf83-d390-4435-8916-21d62126a916"]
+}, Open  ]],
+Cell[57535, 1306, 29311, 721, 549, "Output",ExpressionUUID->"69810ba5-f689-40c6-b327-177245a4ae81"],
+Cell[86849, 2029, 722, 12, 23, "Print",ExpressionUUID->"2218e2f8-aea7-4310-a3ec-971fc568f5aa"]
 }, Open  ]]
 }
 ]
